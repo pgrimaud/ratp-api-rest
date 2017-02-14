@@ -19,6 +19,7 @@ class TrafficController extends Controller
      */
     public function trafficAction(Request $request)
     {
+        //  http://apixha.ixxi.net/APIX?keyapp=FvChCBnSetVgTKk324rO&cmd=getTrafficSituation&category=all&networkType=all&withText=true&apixFormat=json&tmp=1487092706473
         $payload = [
             'payload' => 'OK'
         ];
