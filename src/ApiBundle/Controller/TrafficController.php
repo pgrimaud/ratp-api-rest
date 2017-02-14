@@ -1,20 +1,26 @@
 <?php
 namespace ApiBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\View\View;
 
 class TrafficController extends Controller
 {
     /**
-     * @Route("/traffic", name="traffic")
-     * @Method({"GET"})
+     * @Rest\View()
+     * @Rest\Get("/traffic")
      */
     public function trafficAction(Request $request)
     {
-        return new JsonResponse(['payload' => 'OK']);
+        $payload = [
+            'payload' => 'OK'
+        ];
+
+        $view = View::create($payload);
+        $view->setFormat('json');
+
+        return $view;
     }
 }
