@@ -69,8 +69,15 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
+# fos rest bundle configuration
 fos_rest:
     routing_loader:
         include_format: false
     view:
         view_response_listener: true
+
+# nelmio api doc bundle configuration
+nelmio_api_doc:
+    name: 'To rename' #@todo
+    motd:
+        template: '@Api/Swagger/override.html.twig'

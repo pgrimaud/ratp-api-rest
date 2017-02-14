@@ -1,14 +1,16 @@
 documentation:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
-    prefix: /documentation
+    prefix:   "/%prefix%/documentation"
     schemes:  ["%schemes%"]
 
 app:
     type:     annotation
     resource: "@ApiBundle/Controller/HomeController.php"
     schemes:  ["%schemes%"]
+    prefix:   "/%prefix%/"
 
 traffic:
     type:     rest
     resource: "@ApiBundle/Controller/TrafficController.php"
     schemes:  ["%schemes%"]
+    prefix:   "/%prefix%/"
