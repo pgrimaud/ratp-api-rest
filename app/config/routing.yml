@@ -1,4 +1,4 @@
-app:
-    resource: "@ApiBundle/Controller/"
-    type:     annotation
+traffic:
+    type:     rest
+    resource: "@ApiBundle/Controller/TrafficController.php"
     schemes:  ["%schemes%"]
