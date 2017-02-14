@@ -1,5 +1,6 @@
-/app/config/parameters.yml
 /build/
+
+/app/config/parameters.yml
 /phpunit.xml
 /var/*
 !/var/cache
@@ -14,4 +15,6 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
+
 .idea
+.php_cs.cache
