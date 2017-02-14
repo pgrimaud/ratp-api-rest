@@ -1,3 +1,4 @@
 app:
-    resource: "@AppBundle/Controller/"
+    resource: "@ApiBundle/Controller/"
     type:     annotation
+    schemes:  ["%schemes%"]
