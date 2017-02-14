@@ -78,6 +78,6 @@ fos_rest:
 
 # nelmio api doc bundle configuration
 nelmio_api_doc:
-    name: 'To rename' #@todo
+    name: 'RATP API REST'
     motd:
         template: '@Api/Swagger/override.html.twig'
