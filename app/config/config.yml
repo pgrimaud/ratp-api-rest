@@ -33,6 +33,9 @@ framework:
     assets: ~
     php_errors:
         log: true
+    cache:
+        app: cache.adapter.redis
+        default_redis_provider: "redis://localhost"
 
 # Twig Configuration
 twig:
@@ -51,7 +54,7 @@ doctrine:
         charset:  UTF8
         # if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
-        #     e.g. database_path: "%kernel.root_dir%/../var/data/data.sqlite"
+        #     e.g. data base_path: "%kernel.root_dir%/../var/data/data.sqlite"
         #   2. Uncomment database_path in parameters.yml.dist
         #   3. Uncomment next line:
         #path:     "%database_path%"
@@ -81,3 +84,6 @@ nelmio_api_doc:
     name: 'RATP API REST'
     motd:
         template: '@Api/Swagger/override.html.twig'
+    cache:
+        enabled: true
+        file: '%kernel.cache_dir%/api-doc.cache'

@@ -11,7 +11,7 @@ class TrafficController extends Controller
 {
     /**
      * @ApiDoc(
-     *    description="Récupère la liste des lieux de l'application"
+     *    description="Get all traffic on all lines"
      * )
      *
      * @Rest\View()
@@ -20,31 +20,26 @@ class TrafficController extends Controller
     public function trafficAction(Request $request)
     {
         //  http://apixha.ixxi.net/APIX?keyapp=FvChCBnSetVgTKk324rO&cmd=getTrafficSituation&category=all&networkType=all&withText=true&apixFormat=json&tmp=1487092706473
-        $payload = [
-            'payload' => 'OK'
-        ];
+
+        $cache = $this->get('cache.app')->getItem('')
 
         $hash = $this->get('api.storage')->getHash($request->getRequestUri());
 
         // use cache here
-        $cachedData = $this->get('cache.app')->getItem($hash);
+        $cachedData = $this->get('api.storage')->getCache($hash);
 
-        dump($cachedData);
+        if ($cachedData->isHit()) {
+            echo 'exist'; exit;
+        } else {
 
-        $cachedData->set('toto ma gueule');
-        $cachedData->expiresAt(new \DateTime('+ 3 seconds'));
-        $this->get('cache.app')->save($cachedData);
+            $traffic = $this->get('api.traffic')->getAllTraffic();
 
-
-        dump($cachedData);
-        exit;
-
-        $this->get('api.traffic')->getTraffic();
+            $this->get('api.storage')->setCache($cachedData, $hash, $traffic);
+        }
 
 
-        $view = View::create($payload);
+        $view = View::create();
         $view->setFormat('json');
-
         return $view;
     }
 }
