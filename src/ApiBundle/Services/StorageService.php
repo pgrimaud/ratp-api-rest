@@ -43,7 +43,7 @@ class StorageService
     public function setCache($cachedData, $data)
     {
         $cachedData->set(serialize($data));
-        $cachedData->expiresAt(new \DateTime('+ 30 seconds'));
+        $cachedData->expiresAt(new \DateTime('+5 seconds'));
         $this->cache->save($cachedData);
     }
 }

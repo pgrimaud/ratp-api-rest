@@ -2,6 +2,7 @@
 namespace ApiBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Cache\CacheItem;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
@@ -23,21 +24,18 @@ class TrafficController extends Controller
 
         $hash = $this->get('api.storage')->getHash($request->getRequestUri());
 
-        // use cache here
+        /** @var CacheItem $cachedData */
         $cachedData = $this->get('api.storage')->getCache($hash);
 
         if ($cachedData->isHit()) {
-            echo 'exist';
-            exit;
+            $payload = unserialize($cachedData->get());
         } else {
-
             $traffic = $this->get('api.traffic')->getAllTraffic();
-
-            $this->get('api.storage')->setCache($cachedData, $hash, $traffic);
+            $this->get('api.storage')->setCache($cachedData, $traffic);
+            $payload = unserialize($cachedData->get());
         }
 
-
-        $view = View::create();
+        $view = View::create($payload);
         $view->setFormat('json');
         return $view;
     }
