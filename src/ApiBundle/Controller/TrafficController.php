@@ -17,6 +17,9 @@ class TrafficController extends Controller
      *
      * @Rest\View()
      * @Rest\Get("/traffic")
+     *
+     * @param Request $request
+     * @return View
      */
     public function trafficAction(Request $request)
     {
