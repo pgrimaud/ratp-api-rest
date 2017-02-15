@@ -13,6 +13,7 @@ parameters:
     mailer_user:       ~
     mailer_password:   ~
 
-    secret:            coucou
+    secret:            ThisIsASecretKeyChangeIt
     schemes:           http
     prefix:            ''
+    ixxi_key:          FvChCBnSetVgTKk324rO
