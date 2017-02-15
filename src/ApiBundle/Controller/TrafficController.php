@@ -24,6 +24,16 @@ class TrafficController extends Controller
             'payload' => 'OK'
         ];
 
+
+        $hash = $this->get('api.storage')->getHash($request->getRequestUri());
+
+        dump($hash);exit;
+
+        // use cache here
+        $cachedCategories = $this->get('cache.app')->getItem($this->get('app'));
+        $this->get('api.traffic')->getTraffic();
+
+
         $view = View::create($payload);
         $view->setFormat('json');
 

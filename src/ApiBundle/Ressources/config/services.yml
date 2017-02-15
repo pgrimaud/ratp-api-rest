@@ -1,0 +1,8 @@
+services:
+  # CORE SERVICES
+  api.storage:
+    class: ApiBundle\Services\StorageService
+
+  # API SERVICES
+  api.traffic:
+    class: ApiBundle\Services\TrafficService
