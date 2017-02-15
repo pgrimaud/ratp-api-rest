@@ -81,5 +81,3 @@ nelmio_api_doc:
     name: 'RATP API REST'
     motd:
         template: '@Api/Swagger/override.html.twig'
-    cache:
-        enabled: true

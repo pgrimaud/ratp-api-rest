@@ -24,13 +24,21 @@ class TrafficController extends Controller
             'payload' => 'OK'
         ];
 
-
         $hash = $this->get('api.storage')->getHash($request->getRequestUri());
 
-        dump($hash);exit;
-
         // use cache here
-        $cachedCategories = $this->get('cache.app')->getItem($this->get('app'));
+        $cachedData = $this->get('cache.app')->getItem($hash);
+
+        dump($cachedData);
+
+        $cachedData->set('toto ma gueule');
+        $cachedData->expiresAt(new \DateTime('+ 3 seconds'));
+        $this->get('cache.app')->save($cachedData);
+
+
+        dump($cachedData);
+        exit;
+
         $this->get('api.traffic')->getTraffic();
 
 
