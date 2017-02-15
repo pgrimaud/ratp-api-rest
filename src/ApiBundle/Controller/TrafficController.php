@@ -21,15 +21,14 @@ class TrafficController extends Controller
     {
         //  http://apixha.ixxi.net/APIX?keyapp=FvChCBnSetVgTKk324rO&cmd=getTrafficSituation&category=all&networkType=all&withText=true&apixFormat=json&tmp=1487092706473
 
-        $cache = $this->get('cache.app')->getItem('')
-
         $hash = $this->get('api.storage')->getHash($request->getRequestUri());
 
         // use cache here
         $cachedData = $this->get('api.storage')->getCache($hash);
 
         if ($cachedData->isHit()) {
-            echo 'exist'; exit;
+            echo 'exist';
+            exit;
         } else {
 
             $traffic = $this->get('api.traffic')->getAllTraffic();
