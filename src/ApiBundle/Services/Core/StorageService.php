@@ -35,6 +35,7 @@ class StorageService extends CoreService
      */
     public function getHash()
     {
+        /** @todo clean parameters if get parameters are added */
         return md5($this->requestStack->getCurrentRequest()->getRequestUri());
     }
 
@@ -45,6 +46,7 @@ class StorageService extends CoreService
     public function setCache(CacheItem $cachedData, $data)
     {
         $cachedData->set(serialize($data));
+        /** @todo manage configuration as dependency */
         $cachedData->expiresAt(new \DateTime('+5 seconds'));
         $this->cache->save($cachedData);
     }
