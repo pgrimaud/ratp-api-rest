@@ -1,8 +1,8 @@
 <?php
 namespace ApiBundle\Services;
 
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Cache\Adapter\RedisAdapter;
+use Symfony\Component\Cache\CacheItem;
 
 class StorageService
 {
@@ -20,7 +20,7 @@ class StorageService
 
     /**
      * @param $hash
-     * @return mixed|\Symfony\Component\Cache\CacheItem
+     * @return mixed|CacheItem
      */
     public function getCache($hash)
     {
@@ -37,10 +37,10 @@ class StorageService
     }
 
     /**
-     * @param $cachedData
+     * @param CacheItem $cachedData
      * @param $data
      */
-    public function setCache($cachedData, $data)
+    public function setCache(CacheItem $cachedData, $data)
     {
         $cachedData->set(serialize($data));
         $cachedData->expiresAt(new \DateTime('+5 seconds'));
