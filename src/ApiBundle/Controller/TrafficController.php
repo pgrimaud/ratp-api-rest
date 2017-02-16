@@ -1,6 +1,7 @@
 <?php
 namespace ApiBundle\Controller;
 
+use ApiBundle\Services\ApiService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Cache\CacheItem;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,8 +26,10 @@ class TrafficController extends Controller
     {
         //  http://apixha.ixxi.net/APIX?keyapp=FvChCBnSetVgTKk324rO&cmd=getTrafficSituation&category=all&networkType=all&withText=true&apixFormat=json&tmp=1487092706473
 
-        $hash = $this->get('api.storage')->getHash($request->getRequestUri());
-
+        $payload = $this->get('api.traffic')->get('all');
+        dump($payload);
+        exit;
+        exit;
         /** @var CacheItem $cachedData */
         $cachedData = $this->get('api.storage')->getCache($hash);
 

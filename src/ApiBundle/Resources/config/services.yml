@@ -1,10 +1,13 @@
 services:
   # CORE SERVICES
   api.storage:
-    class: ApiBundle\Services\StorageService
+    class: ApiBundle\Services\Core\StorageService
+    arguments: ["@request_stack"]
     calls:
       - [ addService, [ 'cache', '@cache.app' ] ]
 
   # API SERVICES
   api.traffic:
-    class: ApiBundle\Services\TrafficService
+    class: ApiBundle\Services\Api\TrafficService
+    calls:
+      - [ addService, [ 'storage', '@api.storage' ] ]
