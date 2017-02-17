@@ -26,9 +26,17 @@ class NamesHelper
     public static function statusSlug($value)
     {
         $names = [
-            'Travaux' => 'normal_trav',
+            'Travaux'              => 'normal_trav',
+            'Incidents techniques' => 'critical'
         ];
 
-        return $names[$value];
+        /**
+         * @todo LOG IT !!!
+         */
+        if (!isset($names[$value])) {
+            return $value;
+        } else {
+            return $names[$value];
+        }
     }
 }

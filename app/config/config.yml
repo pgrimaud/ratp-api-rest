@@ -78,6 +78,9 @@ fos_rest:
         include_format: false
     view:
         view_response_listener: true
+    exception:
+        enabled: true
+        exception_controller: '\ApiBundle\Controller\CoreController::notFoundAction'
 
 # JMS serializer
 jms_serializer:
@@ -87,7 +90,7 @@ jms_serializer:
             default_timezone: "UTC"
     visitors:
         json:
-            options: [JSON_UNESCAPED_SLASHES, JSON_UNESCAPED_UNICODE]
+            options: [JSON_UNESCAPED_SLASHES, JSON_UNESCAPED_UNICODE, JSON_PRETTY_PRINT]
 
 # Nelmio api doc bundle configuration
 nelmio_api_doc:

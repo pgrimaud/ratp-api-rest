@@ -5,7 +5,7 @@ documentation:
 
 app:
     type:     annotation
-    resource: "@ApiBundle/Controller/HomeController.php"
+    resource: "@ApiBundle/Controller/CoreController.php"
     schemes:  ["%schemes%"]
     prefix:   "/%prefix%/"
 
