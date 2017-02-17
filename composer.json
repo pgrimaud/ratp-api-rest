@@ -1,5 +1,5 @@
 {
-    "name": "pierregrimaud/ratp-api-rest",
+    "name": "pgrimaud/ratp-api-rest",
     "license": "proprietary",
     "type": "project",
     "autoload": {

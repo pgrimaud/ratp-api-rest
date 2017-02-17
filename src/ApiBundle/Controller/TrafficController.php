@@ -12,18 +12,50 @@ class TrafficController extends Controller
 {
     /**
      * @ApiDoc(
-     *    description="Get all traffic on all lines"
+     *    description="Get traffic of all lines",
+     *    section="Traffic"
      * )
      *
      * @Rest\View()
      * @Rest\Get("/traffic")
      *
      * @param Request $request
+     *
      * @return View
      */
     public function trafficAction(Request $request)
     {
         $payload = $this->get('api.traffic')->get('all');
+
+        $view = View::create($payload);
+        $view->setFormat('json');
+        return $view;
+    }
+
+    /**
+     * @ApiDoc(
+     *    description="Get traffic of a specific type of transport",
+     *    section="Traffic",
+     *    requirements={
+     *      {
+     *          "name"="type",
+     *          "dataType"="string",
+     *          "description"="Type of transport (rers, metros, bus, tramways)"
+     *      }
+     *   }
+     * )
+     *
+     * @Rest\View()
+     * @Rest\Get("/traffic/{type}")
+     *
+     * @param Request $request
+     * @param $type
+     *
+     * @return View
+     */
+    public function trafficTransportAction(Request $request, $type)
+    {
+        $payload = $this->get('api.traffic')->get($type);
 
         $view = View::create($payload);
         $view->setFormat('json');

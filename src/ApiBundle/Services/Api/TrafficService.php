@@ -1,6 +1,8 @@
 <?php
 namespace ApiBundle\Services\Api;
 
+use GuzzleHttp\Client;
+
 class TrafficService extends ApiService implements ApiDataInterface
 {
     const ENTRYPOINT = 'http://apixha.ixxi.net/APIX?cmd=getTrafficSituation&category=all' .
@@ -47,7 +49,8 @@ class TrafficService extends ApiService implements ApiDataInterface
     protected function getAll()
     {
         /** @todo curl ixxi */
-
+        $client = new Client();
+        
         return [
             'payload' => 'NEW TRAFFIC ' . date('Y-m-d H:i:s')
         ];
