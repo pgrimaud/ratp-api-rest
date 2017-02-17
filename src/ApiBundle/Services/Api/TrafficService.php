@@ -49,7 +49,7 @@ class TrafficService extends ApiService implements ApiDataInterface
     /**
      * @return array
      */
-    protected function getAll()
+    private function getTrafficCache()
     {
         $cache = $this->storage->getCacheItem('traffic_data');
 
@@ -63,8 +63,15 @@ class TrafficService extends ApiService implements ApiDataInterface
 
             $this->storage->setCache($cache, $data, $this->ttl);
         }
-
         return $data;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getAll()
+    {
+        return $this->getTrafficCache();
     }
 
     /**
@@ -83,22 +90,41 @@ class TrafficService extends ApiService implements ApiDataInterface
             return null;
         }
 
-        $cache = $this->storage->getCacheItem('traffic_data');
-
-        if ($cache->isHit()) {
-            $data = unserialize($cache->get());
-        } else {
-            $ratpData = $this->getDataFromRatp();
-            $ixxiData = $this->getDataFromIxxi();
-
-            $data = $this->mergeDataSources($ratpData, $ixxiData);
-
-            $this->storage->setCache($cache, $data, $this->ttl);
-        }
+        $data = $this->getTrafficCache();
 
         return [
             $parameters['type'] => $data[$parameters['type']]
         ];
+    }
+
+    /**
+     * @param $parameters
+     * @return array|null
+     */
+    protected function getLine($parameters)
+    {
+        $typeAllowed = [
+            'rers',
+            'metros',
+            'tramways'
+        ];
+
+        if (!in_array($parameters['type'], $typeAllowed)) {
+            return null;
+        }
+
+        $data = $this->getTrafficCache();
+
+        $line = null;
+
+        foreach ($data[$parameters['type']] as $dataLine) {
+            if ($dataLine['line'] == $parameters['line']) {
+                $line = $dataLine;
+                break;
+            }
+        }
+
+        return $line;
     }
 
     /**

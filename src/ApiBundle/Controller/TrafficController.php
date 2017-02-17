@@ -63,4 +63,47 @@ class TrafficController extends Controller
 
         return $this->get('api.response')->format($payload);
     }
+
+    /**
+     * @ApiDoc(
+     *    description="Get traffic of a specific line",
+     *    section="Traffic",
+     *    requirements={
+     *      {
+     *          "name"="type",
+     *          "dataType"="string",
+     *          "description"="Type of transport (rers, metros, tramways)"
+     *      },
+     *     {
+     *          "name"="line",
+     *          "dataType"="string",
+     *          "description"="Line of transport type"
+     *      }
+     *   }
+     * )
+     *
+     * @Rest\View()
+     * @Rest\Get("/traffic/{type}/{line}")
+     *
+     * @param Request $request
+     * @param $type
+     * @param $line
+     *
+     * @return View
+     */
+    public function trafficLineAction(Request $request, $type, $line)
+    {
+        $parameters = [
+            'type' => $type,
+            'line' => $line
+        ];
+
+        $payload = $this->get('api.traffic')->get('line', $parameters);
+
+        if (!$payload) {
+            return $this->get('api.response')->notFound();
+        }
+
+        return $this->get('api.response')->format($payload);
+    }
 }
