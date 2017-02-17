@@ -1,7 +1,6 @@
 <?php
 namespace ApiBundle\Controller;
 
-use ApiBundle\Services\ApiService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Cache\CacheItem;
 use Symfony\Component\HttpFoundation\Request;

@@ -17,3 +17,6 @@ parameters:
     schemes:           http
     prefix:            ''
     ixxi_key:          FvChCBnSetVgTKk324rO
+
+    cache.ttl.traffic:      30
+    cache.ttl.traffic.data: 60

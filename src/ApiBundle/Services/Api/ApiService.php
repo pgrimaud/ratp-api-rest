@@ -7,10 +7,23 @@ use ApiBundle\Services\Core\StorageService;
 class ApiService extends CoreService
 {
     /**
-     * @var StorageService
-     * $storage
+     * @var StorageService $storage
      */
     protected $storage;
+
+    /**
+     * @var integer $ttl
+     */
+    protected $ttl;
+
+    /**
+     * ApiService constructor.
+     * @param $ttl
+     */
+    public function __construct($ttl)
+    {
+        $this->ttl = $ttl;
+    }
 
     /**
      * @param $method
@@ -24,7 +37,7 @@ class ApiService extends CoreService
             return unserialize($cache->get());
         } else {
             $data = $this->{'get' . $method}();
-            $this->storage->setCache($cache, $data);
+            $this->storage->setCache($cache, $data, $this->ttl);
             return $data;
         }
     }

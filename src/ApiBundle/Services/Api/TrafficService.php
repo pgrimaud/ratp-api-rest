@@ -3,7 +3,34 @@ namespace ApiBundle\Services\Api;
 
 class TrafficService extends ApiService implements ApiDataInterface
 {
-    const ENTRYPOINT = 'http://apixha.ixxi.net/APIX?cmd=getTrafficSituation&category=all&networkType=all&withText=true&apixFormat=json';
+    const ENTRYPOINT = 'http://apixha.ixxi.net/APIX?cmd=getTrafficSituation&category=all' .
+    '&networkType=all&withText=true&apixFormat=json';
+
+    /**
+     * @var string $apiKey
+     */
+    private $apiKey;
+
+    /**
+     * @var int $resultTtl
+     */
+    private $resultTtl;
+
+    /**
+     * TrafficService constructor.
+     * We override parent constructor to inject curl result ttl and apikey.
+     *
+     * @param $ttl
+     * @param $resultTtl
+     * @param $apiKey
+     */
+    public function __construct($ttl, $resultTtl, $apiKey)
+    {
+        $this->apiKey    = $apiKey;
+        $this->resultTtl = $resultTtl;
+
+        parent::__construct($ttl);
+    }
 
     /**
      * @param $method
@@ -19,19 +46,18 @@ class TrafficService extends ApiService implements ApiDataInterface
      */
     protected function getAll()
     {
-        $entrypoint = $this->getEntryPoint();
-        /** @todo get data (ie with guzzlehttp) */
-        /** set curl result to storage ? */
+        /** @todo curl ixxi */
+
         return [
             'payload' => 'NEW TRAFFIC ' . date('Y-m-d H:i:s')
         ];
     }
 
+    /**
+     * @return string
+     */
     private function getEntryPoint()
     {
-        /** @todo manage configuration as dependency */
-        $ixxi_key = $this->getParameter('ixxi_key');
-
-        return self::ENTRYPOINT . '&keyapp=' . $ixxi_key . '&tmp=' . time();
+        return self::ENTRYPOINT . '&keyapp=' . $this->apiKey . '&tmp=' . time();
     }
 }

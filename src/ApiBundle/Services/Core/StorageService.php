@@ -35,19 +35,20 @@ class StorageService extends CoreService
      */
     public function getHash()
     {
-        /** @todo clean parameters if get parameters are added */
-        return md5($this->requestStack->getCurrentRequest()->getRequestUri());
+        $url = $this->requestStack->getCurrentRequest()->getBaseUrl() .
+            $this->requestStack->getCurrentRequest()->getPathInfo();
+        return md5($url);
     }
 
     /**
      * @param CacheItem $cachedData
      * @param $data
      */
-    public function setCache(CacheItem $cachedData, $data)
+    public function setCache(CacheItem $cachedData, $data, $ttl)
     {
         $cachedData->set(serialize($data));
-        /** @todo manage configuration as dependency */
-        $cachedData->expiresAt(new \DateTime('+5 seconds'));
+        $cachedData->expiresAt(new \DateTimeImmutable('+' . $ttl . ' seconds'));
+
         $this->cache->save($cachedData);
     }
 }
