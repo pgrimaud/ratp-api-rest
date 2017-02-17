@@ -23,11 +23,13 @@ class StorageService extends CoreService
     }
 
     /**
+     * @param null $forceHash
      * @return mixed|CacheItem
      */
-    public function getCacheItem()
+    public function getCacheItem($forceHash = null)
     {
-        return $this->cache->getItem($this->getHash());
+        $hash = $forceHash ? $forceHash : $this->getHash();
+        return $this->cache->getItem($hash);
     }
 
     /**

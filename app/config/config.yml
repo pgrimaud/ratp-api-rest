@@ -18,7 +18,7 @@ framework:
     form:            ~
     csrf_protection: ~
     validation:      { enable_annotations: true }
-    serializer:      { enable_annotations: true }
+    serializer:      { enable_annotations: false }
     templating:
         engines: ['twig']
     default_locale:  "%locale%"
@@ -79,6 +79,16 @@ fos_rest:
     view:
         view_response_listener: true
 
+# JMS serializer
+jms_serializer:
+    handlers:
+        datetime:
+            default_format: "Y-m-d\\TH:i:sP"
+            default_timezone: "UTC"
+    visitors:
+        json:
+            options: [JSON_UNESCAPED_SLASHES, JSON_UNESCAPED_UNICODE]
+
 # Nelmio api doc bundle configuration
 nelmio_api_doc:
     name: 'RATP API REST'
@@ -87,3 +97,6 @@ nelmio_api_doc:
     cache:
         enabled: true
         file: '%kernel.cache_dir%/api-doc.cache'
+    sandbox:
+        body_format:
+            formats: {}

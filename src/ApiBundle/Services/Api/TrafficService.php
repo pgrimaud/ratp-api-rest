@@ -2,7 +2,6 @@
 namespace ApiBundle\Services\Api;
 
 use ApiBundle\Helper\NamesHelper;
-use ApiBundle\Helper\NamesHelperClass;
 use GuzzleHttp\Client;
 
 class TrafficService extends ApiService implements ApiDataInterface
@@ -51,10 +50,18 @@ class TrafficService extends ApiService implements ApiDataInterface
      */
     protected function getAll()
     {
-        $ratpData = $this->getDataFromRatp();
-        $ixxiData = $this->getDataFromIxxi();
+        $cache = $this->storage->getCacheItem('traffic_data');
 
-        $data = $this->mergeDataSources($ratpData, $ixxiData);
+        if ($cache->isHit()) {
+            $data = unserialize($cache->get());
+        } else {
+            $ratpData = $this->getDataFromRatp();
+            $ixxiData = $this->getDataFromIxxi();
+
+            $data = $this->mergeDataSources($ratpData, $ixxiData);
+
+            $this->storage->setCache($cache, $data, $this->ttl);
+        }
 
         return $data;
     }

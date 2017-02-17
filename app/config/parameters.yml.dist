@@ -16,7 +16,8 @@ parameters:
     secret:            ThisIsASecretKeyChangeIt
     schemes:           http
     prefix:            ''
+    api_version:       1
     ixxi_key:          FvChCBnSetVgTKk324rO
 
-    cache.ttl.traffic:      30
-    cache.ttl.traffic.data: 60
+    cache.ttl.traffic:      120
+    cache.ttl.traffic.data: 120

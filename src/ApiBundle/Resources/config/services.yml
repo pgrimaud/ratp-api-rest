@@ -6,6 +6,10 @@ services:
     calls:
       - [ addService, [ 'cache', '@cache.app' ] ]
 
+  api.response:
+      class: ApiBundle\Services\Core\ResponseService
+      arguments: ['@request_stack', '%api_version%']
+
   # API SERVICES
   api.traffic:
     class: ApiBundle\Services\Api\TrafficService
