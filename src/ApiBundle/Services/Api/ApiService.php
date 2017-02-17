@@ -27,16 +27,17 @@ class ApiService extends CoreService
 
     /**
      * @param $method
+     * @param $parameters
      * @return mixed
      */
-    public function getData($method)
+    public function getData($method, $parameters)
     {
         $cache = $this->storage->getCacheItem();
 
         if ($cache->isHit()) {
             return unserialize($cache->get());
         } else {
-            $data = $this->{'get' . $method}();
+            $data = $this->{'get' . $method}($parameters);
             $this->storage->setCache($cache, $data, $this->ttl);
             return $data;
         }

@@ -5,7 +5,8 @@ interface ApiDataInterface
 {
     /**
      * @param $method
+     * @param array $parameters
      * @return mixed
      */
-    public function get($method);
+    public function get($method, $parameters = []);
 }

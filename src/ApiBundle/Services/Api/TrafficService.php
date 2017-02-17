@@ -38,11 +38,12 @@ class TrafficService extends ApiService implements ApiDataInterface
 
     /**
      * @param $method
+     * @param array $parameters
      * @return mixed
      */
-    public function get($method)
+    public function get($method, $parameters = [])
     {
-        return parent::getData($method);
+        return parent::getData($method, $parameters);
     }
 
     /**
@@ -67,6 +68,40 @@ class TrafficService extends ApiService implements ApiDataInterface
     }
 
     /**
+     * @param $parameters
+     * @return array|null
+     */
+    protected function getSpecific($parameters)
+    {
+        $typeAllowed = [
+            'rers',
+            'metros',
+            'tramways'
+        ];
+
+        if (!in_array($parameters['type'], $typeAllowed)) {
+            return null;
+        }
+
+        $cache = $this->storage->getCacheItem('traffic_data');
+
+        if ($cache->isHit()) {
+            $data = unserialize($cache->get());
+        } else {
+            $ratpData = $this->getDataFromRatp();
+            $ixxiData = $this->getDataFromIxxi();
+
+            $data = $this->mergeDataSources($ratpData, $ixxiData);
+
+            $this->storage->setCache($cache, $data, $this->ttl);
+        }
+
+        return [
+            $parameters['type'] => $data[$parameters['type']]
+        ];
+    }
+
+    /**
      * @param $ratp
      * @param $ixxi
      * @return array
@@ -85,13 +120,13 @@ class TrafficService extends ApiService implements ApiDataInterface
                 $rer = $ixxi['rers'][$allowedRer];
                 ksort($rer);
 
-                $first_event = current($rer);
+                $firstEvent = current($rer);
 
                 $information = [
                     'line'    => $allowedRer,
-                    'slug'    => NamesHelper::statusSlug($first_event['typeName']),
-                    'title'   => $first_event['typeName'],
-                    'message' => $first_event['message']
+                    'slug'    => NamesHelper::statusSlug($firstEvent['typeName']),
+                    'title'   => $firstEvent['typeName'],
+                    'message' => $firstEvent['message']
                 ];
             } else {
                 $information = [

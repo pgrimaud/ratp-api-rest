@@ -104,6 +104,7 @@ class ResponseService extends CoreService
 
         $view = View::create($result);
         $view->setFormat($format);
+        $view->setStatusCode('404');
 
         return $view;
     }

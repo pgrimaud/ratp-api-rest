@@ -51,7 +51,15 @@ class TrafficController extends Controller
      */
     public function trafficTransportAction(Request $request, $type)
     {
-        $payload = $this->get('api.traffic')->get($type);
+        $parameters = [
+            'type' => $type
+        ];
+
+        $payload = $this->get('api.traffic')->get('specific', $parameters);
+
+        if (!$payload) {
+            return $this->get('api.response')->notFound();
+        }
 
         return $this->get('api.response')->format($payload);
     }
