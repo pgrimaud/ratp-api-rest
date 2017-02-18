@@ -14,3 +14,9 @@ traffic:
     resource: "@ApiBundle/Controller/TrafficController.php"
     schemes:  ["%schemes%"]
     prefix:   "/%prefix%/"
+
+lines:
+    type:     rest
+    resource: "@ApiBundle/Controller/LinesController.php"
+    schemes:  ["%schemes%"]
+    prefix:   "/%prefix%/"
