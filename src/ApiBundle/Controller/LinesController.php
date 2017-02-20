@@ -62,4 +62,47 @@ class LinesController extends Controller
 
         return $this->get('api.response')->format($payload);
     }
+
+    /**
+     * @ApiDoc(
+     *    description="Get information of a specific line",
+     *    section="Lines",
+     *    requirements={
+     *      {
+     *          "name"="type",
+     *          "dataType"="string",
+     *          "description"="Type of transport (rers, metros, bus, tramways)"
+     *      },
+     *     {
+     *          "name"="code",
+     *          "dataType"="string",
+     *          "description"="Code of transport line"
+     *      }
+     *   }
+     * )
+     *
+     * @Rest\View()
+     * @Rest\Get("/lines/{type}/{code}")
+     *
+     * @param Request $request
+     * @param $type
+     * @param $code
+     *
+     * @return View
+     */
+    public function linesInformationAction(Request $request, $type, $code)
+    {
+        $parameters = [
+            'type' => $type,
+            'code' => $code
+        ];
+
+        $payload = $this->get('api.lines')->get('line', $parameters);
+
+        if (!$payload) {
+            return $this->get('api.response')->notFound();
+        }
+
+        return $this->get('api.response')->format($payload);
+    }
 }

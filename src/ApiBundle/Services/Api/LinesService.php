@@ -70,6 +70,37 @@ class LinesService extends ApiService implements ApiDataInterface
     }
 
     /**
+     * @param $parameters
+     * @return array|null
+     */
+    protected function getLine($parameters)
+    {
+        $typeAllowed = [
+            'rers',
+            'metros',
+            'tramways',
+            'bus'
+        ];
+
+        if (!in_array($parameters['type'], $typeAllowed)) {
+            return null;
+        }
+
+        $data = $this->getLinesCache();
+
+        $line = null;
+
+        foreach ($data[$parameters['type']] as $dataLine) {
+            if (strtolower($dataLine['code']) == strtolower($parameters['code'])) {
+                $line = $dataLine;
+                break;
+            }
+        }
+
+        return $line;
+    }
+
+    /**
      * @return array
      */
     private function getLinesCache()

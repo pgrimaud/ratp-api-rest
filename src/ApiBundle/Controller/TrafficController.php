@@ -75,27 +75,27 @@ class TrafficController extends Controller
      *          "description"="Type of transport (rers, metros, tramways)"
      *      },
      *     {
-     *          "name"="line",
+     *          "name"="code",
      *          "dataType"="string",
-     *          "description"="Line of transport type"
+     *          "description"="Code of transport line"
      *      }
      *   }
      * )
      *
      * @Rest\View()
-     * @Rest\Get("/traffic/{type}/{line}")
+     * @Rest\Get("/traffic/{type}/{code}")
      *
      * @param Request $request
      * @param $type
-     * @param $line
+     * @param $code
      *
      * @return View
      */
-    public function trafficLineAction(Request $request, $type, $line)
+    public function trafficLineAction(Request $request, $type, $code)
     {
         $parameters = [
             'type' => $type,
-            'line' => $line
+            'code' => $code
         ];
 
         $payload = $this->get('api.traffic')->get('line', $parameters);
