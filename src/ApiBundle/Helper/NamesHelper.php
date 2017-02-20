@@ -56,5 +56,4 @@ class NamesHelper
 
         return isset($names[$value]) ? $names[$value] : null;
     }
-
 }

@@ -42,8 +42,6 @@ class LinesService extends ApiService implements ApiDataInterface
                         'image'      => $line->getImage()
                     ];
                 }
-
-
             }
         }
 
