@@ -32,3 +32,9 @@ destinations:
     resource: "@ApiBundle/Controller/DestinationsController.php"
     schemes:  ["%schemes%"]
     prefix:   "/%prefix%/"
+
+schedules:
+    type:     rest
+    resource: "@ApiBundle/Controller/SchedulesController.php"
+    schemes:  ["%schemes%"]
+    prefix:   "/%prefix%/"

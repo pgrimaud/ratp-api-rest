@@ -34,3 +34,9 @@ services:
     arguments: ['%cache.ttl.destinations%']
     calls:
       - [ addService, [ 'storage', '@api.storage' ] ]
+
+  api.schedules:
+    class: ApiBundle\Services\Api\SchedulesService
+    arguments: ['%cache.ttl.schedules%']
+    calls:
+      - [ addService, [ 'storage', '@api.storage' ] ]

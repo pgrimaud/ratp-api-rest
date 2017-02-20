@@ -29,3 +29,5 @@ parameters:
 
     cache.ttl.destinations: 3600
 
+    cache.ttl.destinations: 30
+
