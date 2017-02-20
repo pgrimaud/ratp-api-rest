@@ -36,7 +36,7 @@ class LinesController extends Controller
      *      {
      *          "name"="type",
      *          "dataType"="string",
-     *          "description"="Type of transport (rers, metros, bus, tramways)"
+     *          "description"="Type of transport (rers, metros, bus, tramways, noctiliens)"
      *      }
      *   }
      * )
@@ -71,7 +71,7 @@ class LinesController extends Controller
      *      {
      *          "name"="type",
      *          "dataType"="string",
-     *          "description"="Type of transport (rers, metros, bus, tramways)"
+     *          "description"="Type of transport (rers, metros, bus, tramways, noctiliens)"
      *      },
      *     {
      *          "name"="code",

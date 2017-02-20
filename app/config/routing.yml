@@ -20,3 +20,9 @@ lines:
     resource: "@ApiBundle/Controller/LinesController.php"
     schemes:  ["%schemes%"]
     prefix:   "/%prefix%/"
+
+stations:
+    type:     rest
+    resource: "@ApiBundle/Controller/StationsController.php"
+    schemes:  ["%schemes%"]
+    prefix:   "/%prefix%/"

@@ -24,3 +24,6 @@ parameters:
 
     cache.ttl.lines: 3600
     cache.ttl.lines.data: 3600
+
+    cache.ttl.stations: 3600
+

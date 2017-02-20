@@ -22,3 +22,9 @@ services:
       arguments: ['%cache.ttl.lines%', '%cache.ttl.lines.data%']
       calls:
         - [ addService, [ 'storage', '@api.storage' ] ]
+
+  api.stations:
+      class: ApiBundle\Services\Api\StationsService
+      arguments: ['%cache.ttl.stations%']
+      calls:
+        - [ addService, [ 'storage', '@api.storage' ] ]

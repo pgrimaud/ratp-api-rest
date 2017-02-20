@@ -39,21 +39,4 @@ class NamesHelper
             return $names[$value];
         }
     }
-
-    /**
-     * @param $value
-     * @return mixed
-     */
-    public static function sdkSlug($value)
-    {
-        $names = [
-            'metro'         => 'metros',
-            'rer'           => 'rers',
-            'tram'          => 'tramways',
-            'busratp'       => 'bus',
-            'noctilienratp' => 'bus'
-        ];
-
-        return isset($names[$value]) ? $names[$value] : null;
-    }
 }

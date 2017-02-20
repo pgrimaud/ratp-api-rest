@@ -80,13 +80,13 @@ class TrafficService extends ApiService implements ApiDataInterface
      */
     protected function getSpecific($parameters)
     {
-        $typeAllowed = [
+        $typesAllowed = [
             'rers',
             'metros',
             'tramways'
         ];
 
-        if (!in_array($parameters['type'], $typeAllowed)) {
+        if (!in_array($parameters['type'], $typesAllowed)) {
             return null;
         }
 
@@ -103,13 +103,13 @@ class TrafficService extends ApiService implements ApiDataInterface
      */
     protected function getLine($parameters)
     {
-        $typeAllowed = [
+        $typesAllowed = [
             'rers',
             'metros',
             'tramways'
         ];
 
-        if (!in_array($parameters['type'], $typeAllowed)) {
+        if (!in_array($parameters['type'], $typesAllowed)) {
             return null;
         }
 

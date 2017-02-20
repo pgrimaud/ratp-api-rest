@@ -1,7 +1,7 @@
 <?php
 namespace ApiBundle\Services\Api;
 
-use ApiBundle\Helper\NamesHelper;
+use ApiBundle\Helper\NetworkHelper;
 use Ratp\Api;
 use Ratp\Line;
 use Ratp\Lines;
@@ -51,14 +51,15 @@ class LinesService extends ApiService implements ApiDataInterface
      */
     protected function getSpecific($parameters)
     {
-        $typeAllowed = [
+        $typesAllowed = [
             'rers',
             'metros',
             'tramways',
-            'bus'
+            'bus',
+            'noctiliens'
         ];
 
-        if (!in_array($parameters['type'], $typeAllowed)) {
+        if (!in_array($parameters['type'], $typesAllowed)) {
             return null;
         }
 
@@ -75,14 +76,15 @@ class LinesService extends ApiService implements ApiDataInterface
      */
     protected function getLine($parameters)
     {
-        $typeAllowed = [
+        $typesAllowed = [
             'rers',
             'metros',
             'tramways',
-            'bus'
+            'bus',
+            'noctiliens'
         ];
 
-        if (!in_array($parameters['type'], $typeAllowed)) {
+        if (!in_array($parameters['type'], $typesAllowed)) {
             return null;
         }
 
@@ -129,7 +131,7 @@ class LinesService extends ApiService implements ApiDataInterface
         foreach ($api->getLines($lines)->getReturn() as $line) {
             /** @var Line $line */
             if ($line instanceof Line) {
-                $type = NamesHelper::sdkSlug($line->getReseau()->getCode());
+                $type = NetworkHelper::typeSlug($line->getReseau()->getCode());
 
                 if ($type) {
                     $return[$type][] = [
