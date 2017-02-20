@@ -26,3 +26,9 @@ stations:
     resource: "@ApiBundle/Controller/StationsController.php"
     schemes:  ["%schemes%"]
     prefix:   "/%prefix%/"
+
+destinations:
+    type:     rest
+    resource: "@ApiBundle/Controller/DestinationsController.php"
+    schemes:  ["%schemes%"]
+    prefix:   "/%prefix%/"

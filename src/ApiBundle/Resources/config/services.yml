@@ -7,8 +7,8 @@ services:
       - [ addService, [ 'cache', '@cache.app' ] ]
 
   api.response:
-      class: ApiBundle\Services\Core\ResponseService
-      arguments: ['@request_stack', '%api_version%']
+    class: ApiBundle\Services\Core\ResponseService
+    arguments: ['@request_stack', '%api_version%']
 
   # API SERVICES
   api.traffic:
@@ -18,13 +18,19 @@ services:
       - [ addService, [ 'storage', '@api.storage' ] ]
 
   api.lines:
-      class: ApiBundle\Services\Api\LinesService
-      arguments: ['%cache.ttl.lines%', '%cache.ttl.lines.data%']
-      calls:
-        - [ addService, [ 'storage', '@api.storage' ] ]
+    class: ApiBundle\Services\Api\LinesService
+    arguments: ['%cache.ttl.lines%', '%cache.ttl.lines.data%']
+    calls:
+      - [ addService, [ 'storage', '@api.storage' ] ]
 
   api.stations:
-      class: ApiBundle\Services\Api\StationsService
-      arguments: ['%cache.ttl.stations%']
-      calls:
-        - [ addService, [ 'storage', '@api.storage' ] ]
+    class: ApiBundle\Services\Api\StationsService
+    arguments: ['%cache.ttl.stations%']
+    calls:
+      - [ addService, [ 'storage', '@api.storage' ] ]
+
+  api.destinations:
+    class: ApiBundle\Services\Api\DestinationsService
+    arguments: ['%cache.ttl.destinations%']
+    calls:
+      - [ addService, [ 'storage', '@api.storage' ] ]
