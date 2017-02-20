@@ -21,3 +21,5 @@ parameters:
 
     cache.ttl.traffic:      120
     cache.ttl.traffic.data: 120
+
+    cache.ttl.lines: 3600

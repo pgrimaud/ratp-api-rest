@@ -16,3 +16,9 @@ services:
     arguments: ['%cache.ttl.traffic%', '%cache.ttl.traffic.data%', '%ixxi_key%']
     calls:
       - [ addService, [ 'storage', '@api.storage' ] ]
+
+  api.lines:
+      class: ApiBundle\Services\Api\LinesService
+      arguments: ['%cache.ttl.lines%']
+      calls:
+        - [ addService, [ 'storage', '@api.storage' ] ]

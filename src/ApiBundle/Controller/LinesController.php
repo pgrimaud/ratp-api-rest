@@ -24,8 +24,7 @@ class LinesController extends Controller
      */
     public function linesAction(Request $request)
     {
-        exit;
-        $payload = $this->get('api.lines')->get('');
+        $payload = $this->get('api.lines')->get('all');
         return $this->get('api.response')->format($payload);
     }
 }
