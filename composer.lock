@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7b559f0e7841198cd45f864ccf915d51",
+    "content-hash": "c2106a55bf8031cabe1defcdb2d1fb29",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1639,6 +1639,43 @@
             "time": "2016-11-07T23:38:38+00:00"
         },
         {
+            "name": "pgrimaud/horaires-ratp-sdk",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:pgrimaud/horaires-ratp-sdk.git",
+                "reference": "da8135da207a9f336a866f4460c22087321f9ef1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pgrimaud/horaires-ratp-sdk/zipball/da8135da207a9f336a866f4460c22087321f9ef1",
+                "reference": "da8135da207a9f336a866f4460c22087321f9ef1",
+                "shasum": ""
+            },
+            "require": {
+                "ext-soap": "*",
+                "php": ">=5.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ratp\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pierre Grimaud",
+                    "email": "grimaud.pierre@gmail.com"
+                }
+            ],
+            "description": "RATP SDK - Retrieve schedules for any given RER (train), Metro, or Tramway stop in real time. The RATP is a public transport operator based in Paris, France.",
+            "homepage": "https://github.com/pgrimaud/horaires-ratp-sdk",
+            "time": "2017-02-14T13:40:51+00:00"
+        },
+        {
             "name": "phpcollection/phpcollection",
             "version": "0.5.0",
             "source": {
@@ -2053,16 +2090,16 @@
         },
         {
             "name": "sensiolabs/security-checker",
-            "version": "v4.0.0",
+            "version": "v4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/security-checker.git",
-                "reference": "116027b57b568ed61b7b1c80eeb4f6ee9e8c599c"
+                "reference": "f2ce0035fc512287978510ca1740cd111d60f89f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/116027b57b568ed61b7b1c80eeb4f6ee9e8c599c",
-                "reference": "116027b57b568ed61b7b1c80eeb4f6ee9e8c599c",
+                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/f2ce0035fc512287978510ca1740cd111d60f89f",
+                "reference": "f2ce0035fc512287978510ca1740cd111d60f89f",
                 "shasum": ""
             },
             "require": {
@@ -2093,7 +2130,7 @@
                 }
             ],
             "description": "A security checker for your composer.lock",
-            "time": "2016-09-23T18:09:57+00:00"
+            "time": "2017-02-18T17:53:25+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

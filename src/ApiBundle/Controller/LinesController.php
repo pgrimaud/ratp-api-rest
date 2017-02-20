@@ -11,7 +11,7 @@ class LinesController extends Controller
 {
     /**
      * @ApiDoc(
-     *    description="Get list of all lines",
+     *    description="Get a list of all lines",
      *    section="Lines"
      * )
      *
@@ -24,7 +24,8 @@ class LinesController extends Controller
      */
     public function linesAction(Request $request)
     {
-        /** @todo */
-        return null;
+        exit;
+        $payload = $this->get('api.lines')->get('');
+        return $this->get('api.response')->format($payload);
     }
 }
