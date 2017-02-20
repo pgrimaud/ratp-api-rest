@@ -19,6 +19,6 @@ services:
 
   api.lines:
       class: ApiBundle\Services\Api\LinesService
-      arguments: ['%cache.ttl.lines%']
+      arguments: ['%cache.ttl.lines%', '%cache.ttl.lines.data%']
       calls:
         - [ addService, [ 'storage', '@api.storage' ] ]

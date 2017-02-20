@@ -9,6 +9,25 @@ use Ratp\Lines;
 class LinesService extends ApiService implements ApiDataInterface
 {
     /**
+     * @var int $resultTtl
+     */
+    private $resultTtl;
+
+    /**
+     * LinesService constructor.
+     * We override parent constructor to inject ttl.
+     *
+     * @param $ttl
+     * @param $resultTtl
+     */
+    public function __construct($ttl, $resultTtl)
+    {
+        $this->resultTtl = $resultTtl;
+
+        parent::__construct($ttl);
+    }
+
+    /**
      * @param $method
      * @param array $parameters
      * @return mixed
@@ -22,6 +41,54 @@ class LinesService extends ApiService implements ApiDataInterface
      * @return array
      */
     protected function getAll()
+    {
+        return $this->getLinesCache();
+    }
+
+    /**
+     * @param $parameters
+     * @return array|null
+     */
+    protected function getSpecific($parameters)
+    {
+        $typeAllowed = [
+            'rers',
+            'metros',
+            'tramways',
+            'bus'
+        ];
+
+        if (!in_array($parameters['type'], $typeAllowed)) {
+            return null;
+        }
+
+        $data = $this->getLinesCache();
+
+        return [
+            $parameters['type'] => $data[$parameters['type']]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function getLinesCache()
+    {
+        $cache = $this->storage->getCacheItem('lines_data');
+
+        if ($cache->isHit()) {
+            $data = unserialize($cache->get());
+        } else {
+            $data = $this->getAllLinesForCache();
+            $this->storage->setCache($cache, $data, $this->resultTtl);
+        }
+        return $data;
+    }
+
+    /**
+     * @return array
+     */
+    private function getAllLinesForCache()
     {
         $return = [];
 

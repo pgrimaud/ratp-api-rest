@@ -36,7 +36,7 @@ class TrafficController extends Controller
      *      {
      *          "name"="type",
      *          "dataType"="string",
-     *          "description"="Type of transport (rers, metros, bus, tramways)"
+     *          "description"="Type of transport (rers, metros, tramways)"
      *      }
      *   }
      * )
@@ -49,7 +49,7 @@ class TrafficController extends Controller
      *
      * @return View
      */
-    public function trafficTransportAction(Request $request, $type)
+    public function trafficTypeAction(Request $request, $type)
     {
         $parameters = [
             'type' => $type

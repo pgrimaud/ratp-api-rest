@@ -61,7 +61,7 @@ class TrafficService extends ApiService implements ApiDataInterface
 
             $data = $this->mergeDataSources($ratpData, $ixxiData);
 
-            $this->storage->setCache($cache, $data, $this->ttl);
+            $this->storage->setCache($cache, $data, $this->resultTtl);
         }
         return $data;
     }
