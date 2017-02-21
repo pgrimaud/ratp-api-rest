@@ -24,4 +24,27 @@ class NetworkHelper
 
         return isset($names[$value]) ? $names[$value] : null;
     }
+
+    /**
+     * @param $value
+     * @param bool $reverse
+     * @return mixed|null
+     */
+    public static function typeSlugSchedules($value, $reverse = false)
+    {
+        $names = [
+            'metro'         => 'M',
+            'rer'           => 'R',
+            'tram'          => 'T',
+            'bus'           => 'B',
+            'noctilienratp' => 'N'
+        ];
+
+        if ($reverse) {
+            $names = array_flip($names);
+        }
+
+        return isset($names[$value]) ? $names[$value] : null;
+    }
+
 }

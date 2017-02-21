@@ -6,7 +6,6 @@ use Ratp\Api;
 use Ratp\Direction;
 use Ratp\Line;
 use Ratp\MissionsNext;
-use Ratp\Reseau;
 use Ratp\Station;
 
 class SchedulesService extends ApiService implements ApiDataInterface
@@ -43,38 +42,28 @@ class SchedulesService extends ApiService implements ApiDataInterface
             return null;
         }
 
-
-        $networkRatp = NetworkHelper::typeSlug($parameters['type'], true);
-
-        $reseau = new Reseau();
-        $reseau->setCode('metro');
+        $networkRatp = NetworkHelper::typeSlugSchedules($parameters['type']);
 
         $line = new Line();
-        $line->setReseau($reseau);
-        $line->setCode('8');
+        $line->setId($networkRatp . $parameters['code']);
 
         $station = new Station();
-        $station->setName('Daumesnil');
+        $station->setName($parameters['station']);
         $station->setLine($line);
 
         $direction = new Direction();
-        $direction->setSens('R');
+        $direction->setSens($parameters['way']);
         $direction->setLine($line);
 
         $mission = new MissionsNext($station, $direction);
-        $api    = new Api();
+        $api     = new Api();
 
         $result = $api->getMissionsNext($mission)->getReturn();
 
         foreach ($result->getMissions() as $mission) {
-
-            dump($mission); exit;
-
-            /** @var Mis */
-//            dump($mission->s);
-//            echo $mission->stationsMessages[0] . "\n";
+            $schedules[] = $mission->stationsMessages;
         }
-        exit;
+
         return $schedules;
     }
 }

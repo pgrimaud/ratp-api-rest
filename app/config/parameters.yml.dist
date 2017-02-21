@@ -31,3 +31,5 @@ parameters:
 
     cache.ttl.destinations: 30
 
+    cache.ttl.schedules: 30
+
