@@ -41,13 +41,14 @@ class StationsService extends ApiService implements ApiDataInterface
         }
 
         $networkRatp = NetworkHelper::typeSlug($parameters['type'], true);
+        $prefixcode  = NetworkHelper::forcePrefix($parameters['type']);
 
         $reseau = new Reseau();
         $reseau->setCode($networkRatp);
 
         $line = new Line();
         $line->setReseau($reseau);
-        $line->setCode($parameters['code']);
+        $line->setCode($prefixcode . $parameters['code']);
 
         $apiStation = new Station();
         $apiStation->setLine($line);

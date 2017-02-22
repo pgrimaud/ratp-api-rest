@@ -6,6 +6,7 @@ use Ratp\Api;
 use Ratp\Direction;
 use Ratp\Line;
 use Ratp\MissionsNext;
+use Ratp\Reseau;
 use Ratp\Station;
 
 class SchedulesService extends ApiService implements ApiDataInterface
@@ -42,28 +43,42 @@ class SchedulesService extends ApiService implements ApiDataInterface
             return null;
         }
 
-        $networkRatp = NetworkHelper::typeSlugSchedules($parameters['type']);
+        $prefix = NetworkHelper::typeSlugSchedules($parameters['type']);
 
         $line = new Line();
-        $line->setId($networkRatp . $parameters['code']);
+        if (in_array($parameters['type'], ['bus', 'metros'])) {
+            $line->setId($prefix . $parameters['code']);
+        } else if (in_array($parameters['type'], ['rers'])) {
+            $line->setId($prefix . strtoupper($parameters['code']));
+        } else {
+            $line->setCode('T1');
+        }
 
         $station = new Station();
-        $station->setName($parameters['station']);
         $station->setLine($line);
+        $station->setName($parameters['station']);
 
         $direction = new Direction();
         $direction->setSens($parameters['way']);
-        $direction->setLine($line);
 
-        $mission = new MissionsNext($station, $direction);
+        $mission = new MissionsNext($station, $direction, date('YmdHi'));
         $api     = new Api();
+
+        dump($mission);
 
         $result = $api->getMissionsNext($mission)->getReturn();
 
-        foreach ($result->getMissions() as $mission) {
-            $schedules[] = $mission->stationsMessages;
-        }
+        dump($result);
 
+
+//        foreach ($result->getMissions() as $mission) {
+//            dump($mission);
+//            $schedules[] = $mission->stationsMessages;
+//        }
+
+        dump($api->__getLastRequest());
+
+        exit;
         return $schedules;
     }
 }

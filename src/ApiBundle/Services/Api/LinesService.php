@@ -136,7 +136,7 @@ class LinesService extends ApiService implements ApiDataInterface
                 if ($type) {
                     $return[$type][] = [
                         'id'         => $line->getId(),
-                        'code'       => $line->getCode(),
+                        'code'       => str_replace(['N', 'T'], '', $line->getCode()),
                         'name'       => $line->getReseau()->getName() . ' ' . $line->getCode(),
                         'directions' => $line->getName(),
                         'image'      => $line->getImage()

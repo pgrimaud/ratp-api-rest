@@ -33,11 +33,11 @@ class NetworkHelper
     public static function typeSlugSchedules($value, $reverse = false)
     {
         $names = [
-            'metro'         => 'M',
-            'rer'           => 'R',
-            'tram'          => 'T',
-            'bus'           => 'B',
-            'noctilienratp' => 'N'
+            'metros'     => 'M',
+            'rers'       => 'R',
+            'tramways'   => 'T',
+            'bus'        => 'B',
+            'noctiliens' => 'N'
         ];
 
         if ($reverse) {
@@ -45,6 +45,20 @@ class NetworkHelper
         }
 
         return isset($names[$value]) ? $names[$value] : null;
+    }
+
+    /**
+     * @param $value
+     * @return mixed|string
+     */
+    public static function forcePrefix($value)
+    {
+        $names = [
+            'tramways'   => 'T',
+            'noctiliens' => 'N'
+        ];
+
+        return isset($names[$value]) ? $names[$value] : '';
     }
 
 }
