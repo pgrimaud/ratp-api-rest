@@ -51,7 +51,8 @@ class SchedulesService extends ApiService implements ApiDataInterface
         } else if (in_array($parameters['type'], ['rers'])) {
             $line->setId($prefix . strtoupper($parameters['code']));
         } else {
-            $line->setCode('T1');
+            /** @FIXME RAPT PLS */
+            $line->setCode($prefix . strtoupper($parameters['code']));
         }
 
         $station = new Station();
@@ -62,23 +63,15 @@ class SchedulesService extends ApiService implements ApiDataInterface
         $direction->setSens($parameters['way']);
 
         $mission = new MissionsNext($station, $direction, date('YmdHi'));
-        $api     = new Api();
 
-        dump($mission);
-
+        $api    = new Api();
         $result = $api->getMissionsNext($mission)->getReturn();
 
-        dump($result);
 
+        foreach ($result->getMissions() as $mission) {
+            $schedules[] = $mission->stationsMessages;
+        }
 
-//        foreach ($result->getMissions() as $mission) {
-//            dump($mission);
-//            $schedules[] = $mission->stationsMessages;
-//        }
-
-        dump($api->__getLastRequest());
-
-        exit;
         return $schedules;
     }
 }
