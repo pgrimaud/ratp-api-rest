@@ -51,5 +51,4 @@ class StationsController extends Controller
 
         return $this->get('api.response')->format($payload);
     }
-
 }

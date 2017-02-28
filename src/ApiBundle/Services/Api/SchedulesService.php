@@ -48,7 +48,7 @@ class SchedulesService extends ApiService implements ApiDataInterface
         $line = new Line();
         if (in_array($parameters['type'], ['bus', 'metros'])) {
             $line->setId($prefix . $parameters['code']);
-        } else if (in_array($parameters['type'], ['rers'])) {
+        } elseif (in_array($parameters['type'], ['rers'])) {
             $line->setId($prefix . strtoupper($parameters['code']));
         } else {
             /** @FIXME RAPT PLS */

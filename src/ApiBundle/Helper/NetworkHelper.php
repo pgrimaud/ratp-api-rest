@@ -60,5 +60,4 @@ class NetworkHelper
 
         return isset($names[$value]) ? $names[$value] : '';
     }
-
 }
