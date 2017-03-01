@@ -79,7 +79,7 @@ fos_rest:
         view_response_listener: true
     exception:
         enabled: true
-        exception_controller: '\ApiBundle\Controller\CoreController::notFoundAction'
+        exception_controller: '\ApiBundle\Controller\CoreController::internalErrorAction'
 
 # JMS serializer
 jms_serializer:

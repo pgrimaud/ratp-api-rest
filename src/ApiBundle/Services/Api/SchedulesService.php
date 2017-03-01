@@ -6,7 +6,6 @@ use Ratp\Api;
 use Ratp\Direction;
 use Ratp\Line;
 use Ratp\MissionsNext;
-use Ratp\Reseau;
 use Ratp\Station;
 
 class SchedulesService extends ApiService implements ApiDataInterface
@@ -51,7 +50,7 @@ class SchedulesService extends ApiService implements ApiDataInterface
         } elseif (in_array($parameters['type'], ['rers'])) {
             $line->setId($prefix . strtoupper($parameters['code']));
         } else {
-            /** @FIXME RAPT PLS */
+            /** @FIXME TRAMWAYS DONT WORK */
             $line->setCode($prefix . strtoupper($parameters['code']));
         }
 
