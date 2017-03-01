@@ -3,7 +3,6 @@ namespace ApiBundle\Services\Core;
 
 use ApiBundle\Helper\XmlResponseHelper;
 use FOS\RestBundle\View\View;
-use Ratp\Reseau;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 
