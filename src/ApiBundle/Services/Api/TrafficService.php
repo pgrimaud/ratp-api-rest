@@ -118,7 +118,7 @@ class TrafficService extends ApiService implements ApiDataInterface
         $line = null;
 
         foreach ($data[$parameters['type']] as $dataLine) {
-            if ($dataLine['line'] == $parameters['line']) {
+            if ($dataLine['line'] == $parameters['code']) {
                 $line = $dataLine;
                 break;
             }
