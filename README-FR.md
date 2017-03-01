@@ -1,24 +1,24 @@
 # REST RATP API
 
-This project turnkey is distributed as a middleware to expose RATP data as REST resources.
-You can retrieve real time schedules for any given RER (train), Metro, Tramway or Bus stop in real time.
+Ce projet clé-en-main est distribué comme une passerelle pour générer des données RATP au format REST.
+Vous pouvez récupérer les horaires en temps réel pour tout arrêt RER (train), métro, tramway, bus ou noctilien du réseau RATP.
 
-This API uses the package [horaires-ratp-sdk](https://github.com/pgrimaud/horaires-ratp-sdk) which consumes the official RATP API.
+Ce projet utilise la librairie [horaires-ratp-sdk](https://github.com/pgrimaud/horaires-ratp-sdk) qui utilise les données de l'API RATP officielle.
  
-## Translations
+## Traductions
 
-This README file is also available in [french](https://github.com/pgrimaud/ratp-api-rest/blob/master/README-FR.md).
+Ce README est aussi disponible en [anglais](https://github.com/pgrimaud/ratp-api-rest/blob/master/README.md).
 
-## Requirements
+## Prérequis
 
- - Access to the RATP API (see [here](https://data.ratp.fr/explore/dataset/horaires-temps-reel/))
+ - Accès à l'API RATP (voir [ici](https://data.ratp.fr/explore/dataset/horaires-temps-reel/))
  - PHP >= 5.6
- - Package php-soap (ext-soap extension)
- - Redis server (for cache)
+ - Librairie php-soap (ext-soap extension)
+ - Serveur Redis (pour le cache)
 
 ## Installation
 
-First :
+Tout d'abord :
 
 ```
 git clone git@github.com:pgrimaud/ratp-api-rest
@@ -26,30 +26,30 @@ cd ratp-api-rest
 composer install --no-dev
 ```
 
-Then configure your favorite webserver with the entrypoint in ```web/app.php.```
+Puis configurer votre serveur web et le faire pointer sur ```web/app.php.```. 
 
-Optionnal for production : remove app_dev.php file from the ```web``` folder.
+*Conseil pour la production* : supprimer le fichier app_dev.php du dossier ```web```.
 
 ## TODO
 
-- Enable / disable cache usage
+- Gérer l'activation / désactivation du cache.
 
-## Known bugs
+## Bugs connus
 
-- 2017-02-27 : Tramways schedules don't work. I contacted RATP about it and I still waiting for a reply and/or a fix.
+- 2017-02-27 : Les horaires en temps réel des tramways ne fonctionnent pas. J'ai contacté la RATP à ce sujet et je suis toujours en attente d'une réponse.
 
 ## Feedback or questions
 
-You can [create an issue](https://github.com/pgrimaud/ratp-api-rest/issues) if needed or contact me on [Twitter](https://twitter.com/pgrimaud_).
+Vous pouvez [créer une issue](https://github.com/pgrimaud/ratp-api-rest/issues) ou me contacter sur [Twitter](https://twitter.com/pgrimaud_).
 
-## Contributing
+## Contributions
 
-Pull requests are appreciated. Everyone is welcome and even encouraged to contribute with their own improvements.
+Les pull requests sont appréciées. N'hésitez pas à soumettre vos propres optimisations ou correctifs.
 
 ## Copyrights
 
-This project is not affiliated with or endorsed by the [RATP](http://www.ratp.fr).
+Ce projet n'est pas affilié à la [RATP](http://www.ratp.fr).
 
 ## Licence
 
-Licensed under the terms of the MIT License.
+Licence MIT.

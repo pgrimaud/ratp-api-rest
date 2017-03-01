@@ -1,9 +1,9 @@
 # REST RATP API
 
 This project turnkey is distributed as a middleware to expose RATP data as REST resources.
-You can retrieve real time schedules for any given RER (train), Metro, Tramway or Bus stop in real time.
+You can retrieve real time schedules for any given RER (train), Metro, Tramway, Bus or Noctilien stop in real time.
 
-This API uses the package [horaires-ratp-sdk](https://github.com/pgrimaud/horaires-ratp-sdk) which consumes the official RATP API.
+This project uses the package [horaires-ratp-sdk](https://github.com/pgrimaud/horaires-ratp-sdk) which consume the official RATP API.
  
 ## Translations
 
@@ -26,9 +26,9 @@ cd ratp-api-rest
 composer install --no-dev
 ```
 
-Then configure your favorite webserver with the entrypoint in ```web/app.php.```
+Then configure your favorite webserver with ```web/app.php.``` as  entrypoint. 
 
-Optionnal for production : remove app_dev.php file from the ```web``` folder.
+*Recommendation for production* : remove app_dev.php file from the ```web``` folder.
 
 ## TODO
 
