@@ -26,7 +26,7 @@ cd ratp-api-rest
 composer install --no-dev
 ```
 
-Puis configurer votre serveur web et le faire pointer votre vhost sur ```web/app.php```. 
+Puis configurer votre serveur web et le faire pointer votre vhost sur ```web/app.php```. [Plus d'infos ici](http://symfony.com/doc/current/setup/web_server_configuration.html)
 
 *Conseil pour la production* : supprimer le fichier app_dev.php du dossier ```web```.
 

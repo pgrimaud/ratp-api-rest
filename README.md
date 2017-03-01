@@ -26,7 +26,7 @@ cd ratp-api-rest
 composer install --no-dev
 ```
 
-Then configure your favorite webserver with ```web/app.php``` as  entrypoint. 
+Then configure your favorite webserver with ```web/app.php``` as  entrypoint. [More informations here](http://symfony.com/doc/current/setup/web_server_configuration.html)
 
 *Recommendation for production* : remove app_dev.php file from the ```web``` folder.
 
