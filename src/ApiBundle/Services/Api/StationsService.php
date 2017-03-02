@@ -2,6 +2,7 @@
 namespace ApiBundle\Services\Api;
 
 use ApiBundle\Helper\NetworkHelper;
+use FOS\RestBundle\Exception\InvalidParameterException;
 use Ratp\Api;
 use Ratp\Line;
 use Ratp\Reseau;
@@ -36,8 +37,8 @@ class StationsService extends ApiService implements ApiDataInterface
             'noctiliens'
         ];
 
-        if (!in_array($parameters['type'], $typesAllowed) || empty($parameters['code'])) {
-            return null;
+        if (!in_array($parameters['type'], $typesAllowed)) {
+            throw new InvalidParameterException(sprintf('Unknown type : %s', $parameters['type']));
         }
 
         $networkRatp = NetworkHelper::typeSlug($parameters['type'], true);
@@ -58,6 +59,8 @@ class StationsService extends ApiService implements ApiDataInterface
         $api = new Api();
 
         $return = $api->getStations($apiStations)->getReturn();
+
+        $this->isAmbiguous($return);
 
         foreach ($return->getStations() as $station) {
             /** @var \Ratp\Station $station */

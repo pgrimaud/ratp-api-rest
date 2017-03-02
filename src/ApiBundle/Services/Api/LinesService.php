@@ -2,6 +2,7 @@
 namespace ApiBundle\Services\Api;
 
 use ApiBundle\Helper\NetworkHelper;
+use FOS\RestBundle\Exception\InvalidParameterException;
 use Ratp\Api;
 use Ratp\Line;
 use Ratp\Lines;
@@ -60,7 +61,7 @@ class LinesService extends ApiService implements ApiDataInterface
         ];
 
         if (!in_array($parameters['type'], $typesAllowed)) {
-            return null;
+            throw new InvalidParameterException(sprintf('Unknown type : %s', $parameters['type']));
         }
 
         $data = $this->getLinesCache();
@@ -85,7 +86,7 @@ class LinesService extends ApiService implements ApiDataInterface
         ];
 
         if (!in_array($parameters['type'], $typesAllowed)) {
-            return null;
+            throw new InvalidParameterException(sprintf('Unknown type : %s', $parameters['type']));
         }
 
         $data = $this->getLinesCache();

@@ -2,6 +2,7 @@
 namespace ApiBundle\Services\Api;
 
 use ApiBundle\Helper\NetworkHelper;
+use FOS\RestBundle\Exception\InvalidParameterException;
 use Ratp\Api;
 use Ratp\Direction;
 use Ratp\Line;
@@ -36,10 +37,8 @@ class SchedulesService extends ApiService implements ApiDataInterface
             'noctiliens'
         ];
 
-        if (!in_array($parameters['type'], $typesAllowed) || empty($parameters['code'])
-            || empty($parameters['station']) || empty($parameters['way'])
-        ) {
-            return null;
+        if (!in_array($parameters['type'], $typesAllowed)) {
+            throw new InvalidParameterException(sprintf('Unknown type : %s', $parameters['type']));
         }
 
         $prefix = NetworkHelper::typeSlugSchedules($parameters['type']);
@@ -64,18 +63,20 @@ class SchedulesService extends ApiService implements ApiDataInterface
         $mission = new MissionsNext($station, $direction, date('YmdHi'));
 
         $api    = new Api();
-        $result = $api->getMissionsNext($mission)->getReturn();
+        $return = $api->getMissionsNext($mission)->getReturn();
 
-        /** @todo Manage exception if station is not found */
+        $this->isAmbiguous($return);
 
-        if ($result->getMissions()) {
-            foreach ($result->getMissions() as $mission) {
+        if ($return->getMissions()) {
+            foreach ($return->getMissions() as $mission) {
                 $schedules[] = $mission->stationsMessages;
             }
         } else {
             $schedules[] = 'Schedules unavailable';
         }
 
-        return $schedules;
+        return [
+            'schedules' => $schedules
+        ];
     }
 }

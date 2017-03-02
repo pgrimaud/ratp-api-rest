@@ -257,16 +257,16 @@ class TrafficService extends ApiService implements ApiDataInterface
     {
         $results = [];
 
-        $matching_ressources = [
+        $matchingRessources = [
             'metros'   => 'metro',
             'rers'     => 'rer',
             'tramways' => 'tram'
         ];
 
-        foreach ($matching_ressources as $route => $ratp_route) {
-            $data_name = $matching_ressources[$route];
+        foreach ($matchingRessources as $route => $ratp_route) {
+            $dataName = $matchingRessources[$route];
 
-            foreach ($data['status'][$data_name]['lines'] as $line => $value) {
+            foreach ($data['status'][$dataName]['lines'] as $line => $value) {
                 $line = strtolower(str_replace('T', '', $line));
 
                 $results[$route][] = [

@@ -1,6 +1,7 @@
 <?php
 namespace ApiBundle\Controller;
 
+use FOS\RestBundle\Exception\InvalidParameterException;
 use FOS\RestBundle\View\View;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -37,6 +38,8 @@ class CoreController extends Controller
 
         if ($exception instanceof NotFoundHttpException) {
             return $this->get('api.response')->notFound();
+        } elseif ($exception instanceof InvalidParameterException) {
+            return $this->get('api.response')->invalidParameter($exception->getMessage());
         } else {
             return $this->get('api.response')->internalError();
         }

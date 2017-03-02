@@ -2,6 +2,7 @@
 namespace ApiBundle\Services\Api;
 
 use ApiBundle\Helper\NetworkHelper;
+use FOS\RestBundle\Exception\InvalidParameterException;
 use Ratp\Api;
 use Ratp\Direction;
 use Ratp\Directions;
@@ -36,8 +37,8 @@ class DestinationsService extends ApiService implements ApiDataInterface
             'noctiliens'
         ];
 
-        if (!in_array($parameters['type'], $typesAllowed) || empty($parameters['code'])) {
-            return null;
+        if (!in_array($parameters['type'], $typesAllowed)) {
+            throw new InvalidParameterException(sprintf('Unknown type : %s', $parameters['type']));
         }
 
         $networkRatp = NetworkHelper::typeSlug($parameters['type'], true);
@@ -55,6 +56,8 @@ class DestinationsService extends ApiService implements ApiDataInterface
         $api    = new Api();
         $return = $api->getDirections($directionsApi)->getReturn();
 
+        $this->isAmbiguous($return);
+
         foreach ($return->getDirections() as $direction) {
             /** @var Direction $direction */
             $destinations[] = [
@@ -62,6 +65,9 @@ class DestinationsService extends ApiService implements ApiDataInterface
                 'way'  => $direction->getSens()
             ];
         }
-        return $destinations;
+
+        return [
+            'destinations' => $destinations
+        ];
     }
 }

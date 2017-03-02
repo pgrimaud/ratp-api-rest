@@ -3,6 +3,10 @@ namespace ApiBundle\Services\Api;
 
 use ApiBundle\Services\Core\CoreService;
 use ApiBundle\Services\Core\StorageService;
+use FOS\RestBundle\Exception\InvalidParameterException;
+use Ratp\WrDirections;
+use Ratp\WrMissions;
+use Ratp\WrStations;
 
 class ApiService extends CoreService
 {
@@ -40,6 +44,17 @@ class ApiService extends CoreService
             $data = $this->{'get' . $method}($parameters);
             $this->storage->setCache($cache, $data, $this->ttl);
             return $data;
+        }
+    }
+
+    /**
+     * @param WrMissions|WrDirections|WrStations $object
+     * @retur
+     */
+    public function isAmbiguous($object)
+    {
+        if ($object->getAmbiguityMessage() != '') {
+            throw new InvalidParameterException($object->getAmbiguityMessage());
         }
     }
 }

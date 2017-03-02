@@ -94,6 +94,20 @@ class ResponseService extends CoreService
     }
 
     /**
+     * @param string $message
+     * @return View
+     */
+    public function invalidParameter($message)
+    {
+        $payload = [
+            'code'    => Response::HTTP_BAD_REQUEST,
+            'message' => $message
+        ];
+
+        return $this->format($payload, Response::HTTP_BAD_REQUEST);
+    }
+
+    /**
      * @return View
      */
     public function internalError()
