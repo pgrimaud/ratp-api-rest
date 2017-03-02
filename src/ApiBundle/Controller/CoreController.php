@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CoreController extends Controller
@@ -23,36 +24,21 @@ class CoreController extends Controller
     }
 
     /**
-     * @Route("/error404", name="api_not_found")
-     * @Method({"GET"})
-     *
      * @param Request $request
-     * @return RedirectResponse|View
-     */
-    public function notFoundAction(Request $request)
-    {
-        if ($request->server->get('REQUEST_SCHEME') == 'http' && $this->getParameter('schemes')) {
-            $route = 'https://' . $request->server->get('SERVER_NAME') . $request->getRequestUri();
-            return new RedirectResponse($route);
-        }
-
-        return $this->get('api.response')->notFound();
-    }
-
-    /**
-     * @Route("/error500", name="api_internal_error")
-     * @Method({"GET"})
-     *
-     * @param Request $request
+     * @param \Exception $exception
      * @return RedirectResponse
      */
-    public function internalErrorAction(Request $request)
+    public function manageErrorAction(Request $request, \Exception $exception)
     {
         if ($request->server->get('REQUEST_SCHEME') == 'http' && $this->getParameter('schemes')) {
             $route = 'https://' . $request->server->get('SERVER_NAME') . $request->getRequestUri();
             return new RedirectResponse($route);
         }
 
-        return $this->get('api.response')->internalError();
+        if ($exception instanceof NotFoundHttpException) {
+            return $this->get('api.response')->notFound();
+        } else {
+            return $this->get('api.response')->internalError();
+        }
     }
 }
