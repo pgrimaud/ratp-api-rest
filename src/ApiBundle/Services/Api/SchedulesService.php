@@ -66,9 +66,14 @@ class SchedulesService extends ApiService implements ApiDataInterface
         $api    = new Api();
         $result = $api->getMissionsNext($mission)->getReturn();
 
+        /** @todo Manage exception if station is not found */
 
-        foreach ($result->getMissions() as $mission) {
-            $schedules[] = $mission->stationsMessages;
+        if ($result->getMissions()) {
+            foreach ($result->getMissions() as $mission) {
+                $schedules[] = $mission->stationsMessages;
+            }
+        } else {
+            $schedules[] = 'Schedules unavailable';
         }
 
         return $schedules;
