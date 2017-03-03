@@ -1,6 +1,7 @@
 <?php
 namespace ApiBundle\Services\Api;
 
+use ApiBundle\Helper\NamesHelper;
 use ApiBundle\Helper\NetworkHelper;
 use FOS\RestBundle\Exception\InvalidParameterException;
 use Ratp\Api;
@@ -65,6 +66,7 @@ class StationsService extends ApiService implements ApiDataInterface
         foreach ($return->getStations() as $station) {
             /** @var \Ratp\Station $station */
             $stations[] = [
+                'slug' => NamesHelper::slugify($station->getName()),
                 'name' => $station->getName()
             ];
         }

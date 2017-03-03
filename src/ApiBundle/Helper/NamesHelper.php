@@ -39,4 +39,13 @@ class NamesHelper
             return $names[$value];
         }
     }
+
+    /**
+     * @param $value
+     * @return mixed
+     */
+    public static function slugify($value)
+    {
+        return strtolower(str_replace([' ', '-'], '+', $value));
+    }
 }

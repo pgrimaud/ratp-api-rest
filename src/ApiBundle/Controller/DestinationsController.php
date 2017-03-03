@@ -22,7 +22,7 @@ class DestinationsController extends Controller
      *     {
      *          "name"="code",
      *          "dataType"="string",
-     *          "description"="Code of transport line"
+     *          "description"="Code of transport line (e.g. 8)"
      *      }
      *   }
      * )

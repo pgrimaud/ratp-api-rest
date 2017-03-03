@@ -22,12 +22,12 @@ class SchedulesController extends Controller
      *      {
      *          "name"="code",
      *          "dataType"="string",
-     *          "description"="Code of transport line"
+     *          "description"="Code of transport line (e.g. 8)"
      *      },
      *      {
      *          "name"="station",
      *          "dataType"="string",
-     *          "description"="Name of the station"
+     *          "description"="Slug of the station (e.g. bonne+nouvelle)"
      *      },
      *      {
      *          "name"="way",
