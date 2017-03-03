@@ -44,13 +44,14 @@ class SchedulesService extends ApiService implements ApiDataInterface
         $prefix = NetworkHelper::typeSlugSchedules($parameters['type']);
 
         $line = new Line();
-        if (in_array($parameters['type'], ['bus', 'metros'])) {
+
+        /**
+         * Prefix line name
+         */
+        if (in_array($parameters['type'], ['bus', 'metros', 'tramways', 'noctiliens'])) {
             $line->setId($prefix . $parameters['code']);
         } elseif (in_array($parameters['type'], ['rers'])) {
             $line->setId($prefix . strtoupper($parameters['code']));
-        } else {
-            /** @FIXME TRAMWAYS DONT WORK */
-            $line->setCode($prefix . strtoupper($parameters['code']));
         }
 
         $station = new Station();
@@ -60,7 +61,7 @@ class SchedulesService extends ApiService implements ApiDataInterface
         $direction = new Direction();
         $direction->setSens($parameters['way']);
 
-        $mission = new MissionsNext($station, $direction, date('YmdHi'));
+        $mission = new MissionsNext($station, $direction);
 
         $api    = new Api();
         $return = $api->getMissionsNext($mission)->getReturn();

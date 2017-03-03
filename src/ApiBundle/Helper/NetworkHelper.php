@@ -35,7 +35,7 @@ class NetworkHelper
         $names = [
             'metros'     => 'M',
             'rers'       => 'R',
-            'tramways'   => 'T',
+            'tramways'   => 'BT',
             'bus'        => 'B',
             'noctiliens' => 'N'
         ];

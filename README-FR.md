@@ -36,9 +36,9 @@ Puis configurer votre serveur web et le faire pointer votre vhost sur ```web/app
 
 ## Bugs connus
 
-- 2017-02-27 : Les horaires en temps réel des tramways ne fonctionnent pas. J'ai contacté la RATP à ce sujet et je suis toujours en attente d'une réponse.
+- ~~2017-02-27 : Les horaires en temps réel des tramways ne fonctionnent pas. J'ai contacté la RATP à ce sujet et je suis toujours en attente d'une réponse.~~
 
-## Feedback or questions
+## Retours ou questions
 
 Vous pouvez [créer une issue](https://github.com/pgrimaud/ratp-api-rest/issues) ou me contacter sur [Twitter](https://twitter.com/pgrimaud_).
 

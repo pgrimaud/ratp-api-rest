@@ -36,7 +36,7 @@ Then configure your favorite webserver with ```web/app.php``` as  entrypoint. [M
 
 ## Known bugs
 
-- 2017-02-27 : Tramways schedules don't work. I contacted RATP about it and I still waiting for a reply and/or a fix.
+- ~~2017-02-27 : Tramways schedules don't work. I contacted RATP about it and I still waiting for a reply and/or a fix.~~
 
 ## Feedback or questions
 
