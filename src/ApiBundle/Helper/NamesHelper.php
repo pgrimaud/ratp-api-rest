@@ -48,4 +48,13 @@ class NamesHelper
     {
         return strtolower(str_replace([' ', '-'], '+', $value));
     }
+
+    /**
+     * @param $value
+     * @return string
+     */
+    public static function clean($value)
+    {
+        return strtolower(str_replace('+', ' ', $value));
+    }
 }

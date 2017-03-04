@@ -2,6 +2,7 @@
 namespace ApiBundle\Services\Api;
 
 use ApiBundle\Helper\NamesHelper;
+use FOS\RestBundle\Exception\InvalidParameterException;
 use GuzzleHttp\Client;
 
 class TrafficService extends ApiService implements ApiDataInterface
@@ -63,6 +64,7 @@ class TrafficService extends ApiService implements ApiDataInterface
 
             $this->storage->setCache($cache, $data, $this->resultTtl);
         }
+
         return $data;
     }
 
@@ -87,7 +89,7 @@ class TrafficService extends ApiService implements ApiDataInterface
         ];
 
         if (!in_array($parameters['type'], $typesAllowed)) {
-            return null;
+            throw new InvalidParameterException(sprintf('Unknown type : %s', $parameters['type']));
         }
 
         $data = $this->getTrafficCache();
@@ -110,7 +112,7 @@ class TrafficService extends ApiService implements ApiDataInterface
         ];
 
         if (!in_array($parameters['type'], $typesAllowed)) {
-            return null;
+            throw new InvalidParameterException(sprintf('Unknown type : %s', $parameters['type']));
         }
 
         $data = $this->getTrafficCache();

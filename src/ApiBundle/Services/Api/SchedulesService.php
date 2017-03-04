@@ -1,6 +1,7 @@
 <?php
 namespace ApiBundle\Services\Api;
 
+use ApiBundle\Helper\NamesHelper;
 use ApiBundle\Helper\NetworkHelper;
 use FOS\RestBundle\Exception\InvalidParameterException;
 use Ratp\Api;
@@ -56,7 +57,7 @@ class SchedulesService extends ApiService implements ApiDataInterface
 
         $station = new Station();
         $station->setLine($line);
-        $station->setName($parameters['station']);
+        $station->setName(NamesHelper::clean($parameters['station']));
 
         $direction = new Direction();
         $direction->setSens($parameters['way']);
@@ -70,10 +71,18 @@ class SchedulesService extends ApiService implements ApiDataInterface
 
         if ($return->getMissions()) {
             foreach ($return->getMissions() as $mission) {
-                $schedules[] = $mission->stationsMessages;
+                $schedules[] = [
+                    'code'        => $mission->code,
+                    'message'     => $mission->stationsMessages[0],
+                    'destination' => $return->getArgumentDirection()->getName(),
+                ];
             }
         } else {
-            $schedules[] = 'Schedules unavailable';
+            $schedules[] = [
+                'code'        => 'Schedules unavailable',
+                'message'     => 'Schedules unavailable',
+                'destination' => $return->getArgumentDirection()->getName(),
+            ];
         }
 
         return [

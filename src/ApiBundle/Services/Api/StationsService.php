@@ -71,6 +71,8 @@ class StationsService extends ApiService implements ApiDataInterface
             ];
         }
 
-        return $stations;
+        return [
+            'stations' => $stations
+        ];
     }
 }
