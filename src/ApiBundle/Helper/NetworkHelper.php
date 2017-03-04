@@ -37,7 +37,7 @@ class NetworkHelper
             'rers'       => 'R',
             'tramways'   => 'BT',
             'bus'        => 'B',
-            'noctiliens' => 'N'
+            'noctiliens' => 'BN'
         ];
 
         if ($reverse) {
