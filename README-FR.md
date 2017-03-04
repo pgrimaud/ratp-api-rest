@@ -3,7 +3,7 @@
 Ce projet clé-en-main est distribué comme une passerelle pour générer des données RATP au format REST.
 Vous pouvez récupérer les horaires en temps réel pour tout arrêt RER (train), métro, tramway, bus ou noctilien du réseau RATP.
 
-Ce projet utilise la librairie [horaires-ratp-sdk](https://github.com/pgrimaud/horaires-ratp-sdk) qui utilise les données de l'API RATP officielle.
+Ce projet utilise la librairie [horaires-ratp-sdk](https://github.com/pgrimaud/horaires-ratp-sdk) qui exploite les données de l'API RATP officielle.
  
 ## Traductions
 
