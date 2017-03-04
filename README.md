@@ -44,7 +44,7 @@ You can [create an issue](https://github.com/pgrimaud/ratp-api-rest/issues) if n
 
 ## Demo
 
-Une démo est disponible ici : [https://api-ratp.pierre-grimaud.fr/v3/documentation](https://api-ratp.pierre-grimaud.fr/v3/documentation)
+Demo is available here : [https://api-ratp.pierre-grimaud.fr/v3/documentation](https://api-ratp.pierre-grimaud.fr/v3/documentation)
 
 ## Contributing
 
