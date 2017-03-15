@@ -53,6 +53,7 @@ class ResponseService extends CoreService
         $view = View::create($result);
         $view->setFormat($format);
         $view->setStatusCode($httpCode);
+        $view->setHeader('Access-Control-Allow-Origin', '*');
 
         return $view;
     }
