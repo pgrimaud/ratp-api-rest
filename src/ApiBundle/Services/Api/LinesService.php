@@ -91,16 +91,15 @@ class LinesService extends ApiService implements ApiDataInterface
 
         $data = $this->getLinesCache();
 
-        $line = null;
+        $lines = [];
 
         foreach ($data[$parameters['type']] as $dataLine) {
             if (strtolower($dataLine['code']) == strtolower($parameters['code'])) {
-                $line = $dataLine;
-                break;
+                $lines[] = $dataLine;
             }
         }
 
-        return $line;
+        return $lines;
     }
 
     /**
