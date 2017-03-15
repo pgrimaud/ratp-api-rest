@@ -46,13 +46,16 @@ class SchedulesService extends ApiService implements ApiDataInterface
 
         $line = new Line();
 
-        /**
-         * Prefix line name
-         */
+        // prefix line name
         if (in_array($parameters['type'], ['bus', 'metros', 'tramways', 'noctiliens'])) {
             $line->setId($prefix . $parameters['code']);
         } elseif (in_array($parameters['type'], ['rers'])) {
             $line->setId($prefix . strtoupper($parameters['code']));
+        }
+
+        // lines with several destinations
+        if ($parameters['id'] != '') {
+            $line->setId($parameters['id']);
         }
 
         $station = new Station();

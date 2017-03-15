@@ -24,7 +24,15 @@ class DestinationsController extends Controller
      *          "dataType"="string",
      *          "description"="Code of transport line (e.g. 8)"
      *      }
-     *   }
+     *   },
+     *   parameters={
+     *    {
+     *       "name"="id",
+     *       "dataType"="string",
+     *       "required"=false,
+     *       "description"="(optionnal) id of line which have several destinations"
+     *    }
+     *  }
      * )
      *
      * @Rest\View()
@@ -40,7 +48,8 @@ class DestinationsController extends Controller
     {
         $parameters = [
             'type' => $type,
-            'code' => $code
+            'code' => $code,
+            'id'   => $request->get('id')
         ];
 
         $payload = $this->get('api.destinations')->get('line', $parameters);

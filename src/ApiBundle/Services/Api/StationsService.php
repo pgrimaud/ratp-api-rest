@@ -55,6 +55,11 @@ class StationsService extends ApiService implements ApiDataInterface
         $apiStation = new Station();
         $apiStation->setLine($line);
 
+        // lines with several destinations
+        if ($parameters['id'] != '') {
+            $line->setId($parameters['id']);
+        }
+
         $apiStations = new Stations($apiStation);
 
         $api = new Api();

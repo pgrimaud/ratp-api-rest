@@ -51,6 +51,11 @@ class DestinationsService extends ApiService implements ApiDataInterface
         $line->setReseau($reseau);
         $line->setCode($prefixcode . $parameters['code']);
 
+        // lines with several destinations
+        if ($parameters['id'] != '') {
+            $line->setId($parameters['id']);
+        }
+
         $directionsApi = new Directions($line);
 
         $api    = new Api();
