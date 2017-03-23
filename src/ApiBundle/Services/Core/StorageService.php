@@ -1,5 +1,4 @@
 <?php
-
 namespace ApiBundle\Services\Core;
 
 use Symfony\Component\Cache\Adapter\RedisAdapter;
