@@ -1,4 +1,5 @@
 <?php
+
 namespace ApiBundle\Services\Core;
 
 use Symfony\Component\Cache\Adapter\RedisAdapter;
@@ -37,8 +38,12 @@ class StorageService extends CoreService
      */
     public function getHash()
     {
+        // manage lines with multiple destinations
+        $id        = $this->requestStack->getCurrentRequest()->get('id');
+        $parameter = $id != '' ? $id : '';
+
         $url = $this->requestStack->getCurrentRequest()->getBaseUrl() .
-            $this->requestStack->getCurrentRequest()->getPathInfo();
+            $this->requestStack->getCurrentRequest()->getPathInfo() . $parameter;
         return md5($url);
     }
 
