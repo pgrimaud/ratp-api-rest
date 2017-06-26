@@ -151,14 +151,14 @@ class TrafficService extends ApiService implements ApiDataInterface
                 $firstEvent = current($rer);
 
                 $information = [
-                    'line'    => $allowedRer,
+                    'line'    => strtoupper($allowedRer),
                     'slug'    => NamesHelper::statusSlug($firstEvent['typeName']),
                     'title'   => $firstEvent['typeName'],
                     'message' => $firstEvent['message']
                 ];
             } else {
                 $information = [
-                    'line'    => $allowedRer,
+                    'line'    => strtoupper($allowedRer),
                     'slug'    => 'normal',
                     'title'   => 'Trafic normal',
                     'message' => 'Trafic normal sur l\'ensemble de la ligne.'
