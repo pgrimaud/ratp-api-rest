@@ -185,7 +185,7 @@ class TrafficService extends ApiService implements ApiDataInterface
             $client = new Client();
             $res    = $client->request('GET', self::ENTRYPOINT_RATP, [
                 'headers' => [
-                    'User-Agent' => 'Dalvik/2.1.0 (Linux; U; Android 5.0; Google Nexus 4 - 5.0.0 - API 21 - 768x1280 Build/LRX21M)'
+                    'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
                 ]
             ]);
 
@@ -269,7 +269,7 @@ class TrafficService extends ApiService implements ApiDataInterface
             $dataName = $matchingRessources[$route];
 
             foreach ($data['status'][$dataName]['lines'] as $line => $value) {
-                $line = strtolower(str_replace('T', '', $line));
+                $line = strtolower(str_replace(['T', 'M', 'R'], '', $line));
 
                 $results[$route][] = [
                     'line'    => strtoupper($line),
