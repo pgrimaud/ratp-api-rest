@@ -183,7 +183,7 @@ class TrafficService extends ApiService implements ApiDataInterface
     {
         try {
             $client = new Client();
-            $res    = $client->request('GET', self::ENTRYPOINT_RATP, [
+            $res    = $client->request('GET', $this->getEntryPointRatp(), [
                 'headers' => [
                     'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
                 ]
@@ -289,5 +289,13 @@ class TrafficService extends ApiService implements ApiDataInterface
     private function getEntryPointIxxi()
     {
         return self::ENTRYPOINT_IXXI . '&keyapp=' . $this->apiKey . '&tmp=' . time();
+    }
+
+    /**
+     * @return string
+     */
+    private function getEntryPointRatp()
+    {
+        return self::ENTRYPOINT_RATP . '?tmp=' . time();
     }
 }
