@@ -82,7 +82,7 @@ class SchedulesService extends ApiService implements ApiDataInterface
                 // 2017-10-11 fix destination name
                 if (isset($mission->stations[1]) && ($mission->stations[1]->getGeoPointA() instanceof GeoPoint)) {
                     $destination = $mission->stations[1]->getGeoPointA()->getName();
-                } else if (isset($mission->stations[1])) {
+                } elseif (isset($mission->stations[1])) {
                     $destination = $mission->stations[1]->getName();
                 } else {
                     $destination = $return->getArgumentDirection()->getName();

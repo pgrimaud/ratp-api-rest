@@ -40,3 +40,9 @@ services:
     arguments: ['%cache.ttl.schedules%']
     calls:
       - [ addService, [ 'storage', '@api.storage' ] ]
+
+  api.mission:
+    class: ApiBundle\Services\Api\MissionService
+    arguments: ['%cache.ttl.schedules%']
+    calls:
+      - [ addService, [ 'storage', '@api.storage' ] ]
