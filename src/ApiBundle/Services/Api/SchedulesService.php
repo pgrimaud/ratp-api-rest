@@ -74,10 +74,16 @@ class SchedulesService extends ApiService implements ApiDataInterface
 
         if ($return->getMissions()) {
             foreach ($return->getMissions() as $mission) {
+
+                // 2017-10-11 fix destination name
+                $destination = isset($mission->stations[1]) ?
+                    $mission->stations[1]->getGeoPointA()->getName() :
+                    $return->getArgumentDirection()->getName();
+
                 $schedules[] = [
                     'code'        => $mission->code,
                     'message'     => $mission->stationsMessages[0],
-                    'destination' => $return->getArgumentDirection()->getName(),
+                    'destination' => $destination,
                 ];
             }
         } else {
