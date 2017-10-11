@@ -416,16 +416,16 @@
         },
         {
             "name": "doctrine/doctrine-bundle",
-            "version": "1.6.12",
+            "version": "1.6.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "96a074a6202d6caf504fb728688f89bb76caf987"
+                "reference": "8cd4c2921b6cef14a78d98cd3f0fb81ba6a976f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/96a074a6202d6caf504fb728688f89bb76caf987",
-                "reference": "96a074a6202d6caf504fb728688f89bb76caf987",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/8cd4c2921b6cef14a78d98cd3f0fb81ba6a976f9",
+                "reference": "8cd4c2921b6cef14a78d98cd3f0fb81ba6a976f9",
                 "shasum": ""
             },
             "require": {
@@ -493,7 +493,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2017-10-08T14:49:13+00:00"
+            "time": "2017-10-11T19:48:03+00:00"
         },
         {
             "name": "doctrine/doctrine-cache-bundle",
@@ -1776,16 +1776,16 @@
         },
         {
             "name": "pgrimaud/horaires-ratp-sdk",
-            "version": "1.0.2",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pgrimaud/horaires-ratp-sdk.git",
-                "reference": "c87deb65efb51f0fe59beab78cf8a8e6e2abd9ad"
+                "reference": "8272dd63c3824b430add9eb007144a0804b32341"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pgrimaud/horaires-ratp-sdk/zipball/c87deb65efb51f0fe59beab78cf8a8e6e2abd9ad",
-                "reference": "c87deb65efb51f0fe59beab78cf8a8e6e2abd9ad",
+                "url": "https://api.github.com/repos/pgrimaud/horaires-ratp-sdk/zipball/8272dd63c3824b430add9eb007144a0804b32341",
+                "reference": "8272dd63c3824b430add9eb007144a0804b32341",
                 "shasum": ""
             },
             "require": {
@@ -1813,7 +1813,7 @@
             ],
             "description": "RATP SDK - Retrieve schedules for any given RER (train), Metro, or Tramway stop in real time. The RATP is a public transport operator based in Paris, France.",
             "homepage": "https://github.com/pgrimaud/horaires-ratp-sdk",
-            "time": "2017-10-11T12:59:00+00:00"
+            "time": "2017-10-11T20:39:07+00:00"
         },
         {
             "name": "phpcollection/phpcollection",
