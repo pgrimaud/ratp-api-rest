@@ -62,8 +62,11 @@ class SchedulesService extends ApiService implements ApiDataInterface
         $station->setLine($line);
         $station->setName(NamesHelper::clean($parameters['station']));
 
+        // 2017-10-11 add "all ways" option
+        $way = $parameters['way'] == 'A+R' ? '*' : $parameters['way'];
+
         $direction = new Direction();
-        $direction->setSens($parameters['way']);
+        $direction->setSens($way);
 
         $mission = new MissionsNext($station, $direction);
 

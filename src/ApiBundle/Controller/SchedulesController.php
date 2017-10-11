@@ -32,7 +32,7 @@ class SchedulesController extends Controller
      *      {
      *          "name"="way",
      *          "dataType"="string",
-     *          "description"="Way on the line (A or R)"
+     *          "description"="Way on the line (A, R or A+R)"
      *      }
      *   },
      *   parameters={
