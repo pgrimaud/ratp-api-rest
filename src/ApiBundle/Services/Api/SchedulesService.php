@@ -50,7 +50,7 @@ class SchedulesService extends ApiService implements ApiDataInterface
 
         // prefix line name
         if (in_array($parameters['type'], ['bus', 'metros', 'tramways', 'noctiliens'])) {
-            $line->setId($prefix . $parameters['code']);
+            $line->setId($prefix . strtoupper($parameters['code']));
         } elseif (in_array($parameters['type'], ['rers'])) {
             $line->setId($prefix . strtoupper($parameters['code']));
         }
