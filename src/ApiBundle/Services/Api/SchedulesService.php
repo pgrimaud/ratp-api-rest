@@ -8,6 +8,7 @@ use Ratp\Api;
 use Ratp\Direction;
 use Ratp\GeoPoint;
 use Ratp\Line;
+use Ratp\Mission;
 use Ratp\MissionsNext;
 use Ratp\Station;
 
@@ -78,19 +79,19 @@ class SchedulesService extends ApiService implements ApiDataInterface
 
         if ($return->getMissions()) {
             foreach ($return->getMissions() as $mission) {
-
+                /** @var Mission $mission */
                 // 2017-10-11 fix destination name
-                if (isset($mission->stations[1]) && ($mission->stations[1]->getGeoPointA() instanceof GeoPoint)) {
-                    $destination = $mission->stations[1]->getGeoPointA()->getName();
-                } elseif (isset($mission->stations[1])) {
-                    $destination = $mission->stations[1]->getName();
+                if (isset($mission->getStations()[1]) && ($mission->getStations()[1]->getGeoPointA() instanceof GeoPoint)) {
+                    $destination = $mission->getStations()[1]->getGeoPointA()->getName();
+                } elseif (isset($mission->getStations()[1])) {
+                    $destination = $mission->getStations()[1]->getName();
                 } else {
                     $destination = $return->getArgumentDirection()->getName();
                 }
 
                 $schedules[] = [
-                    'code'        => $mission->code,
-                    'message'     => $mission->stationsMessages[0],
+                    'code'        => $mission->getCode(),
+                    'message'     => $mission->getStationsMessages()[0],
                     'destination' => $destination,
                 ];
             }
