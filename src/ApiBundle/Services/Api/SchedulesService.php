@@ -6,6 +6,7 @@ use ApiBundle\Helper\NetworkHelper;
 use FOS\RestBundle\Exception\InvalidParameterException;
 use Ratp\Api;
 use Ratp\Direction;
+use Ratp\GeoPoint;
 use Ratp\Line;
 use Ratp\MissionsNext;
 use Ratp\Station;
@@ -79,9 +80,13 @@ class SchedulesService extends ApiService implements ApiDataInterface
             foreach ($return->getMissions() as $mission) {
 
                 // 2017-10-11 fix destination name
-                $destination = isset($mission->stations[1]) ?
-                    $mission->stations[1]->getGeoPointA()->getName() :
-                    $return->getArgumentDirection()->getName();
+                if (isset($mission->stations[1]) && ($mission->stations[1]->getGeoPointA() instanceof GeoPoint)) {
+                    $destination = $mission->stations[1]->getGeoPointA()->getName();
+                } else if (isset($mission->stations[1])) {
+                    $destination = $mission->stations[1]->getName();
+                } else {
+                    $destination = $return->getArgumentDirection()->getName();
+                }
 
                 $schedules[] = [
                     'code'        => $mission->code,
