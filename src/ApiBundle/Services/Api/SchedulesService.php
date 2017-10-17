@@ -80,8 +80,9 @@ class SchedulesService extends ApiService implements ApiDataInterface
         $this->isAmbiguous($return);
 
         if ($return->getMissions()) {
+
+            /** @var Mission $mission */
             foreach ($return->getMissions() as $mission) {
-                /** @var Mission $mission */
                 // 2017-10-11 fix destination name
                 if (isset($mission->getStations()[1]) && ($mission->getStations()[1]->getGeoPointA() instanceof GeoPoint)) {
                     $destination = $mission->getStations()[1]->getGeoPointA()->getName();

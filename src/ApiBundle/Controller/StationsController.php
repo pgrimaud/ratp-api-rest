@@ -30,7 +30,7 @@ class StationsController extends Controller
      *       "name"="id",
      *       "dataType"="string",
      *       "required"=false,
-     *       "description"="(optionnal) id of line which have several destinations"
+     *       "description"="(optional) id of line which have several destinations"
      *    }
      *  }
      * )

@@ -40,7 +40,7 @@ class SchedulesController extends Controller
      *       "name"="id",
      *       "dataType"="string",
      *       "required"=false,
-     *       "description"="(optionnal) id of line which have several destinations"
+     *       "description"="(optional) id of line which have several destinations"
      *    }
      *  }
      * )
@@ -63,7 +63,7 @@ class SchedulesController extends Controller
             'code'    => $code,
             'station' => $station,
             'way'     => $way,
-            'id'      => $request->get('id')
+            'id'      => $request->get('id') ? $request->get('id') : $request->get('ID')
         ];
 
         $payload = $this->get('api.schedules')->get('schedules', $parameters);
