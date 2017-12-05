@@ -1,5 +1,6 @@
 {
     "name": "pgrimaud/ratp-api-rest",
+    "description": "This project turnkey is distributed as a middleware to expose RATP realtime data as REST resources",
     "license": "MIT",
     "type": "project",
     "autoload": {
