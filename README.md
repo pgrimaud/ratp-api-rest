@@ -1,5 +1,7 @@
 # REST RATP API
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/a4a4f734-62c2-44da-9909-caeeac0bd810/mini.png)](https://insight.sensiolabs.com/projects/a4a4f734-62c2-44da-9909-caeeac0bd810)
+
 This project turnkey is distributed as a middleware to expose RATP data as REST resources.
 You can retrieve real time schedules for any given RER (train), Metro, Tramway, Bus or Noctilien stop in real time.
 

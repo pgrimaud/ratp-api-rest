@@ -1,5 +1,7 @@
 # REST RATP API
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/a4a4f734-62c2-44da-9909-caeeac0bd810/mini.png)](https://insight.sensiolabs.com/projects/a4a4f734-62c2-44da-9909-caeeac0bd810)
+
 Ce projet clé-en-main est distribué comme une passerelle pour générer des données RATP au format REST.
 Vous pouvez récupérer les horaires en temps réel pour tout arrêt RER (train), métro, tramway, bus ou noctilien du réseau RATP.
 
