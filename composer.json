@@ -5,7 +5,7 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Ratp\\": "src/"
+            "": "src/"
         },
         "classmap": [
             "app/AppKernel.php",
