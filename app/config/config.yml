@@ -27,6 +27,7 @@ framework:
     session:
         # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
         handler_id:  session.handler.native_file
+        name: APIRATPREST
     fragments:       ~
     http_method_override: true
     assets: ~
