@@ -1,7 +1,7 @@
 <?php
-namespace ApiBundle\Services\Core;
+namespace RatpApi\ApiBundle\Services\Core;
 
-use ApiBundle\Helper\XmlResponseHelper;
+use RatpApi\ApiBundle\Helper\XmlResponseHelper;
 use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;

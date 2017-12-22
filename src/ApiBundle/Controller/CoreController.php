@@ -1,5 +1,5 @@
 <?php
-namespace ApiBundle\Controller;
+namespace RatpApi\ApiBundle\Controller;
 
 use FOS\RestBundle\Exception\InvalidParameterException;
 use FOS\RestBundle\View\View;

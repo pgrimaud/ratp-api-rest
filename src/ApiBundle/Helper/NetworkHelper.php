@@ -1,5 +1,5 @@
 <?php
-namespace ApiBundle\Helper;
+namespace RatpApi\ApiBundle\Helper;
 
 class NetworkHelper
 {

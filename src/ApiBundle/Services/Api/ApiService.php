@@ -1,8 +1,8 @@
 <?php
-namespace ApiBundle\Services\Api;
+namespace RatpApi\ApiBundle\Services\Api;
 
-use ApiBundle\Services\Core\CoreService;
-use ApiBundle\Services\Core\StorageService;
+use RatpApi\ApiBundle\Services\Core\CoreService;
+use RatpApi\ApiBundle\Services\Core\StorageService;
 use FOS\RestBundle\Exception\InvalidParameterException;
 use Ratp\WrDirections;
 use Ratp\WrMissions;

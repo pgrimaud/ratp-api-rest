@@ -1,5 +1,5 @@
 <?php
-namespace ApiBundle\Services\Api;
+namespace RatpApi\ApiBundle\Services\Api;
 
 use Ratp\Api;
 use Ratp\GetMission;

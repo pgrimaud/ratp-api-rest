@@ -1,7 +1,7 @@
 <?php
-namespace ApiBundle\Services\Api;
+namespace RatpApi\ApiBundle\Services\Api;
 
-use ApiBundle\Helper\NamesHelper;
+use RatpApi\ApiBundle\Helper\NamesHelper;
 use FOS\RestBundle\Exception\InvalidParameterException;
 use GuzzleHttp\Client;
 

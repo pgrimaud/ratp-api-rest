@@ -1,6 +1,5 @@
 <?php
-
-namespace ApiBundle;
+namespace RatpApi\ApiBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

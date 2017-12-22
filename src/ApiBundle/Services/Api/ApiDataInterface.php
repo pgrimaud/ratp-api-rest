@@ -1,5 +1,5 @@
 <?php
-namespace ApiBundle\Services\Api;
+namespace RatpApi\ApiBundle\Services\Api;
 
 interface ApiDataInterface
 {
