@@ -1,5 +1,5 @@
 <?php
-namespace ApiBundle\Services\Core;
+namespace RatpApi\ApiBundle\Services\Core;
 
 use Symfony\Component\Cache\Adapter\RedisAdapter;
 use Symfony\Component\Cache\CacheItem;

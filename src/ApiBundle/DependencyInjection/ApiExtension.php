@@ -1,5 +1,5 @@
 <?php
-namespace ApiBundle\DependencyInjection;
+namespace RatpApi\ApiBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;

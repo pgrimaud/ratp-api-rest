@@ -1,8 +1,8 @@
 <?php
-namespace ApiBundle\Services\Api;
+namespace RatpApi\ApiBundle\Services\Api;
 
-use ApiBundle\Helper\NamesHelper;
-use ApiBundle\Helper\NetworkHelper;
+use RatpApi\ApiBundle\Helper\NamesHelper;
+use RatpApi\ApiBundle\Helper\NetworkHelper;
 use FOS\RestBundle\Exception\InvalidParameterException;
 use Ratp\Api;
 use Ratp\Line;

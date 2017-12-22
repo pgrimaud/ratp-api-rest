@@ -1,5 +1,5 @@
 <?php
-namespace ApiBundle\Services\Core;
+namespace RatpApi\ApiBundle\Services\Core;
 
 abstract class CoreService
 {

@@ -1,5 +1,5 @@
 <?php
-namespace ApiBundle\Helper;
+namespace RatpApi\ApiBundle\Helper;
 
 use JMS\Serializer\Annotation\XmlKeyValuePairs;
 use JMS\Serializer\Annotation\XmlRoot;

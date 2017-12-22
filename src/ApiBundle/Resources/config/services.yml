@@ -1,48 +1,48 @@
 services:
   # CORE SERVICES
   api.storage:
-    class: ApiBundle\Services\Core\StorageService
+    class: RatpApi\ApiBundle\Services\Core\StorageService
     arguments: ['@request_stack']
     calls:
       - [ addService, [ 'cache', '@cache.app' ] ]
 
   api.response:
-    class: ApiBundle\Services\Core\ResponseService
+    class: RatpApi\ApiBundle\Services\Core\ResponseService
     arguments: ['@request_stack', '%api_version%']
 
   # API SERVICES
   api.traffic:
-    class: ApiBundle\Services\Api\TrafficService
+    class: RatpApi\ApiBundle\Services\Api\TrafficService
     arguments: ['%cache.ttl.traffic%', '%cache.ttl.traffic.data%', '%ixxi_key%']
     calls:
       - [ addService, [ 'storage', '@api.storage' ] ]
 
   api.lines:
-    class: ApiBundle\Services\Api\LinesService
+    class: RatpApi\ApiBundle\Services\Api\LinesService
     arguments: ['%cache.ttl.lines%', '%cache.ttl.lines.data%']
     calls:
       - [ addService, [ 'storage', '@api.storage' ] ]
 
   api.stations:
-    class: ApiBundle\Services\Api\StationsService
+    class: RatpApi\ApiBundle\Services\Api\StationsService
     arguments: ['%cache.ttl.stations%']
     calls:
       - [ addService, [ 'storage', '@api.storage' ] ]
 
   api.destinations:
-    class: ApiBundle\Services\Api\DestinationsService
+    class: RatpApi\ApiBundle\Services\Api\DestinationsService
     arguments: ['%cache.ttl.destinations%']
     calls:
       - [ addService, [ 'storage', '@api.storage' ] ]
 
   api.schedules:
-    class: ApiBundle\Services\Api\SchedulesService
+    class: RatpApi\ApiBundle\Services\Api\SchedulesService
     arguments: ['%cache.ttl.schedules%']
     calls:
       - [ addService, [ 'storage', '@api.storage' ] ]
 
   api.mission:
-    class: ApiBundle\Services\Api\MissionService
+    class: RatpApi\ApiBundle\Services\Api\MissionService
     arguments: ['%cache.ttl.schedules%']
     calls:
       - [ addService, [ 'storage', '@api.storage' ] ]
