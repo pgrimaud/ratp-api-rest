@@ -30,9 +30,6 @@ class NamesHelper
             'Incidents techniques' => 'critical'
         ];
 
-        /**
-         * @todo LOG IT !!!
-         */
         if (!isset($names[$value])) {
             return $value;
         } else {
