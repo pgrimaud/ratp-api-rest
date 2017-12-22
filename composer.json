@@ -14,7 +14,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Ratp\\": "src/"
         }
     },
     "require": {
