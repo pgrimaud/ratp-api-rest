@@ -5,17 +5,12 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "": "src/"
+            "Ratp\\": "src/"
         },
         "classmap": [
             "app/AppKernel.php",
             "app/AppCache.php"
         ]
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Ratp\\": "src/"
-        }
     },
     "require": {
         "php": ">=5.5.9",
