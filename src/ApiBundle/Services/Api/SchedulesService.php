@@ -99,10 +99,14 @@ class SchedulesService extends ApiService implements ApiDataInterface
                 ];
             }
         } else {
+
+            $destination = $return->getArgumentDirection() instanceof Direction ?
+                $return->getArgumentDirection()->getName() : 'Destination unavailable';
+
             $schedules[] = [
                 'code'        => 'Schedules unavailable',
                 'message'     => 'Schedules unavailable',
-                'destination' => $return->getArgumentDirection()->getName(),
+                'destination' => $destination,
             ];
         }
 
