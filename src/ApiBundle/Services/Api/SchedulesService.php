@@ -84,7 +84,9 @@ class SchedulesService extends ApiService implements ApiDataInterface
             /** @var Mission $mission */
             foreach ($return->getMissions() as $mission) {
                 // 2017-10-11 fix destination name
-                if (isset($mission->getStations()[1]) && ($mission->getStations()[1]->getGeoPointA() instanceof GeoPoint)) {
+                if ($mission->getDirection() instanceof Direction) {
+                    $destination = $mission->getDirection()->getName();
+                } elseif (isset($mission->getStations()[1]) && ($mission->getStations()[1]->getGeoPointA() instanceof GeoPoint)) {
                     $destination = $mission->getStations()[1]->getGeoPointA()->getName();
                 } elseif (isset($mission->getStations()[1])) {
                     $destination = $mission->getStations()[1]->getName();
