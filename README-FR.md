@@ -39,6 +39,8 @@ Puis configurer votre serveur web et le faire pointer votre vhost sur ```web/app
 ## Bugs connus
 
 - ~~2017-02-27 : Les horaires en temps réel des tramways ne fonctionnent pas. J'ai contacté la RATP à ce sujet et je suis toujours en attente d'une réponse.~~
+- 2017-11-27 : Les horaires en temps réel des RER C, D et E ne sont pas disponibles.
+- 2018-03-29 : Les horaires en temps réel des lignes de bus qui ne sont pas équipés SIEL (localisation des bus en temps réel) ne sont pas disponibles.
 
 ## Retours ou questions
 

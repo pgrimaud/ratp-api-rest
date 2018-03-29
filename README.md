@@ -39,6 +39,8 @@ Then configure your favorite webserver with ```web/app.php``` as  entrypoint. [M
 ## Known bugs
 
 - ~~2017-02-27 : Tramways schedules don't work. I contacted RATP about it and I still waiting for a reply and/or a fix.~~
+- 2017-11-27 : Realtime schedules for RER C, D et E are not available.
+- 2018-03-29 : Realtime schedules for buses which are not equiped with SIEL (realtime bus localization) are not available.
 
 ## Feedback or questions
 
