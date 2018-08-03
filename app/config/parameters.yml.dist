@@ -18,6 +18,7 @@ parameters:
     prefix:            ''
     api_version:       1
     ixxi_key:          FvChCBnSetVgTKk324rO
+    ga_tracking:       ''
 
     cache.ttl.traffic:      120
     cache.ttl.traffic.data: 120

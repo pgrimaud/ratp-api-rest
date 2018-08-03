@@ -49,3 +49,16 @@
         margin-left: 10px;
     }
 </style>
+
+{% if ga_tracking != '' %}
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-12524797-18"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', '{{ ga_tracking }}');
+    </script>
+
+{% endif %}
