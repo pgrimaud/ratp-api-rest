@@ -51,7 +51,7 @@ class SchedulesService extends ApiService implements ApiDataInterface
         // prefix line name
         if (in_array($parameters['type'], ['bus', 'metros', 'noctiliens'])) {
             $line->setId($prefix . strtoupper($parameters['code']));
-        } else if ($parameters['type'] == 'tramways') {
+        } elseif ($parameters['type'] == 'tramways') {
             $line->setId($prefix . strtolower($parameters['code']));
         } elseif (in_array($parameters['type'], ['rers'])) {
             $line->setId($prefix . strtoupper($parameters['code']));
@@ -85,7 +85,7 @@ class SchedulesService extends ApiService implements ApiDataInterface
             foreach ($return->getMissions() as $mission) {
                 if (isset($mission->getStations()[1]) && ($mission->getStations()[1]->getGeoPointA() instanceof GeoPoint)) {
                     $destination = $mission->getStations()[1]->getGeoPointA()->getName();
-                } else if ($mission->getDirection() instanceof Direction) {
+                } elseif ($mission->getDirection() instanceof Direction) {
                     $destination = $mission->getDirection()->getName();
                 } elseif (isset($mission->getStations()[1])) {
                     $destination = $mission->getStations()[1]->getName();
@@ -100,7 +100,6 @@ class SchedulesService extends ApiService implements ApiDataInterface
                 ];
             }
         } else {
-
             $destination = $return->getArgumentDirection() instanceof Direction ?
                 $return->getArgumentDirection()->getName() : 'Destination unavailable';
 
