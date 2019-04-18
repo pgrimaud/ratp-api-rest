@@ -13,7 +13,8 @@
         ]
     },
     "require": {
-        "php": ">=5.5.9",
+        "php": ">=7.1",
+        "ext-json": "*",
         "symfony/symfony": "3.4.*",
         "doctrine/orm": "^2.5",
         "doctrine/doctrine-bundle": "^1.6",
@@ -29,13 +30,15 @@
         "guzzlehttp/guzzle": "^6.2",
         "predis/predis": "^1.1",
         "jms/serializer-bundle": "^1.1",
-        "pgrimaud/horaires-ratp-sdk": "^1.0"
+        "pgrimaud/horaires-ratp-sdk": "^1.0",
+        "fabpot/goutte": "^3.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^3.0",
         "friendsofphp/php-cs-fixer": "^2.0",
-        "jolicode/gif-exception-bundle": "^1.2"
+        "jolicode/gif-exception-bundle": "^1.2",
+        "symfony/web-server-bundle": "^3.4"
     },
     "scripts": {
         "symfony-scripts": [

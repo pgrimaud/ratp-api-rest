@@ -27,7 +27,8 @@ class NamesHelper
     {
         $names = [
             'Travaux'              => 'normal_trav',
-            'Incidents techniques' => 'critical'
+            'Incidents techniques' => 'critical',
+            'Incidents'            => 'critical',
         ];
 
         if (!isset($names[$value])) {
