@@ -205,7 +205,7 @@ class TrafficService extends ApiService implements ApiDataInterface
                         'message' => 'Trafic normal sur l\'ensemble de la ligne.'
                     ];
                 }
-                $data[$type][$allowedLine] = $information;
+                $data[$type][] = $information;
             }
         }
 
