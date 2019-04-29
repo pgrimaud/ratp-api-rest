@@ -42,7 +42,7 @@ class ApiService extends CoreService
             return unserialize($cache->get());
         } else {
             $data = $this->{'get' . $method}($parameters);
-            //$this->storage->setCache($cache, $data, $this->ttl);
+            $this->storage->setCache($cache, $data, $this->ttl);
             return $data;
         }
     }
