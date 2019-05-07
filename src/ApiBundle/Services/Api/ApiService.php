@@ -1,4 +1,5 @@
 <?php
+
 namespace RatpApi\ApiBundle\Services\Api;
 
 use RatpApi\ApiBundle\Services\Core\CoreService;

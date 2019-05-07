@@ -10,6 +10,7 @@ class TrafficService extends ApiService implements ApiDataInterface
 {
     const ENTRYPOINT_IXXI = 'http://apixha.ixxi.net/APIX?cmd=getTrafficSituation&category=all' .
     '&networkType=all&withText=true&apixFormat=json';
+    const ENTRYPOINT_RATP = 'http://www.ratp.fr/meteo/ajax/data';
 
     /**
      * @var string $apiKey
@@ -38,7 +39,7 @@ class TrafficService extends ApiService implements ApiDataInterface
     }
 
     /**
-     * @param $method
+     * @param       $method
      * @param array $parameters
      * @return mixed
      */
@@ -48,9 +49,7 @@ class TrafficService extends ApiService implements ApiDataInterface
     }
 
     /**
-     * @return array|mixed
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return array
      */
     private function getTrafficCache()
     {
@@ -59,9 +58,10 @@ class TrafficService extends ApiService implements ApiDataInterface
         if ($cache->isHit()) {
             $data = unserialize($cache->get());
         } else {
+            $ratpData = $this->getDataFromRatp();
             $ixxiData = $this->getDataFromIxxi();
 
-            $data = $this->formatData($ixxiData);
+            $data = $this->mergeDataSources($ratpData, $ixxiData);
 
             $this->storage->setCache($cache, $data, $this->resultTtl);
         }
@@ -70,9 +70,7 @@ class TrafficService extends ApiService implements ApiDataInterface
     }
 
     /**
-     * @return array|mixed
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return array
      */
     protected function getAll()
     {
@@ -81,10 +79,7 @@ class TrafficService extends ApiService implements ApiDataInterface
 
     /**
      * @param $parameters
-     *
-     * @return array
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return array|null
      */
     protected function getSpecific($parameters)
     {
@@ -107,10 +102,7 @@ class TrafficService extends ApiService implements ApiDataInterface
 
     /**
      * @param $parameters
-     *
-     * @return mixed|null
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return array|null
      */
     protected function getLine($parameters)
     {
@@ -139,83 +131,78 @@ class TrafficService extends ApiService implements ApiDataInterface
     }
 
     /**
+     * @param $ratp
      * @param $ixxi
      * @return array
      */
-    private function formatData($ixxi)
+    private function mergeDataSources($ratp, $ixxi)
     {
-        $data = [];
-
-        $allowedSources = [
-            'metros'   => [
-                '1',
-                '2',
-                '3',
-                '3B',
-                '4',
-                '5',
-                '6',
-                '7',
-                '7B',
-                '8',
-                '9',
-                '10',
-                '11',
-                '12',
-                '13',
-                '14',
-            ],
-            'rers'     => [
-                'A',
-                'B',
-                'C',
-                'D',
-                'E'
-            ],
-            'tramways' => [
-                '1',
-                '2',
-                '3A',
-                '3B',
-                '4',
-                '5',
-                '6',
-                '7',
-                '8',
-            ]
+        // merge only RER C, D and E
+        $allowedRers = [
+            'c',
+            'd',
+            'e'
         ];
 
-        foreach ($allowedSources as $type => $allowedLines) {
-            foreach ($allowedLines as $allowedLine) {
-                if (isset($ixxi[$type][$allowedLine])) {
-                    $errors = $ixxi[$type][$allowedLine];
-                    $event  = isset($errors['Incidents']) ? current($errors['Incidents']) : current($errors['Travaux']);
+        foreach ($allowedRers as $allowedRer) {
+            if (isset($ixxi['rers'][$allowedRer])) {
+                $rer = $ixxi['rers'][$allowedRer];
+                ksort($rer);
 
-                    $information = [
-                        'line'    => strtoupper($allowedLine),
-                        'slug'    => NamesHelper::statusSlug($event['typeName']),
-                        'title'   => $event['typeName'],
-                        'message' => $event['message']
-                    ];
-                } else {
-                    $information = [
-                        'line'    => strtoupper($allowedLine),
-                        'slug'    => 'normal',
-                        'title'   => 'Trafic normal',
-                        'message' => 'Trafic normal sur l\'ensemble de la ligne.'
-                    ];
-                }
-                $data[$type][] = $information;
+                $firstEvent = current($rer);
+
+                $information = [
+                    'line'    => strtoupper($allowedRer),
+                    'slug'    => NamesHelper::statusSlug($firstEvent['typeName']),
+                    'title'   => $firstEvent['typeName'],
+                    'message' => $firstEvent['message']
+                ];
+            } else {
+                $information = [
+                    'line'    => strtoupper($allowedRer),
+                    'slug'    => 'normal',
+                    'title'   => 'Trafic normal',
+                    'message' => 'Trafic normal sur l\'ensemble de la ligne.'
+                ];
             }
+            $tmpRers[$allowedRer] = $information;
         }
 
-        return $data;
+        ksort($tmpRers);
+
+        foreach ($tmpRers as $rer) {
+            $ratp['rers'][] = $rer;
+        }
+
+        return $ratp;
     }
 
     /**
      * @return array
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    private function getDataFromRatp()
+    {
+        try {
+            $client = new Client();
+            $res    = $client->request('GET', $this->getEntryPointRatp(), [
+                'headers' => [
+                    'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
+                ]
+            ]);
+
+            $data = json_decode($res->getBody()->getContents(), JSON_OBJECT_AS_ARRAY);
+
+            return $this->formatRatpData($data);
+        } catch (\Exception $exception) {
+            return [
+                'message' => 'Something went wrong'
+            ];
+        }
+    }
+
+
+    /**
+     * @return array
      */
     private function getDataFromIxxi()
     {
@@ -249,13 +236,13 @@ class TrafficService extends ApiService implements ApiDataInterface
             foreach ($event['incidents'] as $incident) {
                 foreach ($incident['lines'] as $line) {
                     if ($event['startDate'] <= date('c') && $event['endDate'] >= date('c')) {
-                        $results[NamesHelper::getSlug($line['groupOfLinesName'])][$line['name']][$event['typeName']][$event['startDate']] = [
+                        $results[NamesHelper::getSlug($line['groupOfLinesName'])][$line['name']][$event['startDate']] = [
                             'message'          => $line['message'],
                             'shortMessage'     => $line['shortMessage'],
                             'incidentSeverity' => $line['incidentSeverity'],
                             'typeName'         => $event['typeName'],
                             'startDate'        => $event['startDate'],
-                            'endDate'          => $event['endDate']
+                            'endDate'          => $event['startDate']
                         ];
                     }
                 }
@@ -303,5 +290,13 @@ class TrafficService extends ApiService implements ApiDataInterface
     private function getEntryPointIxxi()
     {
         return self::ENTRYPOINT_IXXI . '&keyapp=' . $this->apiKey . '&tmp=' . time();
+    }
+
+    /**
+     * @return string
+     */
+    private function getEntryPointRatp()
+    {
+        return self::ENTRYPOINT_RATP . '?tmp=' . time();
     }
 }
