@@ -236,7 +236,7 @@ class TrafficService extends ApiService implements ApiDataInterface
             foreach ($event['incidents'] as $incident) {
                 foreach ($incident['lines'] as $line) {
                     if ($event['startDate'] <= date('c') && $event['endDate'] >= date('c')) {
-                        $results[NamesHelper::getSlug($line['groupOfLinesName'])][$line['name']][$event['startDate']] = [
+                        $results[NamesHelper::getSlug($line['groupOfLinesName'])][$line['typeName']][$event['startDate']] = [
                             'message'          => $line['message'],
                             'shortMessage'     => $line['shortMessage'],
                             'incidentSeverity' => $line['incidentSeverity'],
