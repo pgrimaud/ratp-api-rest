@@ -242,7 +242,7 @@ class TrafficService extends ApiService implements ApiDataInterface
                             'incidentSeverity' => $line['incidentSeverity'],
                             'typeName'         => $event['typeName'],
                             'startDate'        => $event['startDate'],
-                            'endDate'          => $event['startDate']
+                            'endDate'          => $event['endDate']
                         ];
                     }
                 }
