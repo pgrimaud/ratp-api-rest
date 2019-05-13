@@ -4,49 +4,150 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Client\IxxiApiClient;
+use App\Client\RatpWebsiteClient;
+use App\Service\TrafficService;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use Swagger\Annotations as SWG;
-use Symfony\Component\Cache\Adapter\RedisAdapter;
-use Symfony\Component\Cache\CacheItem;
 
 class TrafficController extends AppController
 {
     /**
      * @SWG\Get(
-     *     produces={"application/json", "application/xml"}
+     *     produces={"application/json", "application/xml"},
+     *     description="Get traffic of all lines"
      * )
-     *
      * @SWG\Tag(
-     *   name="Traffic"
+     *   name="Traffic",
      * )
      * @SWG\Response(
      *     response=200,
-     *     description="@todo"
+     *     description="OK"
      * )
      *
      * @Rest\View()
      * @Rest\Get("/traffic")
      *
-     * @throws \Exception
+     * @return View
      */
-    public function trafficAction(): View
+    public function traffic(): View
     {
-        $client = RedisAdapter::createConnection(
-            'redis://localhost'
-        );
+        return $this->appView($this->fetchData());
+    }
 
-        $cache = new RedisAdapter(
-            $client
-        );
+    /**
+     * @SWG\Get(
+     *     produces={"application/json", "application/xml"},
+     *     description="Get traffic of a specific type of transport"
+     * )
+     * @SWG\Parameter(
+     *     name="type",
+     *     in="path",
+     *     type="string",
+     *     description="The type of transport (metros, rers or tramways)",
+     *     enum={"metros", "rers", "tramways"}
+     * )
+     * @SWG\Tag(
+     *   name="Traffic",
+     * )
+     * @SWG\Response(
+     *     response=200,
+     *     description="OK"
+     * )
+     *
+     * @Rest\View()
+     * @Rest\Get("/traffic/{type}")
+     *
+     * @param string $type
+     *
+     * @return View
+     */
+    public function trafficType(string $type): View
+    {
+        $data = $this->fetchData();
 
-        $cacheItem = new CacheItem();
-        $cacheItem->expiresAt(new \DateTimeImmutable('+' . getenv('CACHE_TRAFFIC') . ' seconds'));
-        $cacheItem->set('test');
+        if (!isset($data[$type])) {
+            return $this->invalidParameter('Invalid type : ' . $type);
+        }
 
-        $cache->save($cacheItem);
+        return $this->appView([$type => $data[$type]]);
+    }
 
-        // @todo
-        return $this->appView(['ok']);
+    /**
+     * @SWG\Get(
+     *     produces={"application/json", "application/xml"},
+     *     description="Get traffic of a specific line"
+     * )
+     * @SWG\Parameter(
+     *     name="type",
+     *     in="path",
+     *     type="string",
+     *     description="The type of transport (metros, rers or tramways)",
+     *     enum={"metros", "rers", "tramways"}
+     * )
+     * @SWG\Parameter(
+     *     name="code",
+     *     in="path",
+     *     type="string",
+     *     description="The code of transport line"
+     * )
+     * @SWG\Tag(
+     *   name="Traffic",
+     * )
+     * @SWG\Response(
+     *     response=200,
+     *     description="OK"
+     * )
+     *
+     * @Rest\View()
+     * @Rest\Get("/traffic/{type}/{code}")
+     *
+     * @param string $type
+     * @param string $code
+     *
+     * @return View
+     */
+    public function trafficCode(string $type, string $code): View
+    {
+        $data = $this->fetchData();
+
+        if (!isset($data[$type])) {
+            return $this->invalidParameter('Invalid type : ' . $type);
+        }
+
+        // manage breakage
+        $code = strtoupper($code);
+
+        $lineData = null;
+
+        foreach ($data[$type] as $line) {
+            if ($line['line'] == $code) {
+                $lineData = $line;
+            }
+        }
+
+        if (!$lineData) {
+            return $this->invalidParameter('Invalid code : ' . $code);
+        }
+
+        return $this->appView($lineData);
+    }
+
+    /**
+     * @return array
+     */
+    private function fetchData(): array
+    {
+        $data = $this->cacheService->getDataFromCache();
+
+        if (!$data) {
+            $service = new TrafficService(new IxxiApiClient(), new RatpWebsiteClient());
+            $data    = $service->fetchData();
+
+            $this->cacheService->setDataToCache($data, (int)getenv('CACHE_TRAFFIC'));
+        }
+
+        return $data;
     }
 }

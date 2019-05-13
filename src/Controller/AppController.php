@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Serializer\XmlSerializer;
+use App\Service\CacheService;
+
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Exception\InvalidParameterException;
-
 use FOS\RestBundle\View\View;
+
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,13 +23,19 @@ class AppController extends AbstractFOSRestController
      * @var RequestStack
      */
     private $requestStack;
+    /**
+     * @var CacheService
+     */
+    protected $cacheService;
 
     /**
      * @param RequestStack $requestStack
+     * @param CacheService $cacheService
      */
-    public function __construct(RequestStack $requestStack)
+    public function __construct(RequestStack $requestStack, CacheService $cacheService)
     {
         $this->requestStack = $requestStack;
+        $this->cacheService = $cacheService;
     }
 
     /**
@@ -42,7 +50,7 @@ class AppController extends AbstractFOSRestController
 
     /**
      * @param array $payload
-     * @param int   $httpCode
+     * @param int $httpCode
      *
      * @return View
      */
@@ -96,7 +104,7 @@ class AppController extends AbstractFOSRestController
      */
     public function error(\Exception $exception)
     {
-        dump($exception);
+        dump($exception->getMessage());
         // @todo format api response
 
         if ($exception instanceof NotFoundHttpException) {
@@ -106,5 +114,35 @@ class AppController extends AbstractFOSRestController
         } else {
             exit('internal error');
         }
+    }
+
+    /**
+     * @param string $message
+     *
+     * @return View
+     */
+    public function notFound(string $message): View
+    {
+        $payload = [
+            'code'    => Response::HTTP_NOT_FOUND,
+            'message' => 'Not found : ' . $message
+        ];
+
+        return $this->appView($payload, Response::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * @param string $message
+     *
+     * @return View
+     */
+    public function invalidParameter(string $message): View
+    {
+        $payload = [
+            'code'    => Response::HTTP_BAD_REQUEST,
+            'message' => 'Bad request. ' . $message
+        ];
+
+        return $this->appView($payload, Response::HTTP_NOT_FOUND);
     }
 }
