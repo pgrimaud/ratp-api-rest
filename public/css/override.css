@@ -36,8 +36,8 @@ header:before {
     margin-bottom: 10px;
 }
 
-.swagger-ui .scheme-container a:visited {
-    color: #000000;
+.swagger-ui .scheme-container a, .swagger-ui .scheme-container a:visited {
+    color: #000000 !important;
 }
 
 .swagger-ui .scheme-container .schemes iframe {

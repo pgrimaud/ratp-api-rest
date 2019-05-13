@@ -10,6 +10,7 @@
         "friendsofsymfony/rest-bundle": "^2.5",
         "jms/serializer-bundle": "^3.3",
         "nelmio/api-doc-bundle": "^3.4",
+        "sensio/framework-extra-bundle": "^5.3",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "4.2.*",
         "symfony/console": "4.2.*",

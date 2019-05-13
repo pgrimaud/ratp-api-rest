@@ -1,21 +1,29 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
-use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use FOS\RestBundle\View\View;
+use Swagger\Annotations as SWG;
 
-class TrafficController extends AbstractFOSRestController
+class TrafficController extends AppController
 {
     /**
-     * @Rest\Get("/traffic")
+     * @SWG\Tag(
+     *   name="Traffic"
+     * )
+     * @SWG\Response(
+     *     response=200,
+     *     description="test"
+     * )
      *
-     * @return JsonResponse
+     * @Rest\View()
+     * @Rest\Get("/traffic")
      */
-    public function trafficAction()
+    public function trafficAction(): View
     {
-        // @todo test first traffic route
-        return new JsonResponse(['traffic route']);
+        return $this->appView(['metro' => 'ok']);
     }
 }

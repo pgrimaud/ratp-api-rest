@@ -5,3 +5,6 @@ fos_rest:
   exception:
     enabled: true
     exception_controller: App\Controller\AppController::error
+  routing_loader:
+    include_format: false
+
