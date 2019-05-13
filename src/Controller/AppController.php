@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Serializer\XmlSerializer;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Exception\InvalidParameterException;
 
@@ -41,20 +42,19 @@ class AppController extends AbstractFOSRestController
 
     /**
      * @param array $payload
-     * @param int $httpCode
+     * @param int   $httpCode
      *
      * @return View
      */
     public function appView(array $payload, int $httpCode = Response::HTTP_OK): View
     {
-        $formatParameter = $this->requestStack->getCurrentRequest()->query->get('_format');
-        $format          = $formatParameter ? $formatParameter : 'json';
+        $acceptHeader = $this->requestStack->getCurrentRequest()->headers->get('Accept');
+        $format       = $acceptHeader == 'application/xml' ? 'xml' : 'json';
 
         if ($format == 'xml') {
-            // @todo
-            // $result = new XmlResponseHelper();
-            // $result->setResult($payload);
-            // $result->setMetadata($this->getMetadata());
+            $result = new XmlSerializer();
+            $result->setResult($payload);
+            $result->setMetadata($this->getMetadata());
         } else {
             $result = [
                 'result'    => $payload,
