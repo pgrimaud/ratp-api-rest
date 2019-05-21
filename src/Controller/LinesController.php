@@ -16,11 +16,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class LinesController extends AppController
 {
     /**
-     * @var RatpLinesService
-     */
-    private $ratpLinesService;
-
-    /**
      * @var array
      */
     private $data;
@@ -32,11 +27,11 @@ class LinesController extends AppController
     public function __construct(RequestStack $requestStack, RatpLinesService $ratpLinesService)
     {
         parent::__construct($requestStack);
-        $this->ratpLinesService = $ratpLinesService;
 
         $this->data = $this->fetchData(
             $ratpLinesService,
             'all',
+            [],
             (int)getenv('CACHE_LINES'),
             getenv('API_VERSION') . '_lines'
         );

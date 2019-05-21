@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Exception\AmbiguousException;
 use App\Serializer\XmlSerializer;
 use App\Service\CacheService;
 use App\Service\Ratp\RatpServiceInterface;
@@ -87,6 +88,7 @@ class AppController extends AbstractFOSRestController
     /**
      * @param RatpServiceInterface $service
      * @param string $method
+     * @param array $parameters
      * @param int $ttl
      * @param string $hash
      *
@@ -95,6 +97,7 @@ class AppController extends AbstractFOSRestController
     protected function fetchData(
         RatpServiceInterface $service,
         string $method = '',
+        array $parameters = [],
         int $ttl = 0,
         string $hash = ''
     ): array
@@ -103,7 +106,7 @@ class AppController extends AbstractFOSRestController
         $data         = $cacheService->getDataFromCache();
 
         if (!$data) {
-            $data = $service->get($method);
+            $data = $service->get($method, $parameters);
             $cacheService->setDataToCache($data, $ttl);
         }
 
@@ -136,6 +139,7 @@ class AppController extends AbstractFOSRestController
                 $responseStatus = 'Not found. ' . $exception->getMessage();
                 break;
             case InvalidParameterException::class:
+            case AmbiguousException::class:
                 $responseCode   = Response::HTTP_BAD_REQUEST;
                 $responseStatus = 'Bad request. ' . $exception->getMessage();
                 break;
