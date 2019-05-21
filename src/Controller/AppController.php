@@ -80,7 +80,7 @@ class AppController extends AbstractFOSRestController
         return [
             'call'    => $this->getCall(),
             'date'    => date('c'),
-            'version' => getenv('API_VERSION')
+            'version' => (int)getenv('API_VERSION')
         ];
     }
 
