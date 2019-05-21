@@ -55,6 +55,10 @@ class TrafficController extends AppController
      *     response=200,
      *     description="OK"
      * )
+     * @SWG\Response(
+     *     response=400,
+     *     description="Bad Request"
+     * )
      *
      * @Rest\View()
      * @Rest\Get("/traffic/{type}")
@@ -98,6 +102,10 @@ class TrafficController extends AppController
      * @SWG\Response(
      *     response=200,
      *     description="OK"
+     * )
+     * @SWG\Response(
+     *     response=400,
+     *     description="Bad Request"
      * )
      *
      * @Rest\View()
