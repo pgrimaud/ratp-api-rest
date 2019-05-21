@@ -6,9 +6,10 @@ namespace App\Service;
 
 use App\Client\IxxiApiClient;
 use App\Client\RatpWebsiteClient;
+use App\Service\Ratp\RatpServiceInterface;
 use App\Utils\NameHelper;
 
-class TrafficService
+class TrafficService extends AbstractRatpService implements RatpServiceInterface
 {
     /**
      * @var IxxiApiClient
@@ -20,20 +21,16 @@ class TrafficService
      */
     private $ratpWebsiteClient;
 
-    /**
-     * @param IxxiApiClient $ixxiApiClient
-     * @param RatpWebsiteClient $ratpWebsiteClient
-     */
-    public function __construct(IxxiApiClient $ixxiApiClient, RatpWebsiteClient $ratpWebsiteClient)
+    public function __construct()
     {
-        $this->ixxiApiClient     = $ixxiApiClient;
-        $this->ratpWebsiteClient = $ratpWebsiteClient;
+        $this->ixxiApiClient     = new IxxiApiClient();
+        $this->ratpWebsiteClient = new RatpWebsiteClient();
     }
 
     /**
      * @return array
      */
-    public function fetchData(): array
+    public function getAll(): array
     {
         $ixxiData = $this->ixxiApiClient->getData();
         $ratpData = $this->ratpWebsiteClient->getData();
@@ -49,7 +46,7 @@ class TrafficService
      *
      * @return array
      */
-    private function mergeDataSources(array $ratpData, array $ixxiData)
+    private function mergeDataSources(array $ratpData, array $ixxiData): array
     {
         // merge only RER C, D and E
         $allowedRers = [

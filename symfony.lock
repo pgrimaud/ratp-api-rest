@@ -146,6 +146,9 @@
             "config/routes/nelmio_api_doc.yaml"
         ]
     },
+    "pgrimaud/horaires-ratp-sdk": {
+        "version": "1.1.1"
+    },
     "phpdocumentor/reflection-common": {
         "version": "1.0.1"
     },

@@ -4,16 +4,33 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Client\IxxiApiClient;
-use App\Client\RatpWebsiteClient;
+use App\Service\CacheService;
 use App\Service\TrafficService;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Exception\InvalidParameterException;
 use FOS\RestBundle\View\View;
+
 use Swagger\Annotations as SWG;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class TrafficController extends AppController
 {
+    /**
+     * @var TrafficService
+     */
+    private $trafficService;
+
+    /**
+     * @param RequestStack $requestStack
+     * @param CacheService $cacheService
+     * @param TrafficService $trafficService
+     */
+    public function __construct(RequestStack $requestStack, CacheService $cacheService, TrafficService $trafficService)
+    {
+        parent::__construct($requestStack, $cacheService);
+        $this->trafficService = $trafficService;
+    }
+
     /**
      * @SWG\Get(
      *     produces={"application/json", "application/xml"},
@@ -34,7 +51,9 @@ class TrafficController extends AppController
      */
     public function traffic(): View
     {
-        return $this->appView($this->fetchData());
+        return $this->appView(
+            $this->fetchData($this->trafficService, 'all')
+        );
     }
 
     /**
@@ -70,7 +89,7 @@ class TrafficController extends AppController
      */
     public function trafficType(string $type): View
     {
-        $data = $this->fetchData();
+        $data = $this->fetchData($this->trafficService);
 
         if (!isset($data[$type])) {
             throw new InvalidParameterException('Invalid line type : ' . $type);
@@ -119,7 +138,7 @@ class TrafficController extends AppController
      */
     public function trafficCode(string $type, string $code): View
     {
-        $data = $this->fetchData();
+        $data = $this->fetchData($this->trafficService);
 
         if (!isset($data[$type])) {
             throw new InvalidParameterException('Invalid line type : ' . $type);
@@ -141,22 +160,5 @@ class TrafficController extends AppController
         }
 
         return $this->appView($lineData);
-    }
-
-    /**
-     * @return array
-     */
-    private function fetchData(): array
-    {
-        $data = $this->cacheService->getDataFromCache();
-
-        if (!$data) {
-            $service = new TrafficService(new IxxiApiClient(), new RatpWebsiteClient());
-            $data    = $service->fetchData();
-
-            $this->cacheService->setDataToCache($data, (int)getenv('CACHE_TRAFFIC'));
-        }
-
-        return $data;
     }
 }

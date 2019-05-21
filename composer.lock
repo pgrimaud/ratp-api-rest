@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5f3a444b69e75980d73abf47255cf544",
+    "content-hash": "b0739b7503a6c50908c27c1def75b5f7",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -2031,6 +2031,47 @@
                 "rest"
             ],
             "time": "2019-02-18T16:27:10+00:00"
+        },
+        {
+            "name": "pgrimaud/horaires-ratp-sdk",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pgrimaud/horaires-ratp-sdk.git",
+                "reference": "a5520e230d6db0d1dc54db7ce455d820d1723b60"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pgrimaud/horaires-ratp-sdk/zipball/a5520e230d6db0d1dc54db7ce455d820d1723b60",
+                "reference": "a5520e230d6db0d1dc54db7ce455d820d1723b60",
+                "shasum": ""
+            },
+            "require": {
+                "ext-soap": "*",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ratp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pierre Grimaud",
+                    "email": "grimaud.pierre@gmail.com"
+                }
+            ],
+            "description": "RATP SDK - Retrieve schedules for any given RER (train), Metro, or Tramway stop in real time. The RATP is a public transport operator based in Paris, France.",
+            "homepage": "https://github.com/pgrimaud/horaires-ratp-sdk",
+            "time": "2018-05-17T15:52:48+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",

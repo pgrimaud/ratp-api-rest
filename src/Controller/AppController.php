@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Serializer\XmlSerializer;
 use App\Service\CacheService;
+use App\Service\Ratp\RatpServiceInterface;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Exception\InvalidParameterException;
@@ -90,6 +91,25 @@ class AppController extends AbstractFOSRestController
     }
 
     /**
+     * @param RatpServiceInterface $service
+     * @param string $method
+     * @param int $ttl $ttl = 0
+     *
+     * @return array
+     */
+    protected function fetchData(RatpServiceInterface $service, string $method = '', int $ttl = 0): array
+    {
+        $data = $this->cacheService->getDataFromCache();
+
+        if (!$data) {
+            $data = $service->get($method);
+            $this->cacheService->setDataToCache($data, $ttl);
+        }
+
+        return $data;
+    }
+
+    /**
      * @return string
      */
     private function getCall(): string
@@ -119,7 +139,8 @@ class AppController extends AbstractFOSRestController
                 break;
             default:
                 $responseCode   = Response::HTTP_INTERNAL_SERVER_ERROR;
-                $responseStatus = 'Internal Server Error';
+                $responseStatus = 'Internal Server Error' .
+                    (getenv('APP_ENV') === 'dev' ? ' (' . $exception->getMessage() . ')' : '');
                 break;
         }
 
