@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Service;
+namespace App\Service\Ratp;
 
 use App\Client\IxxiApiClient;
 use App\Client\RatpWebsiteClient;
-use App\Service\Ratp\RatpServiceInterface;
 use App\Utils\NameHelper;
 
-class TrafficService extends AbstractRatpService implements RatpServiceInterface
+class RatpTrafficService extends AbstractRatpService implements RatpServiceInterface
 {
     /**
      * @var IxxiApiClient
@@ -35,9 +34,9 @@ class TrafficService extends AbstractRatpService implements RatpServiceInterface
         $ixxiData = $this->ixxiApiClient->getData();
         $ratpData = $this->ratpWebsiteClient->getData();
 
-        $mergedData = $this->mergeDataSources($ratpData, $ixxiData);
+        $completeData = $this->mergeDataSources($ratpData, $ixxiData);
 
-        return $mergedData;
+        return $completeData;
     }
 
     /**

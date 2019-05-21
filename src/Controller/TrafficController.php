@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Service\CacheService;
-use App\Service\TrafficService;
+use App\Service\Ratp\RatpTrafficService;
+
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Exception\InvalidParameterException;
 use FOS\RestBundle\View\View;
@@ -16,25 +16,30 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class TrafficController extends AppController
 {
     /**
-     * @var TrafficService
+     * @var array
      */
-    private $trafficService;
+    private $data;
 
     /**
      * @param RequestStack $requestStack
-     * @param CacheService $cacheService
-     * @param TrafficService $trafficService
+     * @param RatpTrafficService $trafficService
      */
-    public function __construct(RequestStack $requestStack, CacheService $cacheService, TrafficService $trafficService)
+    public function __construct(RequestStack $requestStack, RatpTrafficService $trafficService)
     {
-        parent::__construct($requestStack, $cacheService);
-        $this->trafficService = $trafficService;
+        parent::__construct($requestStack);
+
+        $this->data = $this->fetchData(
+            $trafficService,
+            'all',
+            (int)getenv('CACHE_TRAFFIC'),
+            getenv('API_VERSION') . '_traffic'
+        );
     }
 
     /**
      * @SWG\Get(
      *     produces={"application/json", "application/xml"},
-     *     description="Get traffic of all lines"
+     *     description="Get traffic of all lines from the RATP network."
      * )
      * @SWG\Tag(
      *   name="Traffic",
@@ -51,15 +56,13 @@ class TrafficController extends AppController
      */
     public function traffic(): View
     {
-        return $this->appView(
-            $this->fetchData($this->trafficService, 'all')
-        );
+        return $this->appView($this->data);
     }
 
     /**
      * @SWG\Get(
      *     produces={"application/json", "application/xml"},
-     *     description="Get traffic of a specific type of transport"
+     *     description="Get traffic of a specific type of transport from the RATP network."
      * )
      * @SWG\Parameter(
      *     name="type",
@@ -89,19 +92,17 @@ class TrafficController extends AppController
      */
     public function trafficType(string $type): View
     {
-        $data = $this->fetchData($this->trafficService);
-
-        if (!isset($data[$type])) {
+        if (!isset($this->data[$type])) {
             throw new InvalidParameterException('Invalid line type : ' . $type);
         }
 
-        return $this->appView([$type => $data[$type]]);
+        return $this->appView([$type => $this->data[$type]]);
     }
 
     /**
      * @SWG\Get(
      *     produces={"application/json", "application/xml"},
-     *     description="Get traffic of a specific line"
+     *     description="Get traffic of a specific line from the RATP network."
      * )
      * @SWG\Parameter(
      *     name="type",
@@ -138,9 +139,7 @@ class TrafficController extends AppController
      */
     public function trafficCode(string $type, string $code): View
     {
-        $data = $this->fetchData($this->trafficService);
-
-        if (!isset($data[$type])) {
+        if (!isset($this->data[$type])) {
             throw new InvalidParameterException('Invalid line type : ' . $type);
         }
 
@@ -149,7 +148,7 @@ class TrafficController extends AppController
 
         $lineData = null;
 
-        foreach ($data[$type] as $line) {
+        foreach ($this->data[$type] as $line) {
             if ($line['line'] == $code) {
                 $lineData = $line;
             }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Service\CacheService;
 use App\Service\Ratp\RatpLinesService;
 
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -22,19 +21,18 @@ class LinesController extends AppController
 
     /**
      * @param RequestStack $requestStack
-     * @param CacheService $cacheService
      * @param RatpLinesService $ratpLinesService
      */
-    /*public function __construct(RequestStack $requestStack, CacheService $cacheService, RatpLinesService $ratpLinesService)
+    public function __construct(RequestStack $requestStack, RatpLinesService $ratpLinesService)
     {
-        parent::__construct($requestStack, $cacheService);
+        parent::__construct($requestStack);
         $this->ratpLinesService = $ratpLinesService;
-    }*/
+    }
 
     /**
      * @SWG\Get(
      *     produces={"application/json", "application/xml"},
-     *     description="Get all lines from RATP network"
+     *     description="Get all lines from the RATP network."
      * )
      * @SWG\Tag(
      *   name="Lines",

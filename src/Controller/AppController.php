@@ -24,19 +24,13 @@ class AppController extends AbstractFOSRestController
      * @var RequestStack
      */
     private $requestStack;
-    /**
-     * @var CacheService
-     */
-    protected $cacheService;
 
     /**
      * @param RequestStack $requestStack
-     * @param CacheService $cacheService
      */
-    public function __construct(RequestStack $requestStack, CacheService $cacheService)
+    public function __construct(RequestStack $requestStack)
     {
         $this->requestStack = $requestStack;
-        $this->cacheService = $cacheService;
     }
 
     /**
@@ -93,17 +87,24 @@ class AppController extends AbstractFOSRestController
     /**
      * @param RatpServiceInterface $service
      * @param string $method
-     * @param int $ttl $ttl = 0
+     * @param int $ttl
+     * @param string $hash
      *
      * @return array
      */
-    protected function fetchData(RatpServiceInterface $service, string $method = '', int $ttl = 0): array
+    protected function fetchData(
+        RatpServiceInterface $service,
+        string $method = '',
+        int $ttl = 0,
+        string $hash = ''
+    ): array
     {
-        $data = $this->cacheService->getDataFromCache();
+        $cacheService = new CacheService($this->requestStack, $hash);
+        $data         = $cacheService->getDataFromCache();
 
         if (!$data) {
             $data = $service->get($method);
-            $this->cacheService->setDataToCache($data, $ttl);
+            $cacheService->setDataToCache($data, $ttl);
         }
 
         return $data;
@@ -116,6 +117,7 @@ class AppController extends AbstractFOSRestController
     {
         $method = $this->requestStack->getCurrentRequest()->getMethod();
         $path   = $this->requestStack->getCurrentRequest()->getPathInfo();
+
         return $method . ' ' . $path;
     }
 

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Service\Ratp;
 
-use App\Service\AbstractRatpService;
-
 class RatpLinesService extends AbstractRatpService implements RatpServiceInterface
 {
     /**
@@ -23,14 +21,6 @@ class RatpLinesService extends AbstractRatpService implements RatpServiceInterfa
      */
     private function getLinesFromCache()
     {
-        $cache = $this->storage->getCacheItem('lines_data');
 
-        if ($cache->isHit()) {
-            $data = unserialize($cache->get());
-        } else {
-            $data = $this->getAllLinesForCache();
-            $this->storage->setCache($cache, $data, $this->resultTtl);
-        }
-        return $data;
     }
 }
