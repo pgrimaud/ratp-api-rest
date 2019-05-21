@@ -8,6 +8,7 @@ use App\Client\IxxiApiClient;
 use App\Client\RatpWebsiteClient;
 use App\Service\TrafficService;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Exception\InvalidParameterException;
 use FOS\RestBundle\View\View;
 use Swagger\Annotations as SWG;
 
@@ -72,7 +73,7 @@ class TrafficController extends AppController
         $data = $this->fetchData();
 
         if (!isset($data[$type])) {
-            return $this->invalidParameter('Invalid type : ' . $type);
+            throw new InvalidParameterException('Invalid line type : ' . $type);
         }
 
         return $this->appView([$type => $data[$type]]);
@@ -121,7 +122,7 @@ class TrafficController extends AppController
         $data = $this->fetchData();
 
         if (!isset($data[$type])) {
-            return $this->invalidParameter('Invalid type : ' . $type);
+            throw new InvalidParameterException('Invalid line type : ' . $type);
         }
 
         // manage breakage
@@ -136,7 +137,7 @@ class TrafficController extends AppController
         }
 
         if (!$lineData) {
-            return $this->invalidParameter('Invalid code : ' . $code);
+            throw new InvalidParameterException('Invalid line code : ' . $code);
         }
 
         return $this->appView($lineData);

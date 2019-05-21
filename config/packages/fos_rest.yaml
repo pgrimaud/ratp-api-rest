@@ -4,7 +4,7 @@ fos_rest:
     view_response_listener: true
   exception:
     enabled: true
-    exception_controller: App\Controller\AppController::error
+    exception_controller: App\Controller\AppController::errorView
   routing_loader:
     include_format: false
 

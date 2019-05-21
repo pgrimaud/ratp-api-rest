@@ -59,7 +59,7 @@ class AppController extends AbstractFOSRestController
         $acceptHeader = $this->requestStack->getCurrentRequest()->headers->get('Accept');
         $format       = $acceptHeader == 'application/xml' ? 'xml' : 'json';
 
-        if ($format == 'xml') {
+        if ($format === 'xml') {
             $result = new XmlSerializer();
             $result->setResult($payload);
             $result->setMetadata($this->getMetadata());
@@ -101,48 +101,33 @@ class AppController extends AbstractFOSRestController
 
     /**
      * @param \Exception $exception
+     *
+     * @return View
      */
-    public function error(\Exception $exception)
+    public function errorView(\Exception $exception)
     {
-        dump($exception->getMessage());
-        // @todo format api response
+        $exceptionClass = get_class($exception);
 
-        if ($exception instanceof NotFoundHttpException) {
-            exit('not found');
-        } elseif ($exception instanceof InvalidParameterException) {
-            exit('invalid parameter action');
-        } else {
-            exit('internal error');
+        switch ($exceptionClass) {
+            case NotFoundHttpException::class:
+                $responseCode   = Response::HTTP_NOT_FOUND;
+                $responseStatus = 'Not found. ' . $exception->getMessage();
+                break;
+            case InvalidParameterException::class:
+                $responseCode   = Response::HTTP_BAD_REQUEST;
+                $responseStatus = 'Bad request. ' . $exception->getMessage();
+                break;
+            default:
+                $responseCode   = Response::HTTP_INTERNAL_SERVER_ERROR;
+                $responseStatus = 'Internal Server Error';
+                break;
         }
-    }
 
-    /**
-     * @param string $message
-     *
-     * @return View
-     */
-    public function notFound(string $message): View
-    {
         $payload = [
-            'code'    => Response::HTTP_NOT_FOUND,
-            'message' => 'Not found : ' . $message
+            'code'    => $responseCode,
+            'message' => $responseStatus
         ];
 
-        return $this->appView($payload, Response::HTTP_NOT_FOUND);
-    }
-
-    /**
-     * @param string $message
-     *
-     * @return View
-     */
-    public function invalidParameter(string $message): View
-    {
-        $payload = [
-            'code'    => Response::HTTP_BAD_REQUEST,
-            'message' => 'Bad request. ' . $message
-        ];
-
-        return $this->appView($payload, Response::HTTP_NOT_FOUND);
+        return $this->appView($payload, $responseCode);
     }
 }
