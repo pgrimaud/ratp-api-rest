@@ -149,7 +149,7 @@ class TrafficController extends AppController
         $lineData = null;
 
         foreach ($this->data[$type] as $line) {
-            if ($line['line'] == $code) {
+            if ($line['line'] === $code) {
                 $lineData = $line;
             }
         }

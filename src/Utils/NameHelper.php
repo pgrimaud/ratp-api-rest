@@ -19,10 +19,24 @@ class NameHelper
             'Incidents'            => 'critical',
         ];
 
-        if (!isset($names[$value])) {
-            return $value;
-        } else {
-            return $names[$value];
-        }
+        return $names[$value] ?? $value;
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return string
+     */
+    public static function typeSlug(string $value): string
+    {
+        $names = [
+            'metro'         => 'metros',
+            'rer'           => 'rers',
+            'tram'          => 'tramways',
+            'busratp'       => 'bus',
+            'noctilienratp' => 'noctiliens'
+        ];
+
+        return $names[$value] ?? '';
     }
 }
