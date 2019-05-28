@@ -31,6 +31,7 @@ class TrafficController extends AppController
         $this->data = $this->fetchData(
             $trafficService,
             'all',
+            [],
             (int)getenv('CACHE_TRAFFIC'),
             getenv('API_VERSION') . '_traffic'
         );
