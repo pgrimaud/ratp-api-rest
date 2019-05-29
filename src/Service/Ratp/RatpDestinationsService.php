@@ -20,7 +20,7 @@ class RatpDestinationsService extends AbstractRatpService implements RatpService
      */
     public function getAll(array $parameters = []): array
     {
-        $stations = [];
+        $destinations = [];
 
         $prefixcode  = NameHelper::networkPrefix($parameters['type']);
         $networkRatp = NameHelper::typeSlug($parameters['type'], true);
@@ -50,7 +50,7 @@ class RatpDestinationsService extends AbstractRatpService implements RatpService
         }
 
         return [
-            'destinations' => $stations
+            'destinations' => $destinations
         ];
     }
 }

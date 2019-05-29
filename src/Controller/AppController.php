@@ -46,7 +46,7 @@ class AppController extends AbstractFOSRestController
 
     /**
      * @param array $payload
-     * @param int   $httpCode
+     * @param int $httpCode
      *
      * @return View
      */
@@ -87,10 +87,10 @@ class AppController extends AbstractFOSRestController
 
     /**
      * @param RatpServiceInterface $service
-     * @param string               $method
-     * @param array                $parameters
-     * @param int                  $ttl
-     * @param string               $hash
+     * @param string $method
+     * @param array $parameters
+     * @param int $ttl
+     * @param string $hash
      *
      * @return array
      */
