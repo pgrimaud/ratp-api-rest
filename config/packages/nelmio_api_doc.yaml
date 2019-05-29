@@ -8,3 +8,4 @@ nelmio_api_doc:
       - ^/traffic
       - ^/lines
       - ^/stations
+      - ^/destinations

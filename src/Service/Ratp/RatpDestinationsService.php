@@ -7,9 +7,9 @@ namespace App\Service\Ratp;
 use App\Exception\AmbiguousException;
 use App\Utils\NameHelper;
 
-use Ratp\{Api, Line, Reseau, Station, Stations};
+use Ratp\{Api, Direction, Directions, Line, Reseau};
 
-class RatpStationsService extends AbstractRatpService implements RatpServiceInterface
+class RatpDestinationsService extends AbstractRatpService implements RatpServiceInterface
 {
     /**
      * @param array $parameters
@@ -32,28 +32,25 @@ class RatpStationsService extends AbstractRatpService implements RatpServiceInte
         $line->setReseau($reseau);
         $line->setCode($prefixcode . $parameters['code']);
 
-        $apiStation = new Station();
-        $apiStation->setLine($line);
-
-        $apiStations = new Stations($apiStation);
+        $directionsApi = new Directions($line);
 
         $api    = new Api();
-        $return = $api->getStations($apiStations)->getReturn();
+        $return = $api->getDirections($directionsApi)->getReturn();
 
         if (($ambiguousMessage = $this->isAmbiguous($return)) != '') {
             throw new AmbiguousException($ambiguousMessage);
         }
 
-        foreach ($return->getStations() as $station) {
-            /** @var Station $station */
-            $stations[] = [
-                'slug' => NameHelper::slugify($station->getName()),
-                'name' => $station->getName()
+        foreach ($return->getDirections() as $direction) {
+            /** @var Direction $direction */
+            $destinations[] = [
+                'name' => $direction->getName(),
+                'way'  => $direction->getSens(),
             ];
         }
 
         return [
-            'stations' => $stations
+            'destinations' => $stations
         ];
     }
 }

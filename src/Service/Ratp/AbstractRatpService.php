@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service\Ratp;
 
-use Ratp\WrStations;
+use Ratp\AmbiguousInterface;
 
 abstract class AbstractRatpService
 {
@@ -20,11 +20,11 @@ abstract class AbstractRatpService
     }
 
     /**
-     * @param WrStations $object
+     * @param AmbiguousInterface $object
      *
      * @return string
      */
-    protected function isAmbiguous(WrStations $object): string
+    protected function isAmbiguous(AmbiguousInterface $object): string
     {
         return $object->getAmbiguityMessage() ? $object->getAmbiguityMessage() : '';
     }
