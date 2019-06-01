@@ -54,7 +54,7 @@ class TrafficController extends AppController
      * @Rest\View()
      * @Rest\Get("/traffic")
      *
-     * @Route(methods={"GET"})
+     * @Route(methods={"GET", "OPTIONS", "HEAD"})
      *
      * @return View
      */
@@ -90,7 +90,7 @@ class TrafficController extends AppController
      * @Rest\View()
      * @Rest\Get("/traffic/{type}")
      *
-     * @Route(methods={"GET"})
+     * @Route(methods={"GET", "OPTIONS", "HEAD"})
      *
      * @param string $type
      *
@@ -138,7 +138,7 @@ class TrafficController extends AppController
      * @Rest\View()
      * @Rest\Get("/traffic/{type}/{code}")
      *
-     * @Route(methods={"GET"})
+     * @Route(methods={"GET", "OPTIONS", "HEAD"})
      *
      * @param string $type
      * @param string $code

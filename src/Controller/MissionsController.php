@@ -11,6 +11,7 @@ use FOS\RestBundle\View\View;
 
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Routing\Annotation\Route;
 
 class MissionsController extends AppController
 {
@@ -62,6 +63,8 @@ class MissionsController extends AppController
      *
      * @Rest\View()
      * @Rest\Get("/missions/rers/{code}/{mission}")
+     *
+     * @Route(methods={"GET", "OPTIONS", "HEAD"})
      *
      * @param string $code
      * @param string $mission
