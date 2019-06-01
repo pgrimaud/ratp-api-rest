@@ -85,7 +85,7 @@ class StationsController extends AppController
 
         $data = $this->fetchData(
             $this->ratpStationsService,
-            'all',
+            'Stations',
             [
                 'type' => $type,
                 'code' => $code,
