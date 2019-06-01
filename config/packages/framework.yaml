@@ -10,6 +10,7 @@ framework:
     handler_id: ~
     cookie_secure: auto
     cookie_samesite: lax
+    name: ratp_api_rest
   php_errors:
     log: true
   templating:
