@@ -22,7 +22,7 @@ class RatpDestinationsService extends AbstractRatpService implements RatpService
     {
         $destinations = [];
 
-        $prefixcode  = NameHelper::networkPrefix($parameters['type']);
+        $prefixCode  = NameHelper::networkPrefix($parameters['type']);
         $networkRatp = NameHelper::typeSlug($parameters['type'], true);
 
         $reseau = new Reseau();
@@ -30,18 +30,18 @@ class RatpDestinationsService extends AbstractRatpService implements RatpService
 
         $line = new Line();
         $line->setReseau($reseau);
-        $line->setCode($prefixcode . $parameters['code']);
+        $line->setCode($prefixCode . $parameters['code']);
 
         $directionsApi = new Directions($line);
 
         $api    = new Api();
-        $return = $api->getDirections($directionsApi)->getReturn();
+        $result = $api->getDirections($directionsApi)->getReturn();
 
-        if (($ambiguousMessage = $this->isAmbiguous($return)) != '') {
+        if (($ambiguousMessage = $this->isAmbiguous($result)) != '') {
             throw new AmbiguousException($ambiguousMessage);
         }
 
-        foreach ($return->getDirections() as $direction) {
+        foreach ($result->getDirections() as $direction) {
             /** @var Direction $direction */
             $destinations[] = [
                 'name' => $direction->getName(),

@@ -18,11 +18,11 @@ class RatpStationsService extends AbstractRatpService implements RatpServiceInte
      *
      * @throws AmbiguousException
      */
-    public function getAll(array $parameters = []): array
+    public function getDestinations(array $parameters = []): array
     {
         $stations = [];
 
-        $prefixcode  = NameHelper::networkPrefix($parameters['type']);
+        $prefixCode  = NameHelper::networkPrefix($parameters['type']);
         $networkRatp = NameHelper::typeSlug($parameters['type'], true);
 
         $reseau = new Reseau();
@@ -30,7 +30,7 @@ class RatpStationsService extends AbstractRatpService implements RatpServiceInte
 
         $line = new Line();
         $line->setReseau($reseau);
-        $line->setCode($prefixcode . $parameters['code']);
+        $line->setCode($prefixCode . $parameters['code']);
 
         $apiStation = new Station();
         $apiStation->setLine($line);
@@ -38,17 +38,17 @@ class RatpStationsService extends AbstractRatpService implements RatpServiceInte
         $apiStations = new Stations($apiStation);
 
         $api    = new Api();
-        $return = $api->getStations($apiStations)->getReturn();
+        $result = $api->getStations($apiStations)->getReturn();
 
-        if (($ambiguousMessage = $this->isAmbiguous($return)) != '') {
+        if (($ambiguousMessage = $this->isAmbiguous($result)) != '') {
             throw new AmbiguousException($ambiguousMessage);
         }
 
-        foreach ($return->getStations() as $station) {
+        foreach ($result->getStations() as $station) {
             /** @var Station $station */
             $stations[] = [
+                'name' => $station->getName(),
                 'slug' => NameHelper::slugify($station->getName()),
-                'name' => $station->getName()
             ];
         }
 

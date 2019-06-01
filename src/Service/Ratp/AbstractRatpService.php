@@ -16,7 +16,7 @@ abstract class AbstractRatpService
      */
     public function get(string $method, array $parameters = []): array
     {
-        return $this->{'get' . $method}($parameters);
+        return $this->{'get' . ucwords($method)}($parameters);
     }
 
     /**

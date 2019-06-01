@@ -86,7 +86,7 @@ class DestinationsController extends AppController
 
         $data = $this->fetchData(
             $this->ratpDestinationsService,
-            'all',
+            'destinations',
             [
                 'type' => $type,
                 'code' => $code,
