@@ -12,7 +12,6 @@ use FOS\RestBundle\View\View;
 
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Routing\Annotation\Route;
 
 class TrafficController extends AppController
 {
@@ -54,8 +53,6 @@ class TrafficController extends AppController
      * @Rest\View()
      * @Rest\Get("/traffic")
      *
-     * @Route(methods={"GET", "OPTIONS", "HEAD"})
-     *
      * @return View
      */
     public function traffic(): View
@@ -89,8 +86,6 @@ class TrafficController extends AppController
      *
      * @Rest\View()
      * @Rest\Get("/traffic/{type}")
-     *
-     * @Route(methods={"GET", "OPTIONS", "HEAD"})
      *
      * @param string $type
      *
@@ -137,8 +132,6 @@ class TrafficController extends AppController
      *
      * @Rest\View()
      * @Rest\Get("/traffic/{type}/{code}")
-     *
-     * @Route(methods={"GET", "OPTIONS", "HEAD"})
      *
      * @param string $type
      * @param string $code

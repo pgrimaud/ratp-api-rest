@@ -13,11 +13,9 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Exception\InvalidParameterException;
 use FOS\RestBundle\View\View;
 
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Routing\Annotation\Route;
 
 class AppController extends AbstractFOSRestController
 {
@@ -32,16 +30,6 @@ class AppController extends AbstractFOSRestController
     public function __construct(RequestStack $requestStack)
     {
         $this->requestStack = $requestStack;
-    }
-
-    /**
-     * @Route("/")
-     *
-     * @return RedirectResponse
-     */
-    public function index(): RedirectResponse
-    {
-        return new RedirectResponse('documentation');
     }
 
     /**

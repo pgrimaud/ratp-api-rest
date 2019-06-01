@@ -12,7 +12,6 @@ use FOS\RestBundle\View\View;
 
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Routing\Annotation\Route;
 
 class StationsController extends AppController
 {
@@ -64,8 +63,6 @@ class StationsController extends AppController
      *
      * @Rest\View()
      * @Rest\Get("/stations/{type}/{code}")
-     *
-     * @Route(methods={"GET", "OPTIONS", "HEAD"})
      *
      * @param string $type
      * @param string $code
