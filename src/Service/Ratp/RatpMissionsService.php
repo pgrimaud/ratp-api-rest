@@ -31,7 +31,9 @@ class RatpMissionsService extends AbstractRatpService implements RatpServiceInte
 
         $getMission = new GetMission($mission, date('YmdHi'), false, false);
 
-        $api = new Api();
+        $api = new Api(null, [
+            'connection_timeout' => getenv('API_TIMEOUT')
+        ]);
 
         /** @var WrMission $result */
         $result = $api->getMission($getMission)->getReturn();

@@ -33,7 +33,7 @@ class MissionsController extends AppController
     /**
      * @SWG\Get(
      *     produces={"application/json", "application/xml"},
-     *     description="Get stations of a specific line from the RATP network."
+     *     description="Get stations of a mission on a specific RER line."
      * )
      * @SWG\Parameter(
      *     name="code",

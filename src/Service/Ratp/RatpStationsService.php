@@ -37,7 +37,10 @@ class RatpStationsService extends AbstractRatpService implements RatpServiceInte
 
         $apiStations = new Stations($apiStation);
 
-        $api    = new Api();
+        $api = new Api(null, [
+            'connection_timeout' => getenv('API_TIMEOUT')
+        ]);
+
         $result = $api->getStations($apiStations)->getReturn();
 
         if (($ambiguousMessage = $this->isAmbiguous($result)) != '') {

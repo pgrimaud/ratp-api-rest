@@ -34,7 +34,10 @@ class RatpDestinationsService extends AbstractRatpService implements RatpService
 
         $directionsApi = new Directions($line);
 
-        $api    = new Api();
+        $api = new Api(null, [
+            'connection_timeout' => getenv('API_TIMEOUT')
+        ]);
+
         $result = $api->getDirections($directionsApi)->getReturn();
 
         if (($ambiguousMessage = $this->isAmbiguous($result)) != '') {
