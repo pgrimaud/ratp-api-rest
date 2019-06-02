@@ -34,7 +34,7 @@ class NameHelper
             'metro'         => 'metros',
             'rer'           => 'rers',
             'tram'          => 'tramways',
-            'busratp'       => 'bus',
+            'bus'           => 'buses',
             'noctilienratp' => 'noctiliens'
         ];
 
@@ -55,6 +55,7 @@ class NameHelper
         $names = [
             'noctiliens' => 'N',
             'tramways'   => 'T',
+            'buses'      => 'B',
         ];
 
         return $names[$value] ?? '';
@@ -91,7 +92,7 @@ class NameHelper
             'metros'     => 'M',
             'rers'       => 'R',
             'tramways'   => 'BT',
-            'bus'        => 'B',
+            'buses'      => 'B',
             'noctiliens' => 'BN'
         ];
 

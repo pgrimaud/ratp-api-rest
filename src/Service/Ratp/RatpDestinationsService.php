@@ -25,12 +25,18 @@ class RatpDestinationsService extends AbstractRatpService implements RatpService
         $prefixCode  = NameHelper::networkPrefix($parameters['type']);
         $networkRatp = NameHelper::typeSlug($parameters['type'], true);
 
-        $reseau = new Reseau();
-        $reseau->setCode($networkRatp);
-
         $line = new Line();
-        $line->setReseau($reseau);
-        $line->setCode($prefixCode . $parameters['code']);
+
+        // some buses need special API calls
+        if ($networkRatp === 'bus') {
+            $line->setId($prefixCode . $parameters['code']);
+        } else {
+            $reseau = new Reseau();
+            $reseau->setCode($networkRatp);
+
+            $line->setCode($prefixCode . $parameters['code']);
+            $line->setReseau($reseau);
+        }
 
         $directionsApi = new Directions($line);
 

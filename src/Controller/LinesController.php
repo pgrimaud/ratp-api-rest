@@ -68,8 +68,8 @@ class LinesController extends AppController
      *     name="type",
      *     in="path",
      *     type="string",
-     *     description="The type of transport (metros, rers, tramways, bus or noctiliens)",
-     *     enum={"metros", "rers", "tramways", "bus", "noctiliens"}
+     *     description="The type of transport (metros, rers, tramways, buses or noctiliens)",
+     *     enum={"metros", "rers", "tramways", "buses", "noctiliens"}
      * )
      * @SWG\Tag(
      *   name="Lines",
@@ -108,8 +108,8 @@ class LinesController extends AppController
      *     name="type",
      *     in="path",
      *     type="string",
-     *     description="The type of transport (metros, rers, tramways, bus or noctiliens)",
-     *     enum={"metros", "rers", "tramways", "bus", "noctiliens"}
+     *     description="The type of transport (metros, rers, tramways, buses or noctiliens)",
+     *     enum={"metros", "rers", "tramways", "buses", "noctiliens"}
      * )
      * @SWG\Parameter(
      *     name="code",

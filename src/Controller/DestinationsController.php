@@ -39,8 +39,8 @@ class DestinationsController extends AppController
      *     name="type",
      *     in="path",
      *     type="string",
-     *     description="The type of transport (metros, rers, tramways, bus or noctiliens)",
-     *     enum={"metros", "rers", "tramways", "bus", "noctiliens"}
+     *     description="The type of transport (metros, rers, tramways, buses or noctiliens)",
+     *     enum={"metros", "rers", "tramways", "buses", "noctiliens"}
      * )
      * @SWG\Parameter(
      *     name="code",
@@ -74,7 +74,7 @@ class DestinationsController extends AppController
             'rers',
             'metros',
             'tramways',
-            'bus',
+            'buses',
             'noctiliens'
         ];
 

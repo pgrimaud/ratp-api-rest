@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service\Ratp;
 
-use App\Exception\AmbiguousException;
-
 use App\Utils\NameHelper;
-use FOS\RestBundle\Exception\InvalidParameterException;
 use Ratp\{Api, Direction, GeoPoint, Line, Mission, MissionsNext, Station};
 
 class RatpSchedulesService extends AbstractRatpService implements RatpServiceInterface
@@ -16,31 +13,17 @@ class RatpSchedulesService extends AbstractRatpService implements RatpServiceInt
      * @param array $parameters
      *
      * @return array
-     *
-     * @throws AmbiguousException
      */
     protected function getSchedules(array $parameters = []): array
     {
         $schedules = [];
-
-        $typesAllowed = [
-            'rers',
-            'metros',
-            'tramways',
-            'bus',
-            'noctiliens'
-        ];
-
-        if (!in_array($parameters['type'], $typesAllowed)) {
-            throw new InvalidParameterException(sprintf('Unknown type : %s', $parameters['type']));
-        }
 
         $prefix = NameHelper::typeSlugSchedules($parameters['type']);
 
         $line = new Line();
 
         // prefix line name
-        if (in_array($parameters['type'], ['bus', 'metros', 'noctiliens'])) {
+        if (in_array($parameters['type'], ['buses', 'metros', 'noctiliens'])) {
             $line->setId($prefix . strtoupper($parameters['code']));
         } elseif ($parameters['type'] == 'tramways') {
             $line->setId($prefix . strtolower($parameters['code']));

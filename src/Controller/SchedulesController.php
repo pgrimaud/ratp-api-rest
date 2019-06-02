@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Service\Ratp\RatpSchedulesService;
 
 use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Exception\InvalidParameterException;
 use FOS\RestBundle\View\View;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -38,8 +39,8 @@ class SchedulesController extends AppController
      *     name="type",
      *     in="path",
      *     type="string",
-     *     description="The type of transport (metros, rers, tramways, bus or noctiliens)",
-     *     enum={"metros", "rers", "tramways", "bus", "noctiliens"}
+     *     description="The type of transport (metros, rers, tramways, buses or noctiliens)",
+     *     enum={"metros", "rers", "tramways", "buses", "noctiliens"}
      * )
      * @SWG\Parameter(
      *     name="code",
@@ -84,17 +85,27 @@ class SchedulesController extends AppController
      */
     public function schedules(string $type, string $code, string $station, string $way): View
     {
-        $parameters = [
-            'type'    => $type,
-            'code'    => $code,
-            'station' => $station,
-            'way'     => $way,
+        $allowedTypes = [
+            'rers',
+            'metros',
+            'tramways',
+            'buses',
+            'noctiliens'
         ];
+
+        if (!in_array($type, $allowedTypes)) {
+            throw new InvalidParameterException('Invalid line type : ' . $type);
+        }
 
         $schedulesData = $this->fetchData(
             $this->ratpSchedulesService,
             'schedules',
-            $parameters,
+            [
+                'type'    => $type,
+                'code'    => $code,
+                'station' => $station,
+                'way'     => $way,
+            ],
             (int)getenv('CACHE_SCHEDULES')
         );
 
