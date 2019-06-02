@@ -77,6 +77,7 @@ class AppController extends AbstractFOSRestController
      * @param array $parameters
      * @param int $ttl
      * @param string $hash
+     * @param array $cacheParameters
      *
      * @return array
      */
@@ -85,10 +86,11 @@ class AppController extends AbstractFOSRestController
         string $method = '',
         array $parameters = [],
         int $ttl = 0,
-        string $hash = ''
+        string $hash = '',
+        array $cacheParameters = []
     ): array
     {
-        $cacheService = new CacheService($this->requestStack, $hash);
+        $cacheService = new CacheService($this->requestStack, $hash, $cacheParameters);
         $data         = $cacheService->getDataFromCache();
 
         if (!$data) {

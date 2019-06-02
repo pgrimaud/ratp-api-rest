@@ -10,6 +10,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Exception\InvalidParameterException;
 use FOS\RestBundle\View\View;
 use Swagger\Annotations as SWG;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class StationsController extends AppController
@@ -48,6 +49,13 @@ class StationsController extends AppController
      *     type="string",
      *     description="The code of transport line"
      * )
+     * @SWG\Parameter(
+     *     name="way",
+     *     in="query",
+     *     type="string",
+     *     description="Way on the line",
+     *     enum={"A", "R"}
+     * )
      * @SWG\Tag(
      *   name="Stations",
      * )
@@ -68,7 +76,7 @@ class StationsController extends AppController
      *
      * @return View
      */
-    public function stations(string $type, string $code): View
+    public function stations(Request $request, string $type, string $code): View
     {
         $allowedTypes = [
             'rers',
@@ -88,8 +96,13 @@ class StationsController extends AppController
             [
                 'type' => $type,
                 'code' => $code,
+                'way'  => $request->get('way'),
             ],
-            (int)getenv('CACHE_STATIONS')
+            (int)getenv('CACHE_STATIONS'),
+            '',
+            [
+                'way' => $request->get('way'),
+            ]
         );
 
         return $this->appView($data);

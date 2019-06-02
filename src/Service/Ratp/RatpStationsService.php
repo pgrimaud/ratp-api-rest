@@ -7,7 +7,7 @@ namespace App\Service\Ratp;
 use App\Exception\AmbiguousException;
 use App\Utils\NameHelper;
 
-use Ratp\{Api, Line, Reseau, Station, Stations};
+use Ratp\{Api, Line, Station, Stations};
 
 class RatpStationsService extends AbstractRatpService implements RatpServiceInterface
 {
@@ -22,15 +22,8 @@ class RatpStationsService extends AbstractRatpService implements RatpServiceInte
     {
         $stations = [];
 
-        $prefixCode  = NameHelper::networkPrefix($parameters['type']);
-        $networkRatp = NameHelper::typeSlug($parameters['type'], true);
-
-        $reseau = new Reseau();
-        $reseau->setCode($networkRatp);
-
-        $line = new Line();
-        $line->setReseau($reseau);
-        $line->setCode($prefixCode . $parameters['code']);
+        /** @var Line $line */
+        $line = $this->formatLineQuery($parameters['type'], $parameters['code']);
 
         $apiStation = new Station();
         $apiStation->setLine($line);
@@ -53,6 +46,11 @@ class RatpStationsService extends AbstractRatpService implements RatpServiceInte
                 'name' => $station->getName(),
                 'slug' => NameHelper::slugify($station->getName()),
             ];
+        }
+
+        // Temporary fix for way on RATP SOAP call (#75 & #83)
+        if ($parameters['way'] === 'R') {
+            $stations = array_reverse($stations);
         }
 
         return [

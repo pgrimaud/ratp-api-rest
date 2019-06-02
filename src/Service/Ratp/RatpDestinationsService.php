@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace App\Service\Ratp;
 
 use App\Exception\AmbiguousException;
-use App\Utils\NameHelper;
 
-use Ratp\{Api, Direction, Directions, Line, Reseau};
+use Ratp\{Api, Direction, Directions, Line};
 
 class RatpDestinationsService extends AbstractRatpService implements RatpServiceInterface
 {
@@ -22,21 +21,8 @@ class RatpDestinationsService extends AbstractRatpService implements RatpService
     {
         $destinations = [];
 
-        $prefixCode  = NameHelper::networkPrefix($parameters['type']);
-        $networkRatp = NameHelper::typeSlug($parameters['type'], true);
-
-        $line = new Line();
-
-        // some buses need special API calls
-        if ($networkRatp === 'bus') {
-            $line->setId($prefixCode . $parameters['code']);
-        } else {
-            $reseau = new Reseau();
-            $reseau->setCode($networkRatp);
-
-            $line->setCode($prefixCode . $parameters['code']);
-            $line->setReseau($reseau);
-        }
+        /** @var Line $line */
+        $line = $this->formatLineQuery($parameters['type'], $parameters['code']);
 
         $directionsApi = new Directions($line);
 

@@ -26,13 +26,20 @@ class CacheService
     private $hash;
 
     /**
+     * @var array
+     */
+    private $cacheParameters;
+
+    /**
      * @param RequestStack $requestStack
      * @param string $hash
+     * @param array $cacheParameters
      */
-    public function __construct(RequestStack $requestStack, string $hash = '')
+    public function __construct(RequestStack $requestStack, string $hash = '', array $cacheParameters = [])
     {
-        $this->requestStack = $requestStack;
-        $this->hash         = $hash;
+        $this->requestStack    = $requestStack;
+        $this->hash            = $hash;
+        $this->cacheParameters = $cacheParameters;
 
         $client        = RedisAdapter::createConnection(getenv('REDIS_URL'));
         $this->adapter = new RedisAdapter($client);
@@ -41,7 +48,7 @@ class CacheService
     /**
      * @return array
      */
-    public function getDataFromCache(): array
+    public function getDataFromCache()
     {
         try {
             $cacheItem = $this->adapter->getItem($this->getHash());
@@ -62,6 +69,13 @@ class CacheService
 
         $url = getenv('APP_SECRET') . $this->requestStack->getCurrentRequest()->getBaseUrl() .
             $this->requestStack->getCurrentRequest()->getPathInfo();
+
+        foreach ($this->cacheParameters as $parameter => $value) {
+            if ($value) {
+                $url .= $parameter . '=' . $value;
+            }
+        }
+
         return md5($url);
     }
 
