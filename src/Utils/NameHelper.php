@@ -34,7 +34,7 @@ class NameHelper
             'metro'         => 'metros',
             'rer'           => 'rers',
             'tram'          => 'tramways',
-            'bus'           => 'buses',
+            'busratp'       => 'buses',
             'noctilienratp' => 'noctiliens'
         ];
 
