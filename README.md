@@ -35,7 +35,7 @@ composer install
 
 ## Known bugs (on the 2nd, June 2019)
 
-- None
+- Sentry dependency as dev-master : https://github.com/getsentry/sentry-php/pull/822
 
 ## Feedback or questions
 
