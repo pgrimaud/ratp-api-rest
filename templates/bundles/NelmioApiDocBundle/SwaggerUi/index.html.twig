@@ -11,4 +11,9 @@
 {% block swagger_initialization %}
     {{ parent() }}
     <script src="{{ asset('js/override.js') }}"></script>
+
+    {% if ga_tracking %}
+        {% include 'api/analytics.html.twig' %}
+    {% endif %}
+
 {% endblock swagger_initialization %}
