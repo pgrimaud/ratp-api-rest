@@ -44,7 +44,7 @@ abstract class AbstractRatpService
         $line = new Line();
 
         // some buses need special API calls
-        if ($networkRatp === 'bus') {
+        if ($networkRatp === 'busratp') {
             $line->setId($prefixCode . $code);
         } else {
             $reseau = new Reseau();

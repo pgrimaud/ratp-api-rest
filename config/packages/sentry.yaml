@@ -2,5 +2,6 @@ sentry:
     dsn: '%env(SENTRY_DSN)%'
     options:
         excluded_exceptions:
+            - 'App\Exception\AmbiguousException'
             - 'FOS\RestBundle\Exception\InvalidParameterException'
             - 'Symfony\Component\HttpKernel\Exception\NotFoundHttpException'
