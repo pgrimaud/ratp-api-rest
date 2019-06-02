@@ -9,7 +9,6 @@ use App\Service\Ratp\RatpTrafficService;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Exception\InvalidParameterException;
 use FOS\RestBundle\View\View;
-
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -30,7 +29,7 @@ class TrafficController extends AppController
 
         $this->data = $this->fetchData(
             $trafficService,
-            'all',
+            'traffic',
             [],
             (int)getenv('CACHE_TRAFFIC'),
             getenv('API_VERSION') . '_traffic'

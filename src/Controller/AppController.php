@@ -12,9 +12,7 @@ use App\Service\Ratp\RatpServiceInterface;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Exception\InvalidParameterException;
 use FOS\RestBundle\View\View;
-
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\{RequestStack, Response};
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AppController extends AbstractFOSRestController

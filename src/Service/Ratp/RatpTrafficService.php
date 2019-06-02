@@ -29,7 +29,7 @@ class RatpTrafficService extends AbstractRatpService implements RatpServiceInter
     /**
      * @return array
      */
-    public function getAll(): array
+    protected function getTraffic(): array
     {
         $ixxiData = $this->ixxiApiClient->getData();
         $ratpData = $this->ratpWebsiteClient->getData();

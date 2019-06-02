@@ -18,7 +18,7 @@ class RatpStationsService extends AbstractRatpService implements RatpServiceInte
      *
      * @throws AmbiguousException
      */
-    public function getStations(array $parameters = []): array
+    protected function getStations(array $parameters = []): array
     {
         $stations = [];
 

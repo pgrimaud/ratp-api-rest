@@ -5,19 +5,17 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Service\Ratp\RatpDestinationsService;
-use App\Service\Ratp\RatpStationsService;
 
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Exception\InvalidParameterException;
 use FOS\RestBundle\View\View;
-
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class DestinationsController extends AppController
 {
     /**
-     * @var RatpStationsService
+     * @var RatpDestinationsService
      */
     private $ratpDestinationsService;
 

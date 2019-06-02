@@ -9,7 +9,6 @@ use App\Service\Ratp\RatpLinesService;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Exception\InvalidParameterException;
 use FOS\RestBundle\View\View;
-
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -30,7 +29,7 @@ class LinesController extends AppController
 
         $this->data = $this->fetchData(
             $ratpLinesService,
-            'all',
+            'lines',
             [],
             (int)getenv('CACHE_LINES'),
             getenv('API_VERSION') . '_lines'

@@ -4,13 +4,31 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Service\Ratp\RatpSchedulesService;
+
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
-
 use Swagger\Annotations as SWG;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class SchedulesController extends AppController
 {
+    /**
+     * @var RatpSchedulesService
+     */
+    private $ratpSchedulesService;
+
+    /**
+     * @param RequestStack $requestStack
+     * @param RatpSchedulesService $ratpSchedulesService
+     */
+    public function __construct(RequestStack $requestStack, RatpSchedulesService $ratpSchedulesService)
+    {
+        parent::__construct($requestStack);
+
+        $this->ratpSchedulesService = $ratpSchedulesService;
+    }
+
     /**
      * @SWG\Get(
      *     produces={"application/json", "application/xml"},
@@ -64,8 +82,22 @@ class SchedulesController extends AppController
      *
      * @return View
      */
-    public function stations(string $type, string $code, string $station, string $way): View
+    public function schedules(string $type, string $code, string $station, string $way): View
     {
-        /** @todo */
+        $parameters = [
+            'type'    => $type,
+            'code'    => $code,
+            'station' => $station,
+            'way'     => $way,
+        ];
+
+        $schedulesData = $this->fetchData(
+            $this->ratpSchedulesService,
+            'schedules',
+            $parameters,
+            (int)getenv('CACHE_SCHEDULES')
+        );
+
+        return $this->appView($schedulesData);
     }
 }

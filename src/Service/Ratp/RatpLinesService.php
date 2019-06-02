@@ -12,7 +12,7 @@ class RatpLinesService extends AbstractRatpService implements RatpServiceInterfa
     /**
      * @return array
      */
-    public function getAll(): array
+    protected function getLines(): array
     {
         $return = [];
 

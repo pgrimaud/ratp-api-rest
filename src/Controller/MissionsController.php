@@ -68,11 +68,11 @@ class MissionsController extends AppController
      *
      * @return View
      */
-    public function stations(string $code, string $mission): View
+    public function missions(string $code, string $mission): View
     {
         $data = $this->fetchData(
             $this->ratpMissionsService,
-            'mission',
+            'missions',
             [
                 'code'    => $code,
                 'mission' => strtoupper($mission),

@@ -46,11 +46,11 @@ class NameHelper
     }
 
     /**
-     * @param $value
+     * @param string $value
      *
      * @return string
      */
-    public static function networkPrefix($value): string
+    public static function networkPrefix(string $value): string
     {
         $names = [
             'noctiliens' => 'N',
@@ -68,5 +68,33 @@ class NameHelper
     public static function slugify(string $value): string
     {
         return strtolower(str_replace([' ', '-'], '+', $value));
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return string
+     */
+    public static function clean(string $value): string
+    {
+        return strtolower(str_replace('+', ' ', $value));
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return string
+     */
+    public static function typeSlugSchedules(string $value): string
+    {
+        $names = [
+            'metros'     => 'M',
+            'rers'       => 'R',
+            'tramways'   => 'BT',
+            'bus'        => 'B',
+            'noctiliens' => 'BN'
+        ];
+
+        return $names[$value] ?? '';
     }
 }
