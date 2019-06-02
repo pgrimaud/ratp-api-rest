@@ -9,6 +9,12 @@ This project uses the package [horaires-ratp-sdk](https://github.com/pgrimaud/ho
  
 Old version 3 README is available [here](https://github.com/pgrimaud/ratp-api-rest/blob/v3/README.md).
 
+[Official documentation on GitHub](https://github.com/pgrimaud/horaires-ratp-api) with dashboard example.
+
+## Demo
+
+Demo is available here : [https://api-ratp.pierre-grimaud.fr/v4/](https://api-ratp.pierre-grimaud.fr/v4/)
+
 ## Requirements
 
  - Access to the official RATP API (see [here](https://data.ratp.fr/explore/dataset/horaires-temps-reel/))
@@ -40,10 +46,6 @@ composer install
 ## Feedback or questions
 
 You can [create an issue](https://github.com/pgrimaud/ratp-api-rest/issues) if needed or contact me on [Twitter](https://twitter.com/pgrimaud_).
-
-## Demo
-
-Demo is available here : [https://api-ratp.pierre-grimaud.fr/v4/](https://api-ratp.pierre-grimaud.fr/v4/)
 
 ## Contributing
 
