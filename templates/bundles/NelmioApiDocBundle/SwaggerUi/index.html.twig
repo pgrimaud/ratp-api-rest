@@ -12,6 +12,8 @@
     {{ parent() }}
     <script src="{{ asset('js/override.js') }}"></script>
 
+    {% set ga_tracking = getenv('ANALYTICS_ID') %}
+
     {% if ga_tracking %}
         {% include 'api/analytics.html.twig' %}
     {% endif %}
