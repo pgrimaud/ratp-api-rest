@@ -71,6 +71,7 @@ class StationsController extends AppController
      * @Rest\View()
      * @Rest\Get("/stations/{type}/{code}")
      *
+     * @param Request $request
      * @param string $type
      * @param string $code
      *
