@@ -92,7 +92,13 @@ class TrafficController extends AppController
      */
     public function trafficType(string $type): View
     {
-        if (!isset($this->data[$type])) {
+        $allowedTypes = [
+            'rers',
+            'metros',
+            'tramways',
+        ];
+
+        if (!in_array($type, $allowedTypes)) {
             throw new InvalidParameterException('Invalid line type : ' . $type);
         }
 
@@ -139,7 +145,13 @@ class TrafficController extends AppController
      */
     public function trafficCode(string $type, string $code): View
     {
-        if (!isset($this->data[$type])) {
+        $allowedTypes = [
+            'rers',
+            'metros',
+            'tramways',
+        ];
+
+        if (!in_array($type, $allowedTypes)) {
             throw new InvalidParameterException('Invalid line type : ' . $type);
         }
 
