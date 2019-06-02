@@ -1,0 +1,45 @@
+body {
+    margin-top: 40px;
+}
+
+header:before {
+    background-color: #00AA91;
+    height: 40px;
+}
+
+#swagger-ui.api-platform .info .title {
+    color: #00AA91;
+}
+
+#swagger-ui.api-platform .opblock.opblock-get .opblock-summary-method {
+    background-color: #00AA91;
+}
+
+#swagger-ui.api-platform .information-container.wrapper {
+    margin-bottom: 5px;
+}
+
+.swagger-ui .info hgroup.main {
+    margin: 0;
+}
+
+.swagger-ui .scheme-container {
+    padding: 5px 0;
+}
+
+.swagger-ui .scheme-container .schemes {
+    display: block;
+}
+
+.swagger-ui .scheme-container p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.swagger-ui .scheme-container a, .swagger-ui .scheme-container a:visited {
+    color: #000000 !important;
+}
+
+.swagger-ui .scheme-container .schemes iframe {
+    margin-top: -3px;
+}

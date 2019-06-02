@@ -1,4 +1,4 @@
-# REST RATP API
+# REST RATP API (v4)
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/0e42a9e2-ecb8-4412-8c88-b8f417f5ae2c/mini.png)](https://insight.sensiolabs.com/projects/0e42a9e2-ecb8-4412-8c88-b8f417f5ae2c)
 
@@ -7,15 +7,12 @@ You can retrieve real time schedules for any given RER (train), Metro, Tramway, 
 
 This project uses the package [horaires-ratp-sdk](https://github.com/pgrimaud/horaires-ratp-sdk) which consume the official RATP API.
  
-## Translations
-
-This README file is also available in [french](https://github.com/pgrimaud/ratp-api-rest/blob/master/README-FR.md).
+Old version 3 README is available [here](https://github.com/pgrimaud/ratp-api-rest/blob/v3/README.md).
 
 ## Requirements
 
- - Access to the RATP API (see [here](https://data.ratp.fr/explore/dataset/horaires-temps-reel/))
- - PHP >= 5.6
- - Package php-soap (ext-soap extension)
+ - Access to the official RATP API (see [here](https://data.ratp.fr/explore/dataset/horaires-temps-reel/))
+ - PHP >= 7.2
  - Redis server (for cache)
 
 ## Installation
@@ -25,22 +22,20 @@ First :
 ```
 git clone git@github.com:pgrimaud/ratp-api-rest
 cd ratp-api-rest
-composer install --no-dev
+composer install
 ```
 
-Then configure your favorite webserver with ```web/app.php``` as  entrypoint. [More informations here](http://symfony.com/doc/current/setup/web_server_configuration.html)
-
-*Recommendation for production* : remove app_dev.php file from the ```web``` folder.
+- Then configure your favorite webserver (Apache or Nginx) : 
+[more informations here](http://symfony.com/doc/current/setup/web_server_configuration.html).
+- Manage your `.env` file : [more informations here](https://symfony.com/doc/current/configuration.html#the-env-file-environment-variables).
 
 ## TODO
 
-- Enable / disable cache usage
+- Add Opendata SNCF data (WIP)
 
-## Known bugs
+## Known bugs (on the 2nd, June 2019)
 
-- ~~2017-02-27 : Tramways schedules don't work. I contacted RATP about it and I still waiting for a reply and/or a fix.~~
-- 2017-11-27 : Realtime schedules for RER C, D et E are not available.
-- 2018-03-29 : Realtime schedules for buses which are not equiped with SIEL (realtime bus localization) are not available.
+- None
 
 ## Feedback or questions
 
@@ -48,7 +43,7 @@ You can [create an issue](https://github.com/pgrimaud/ratp-api-rest/issues) if n
 
 ## Demo
 
-Demo is available here : [https://api-ratp.pierre-grimaud.fr/v3/documentation](https://api-ratp.pierre-grimaud.fr/v3/documentation)
+Demo is available here : [https://api-ratp.pierre-grimaud.fr/v4/](https://api-ratp.pierre-grimaud.fr/v4/)
 
 ## Contributing
 
@@ -58,6 +53,6 @@ Pull requests are appreciated. Everyone is welcome and even encouraged to contri
 
 This project is not affiliated with or endorsed by the [RATP](http://www.ratp.fr).
 
-## Licence
+## License
 
 Licensed under the terms of the MIT License.

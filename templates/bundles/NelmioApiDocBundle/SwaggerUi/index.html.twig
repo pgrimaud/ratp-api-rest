@@ -1,0 +1,14 @@
+{% extends '@!NelmioApiDoc/SwaggerUi/index.html.twig' %}
+
+{% block header %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/override.css') }}">
+{% endblock %}
+
+{% block swagger_initialization %}
+    {{ parent() }}
+    <script src="{{ asset('js/override.js') }}"></script>
+{% endblock swagger_initialization %}

@@ -1,0 +1,12 @@
+jms_serializer:
+  handlers:
+    datetime:
+      default_format: "Y-m-d\\TH:i:sP"
+      default_timezone: "UTC"
+  visitors:
+    json_serialization:
+      options:
+        - JSON_PRETTY_PRINT
+        - JSON_UNESCAPED_SLASHES
+        - JSON_PRESERVE_ZERO_FRACTION
+        - JSON_UNESCAPED_UNICODE

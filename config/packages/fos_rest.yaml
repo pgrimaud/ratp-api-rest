@@ -1,0 +1,10 @@
+# Read the documentation: https://symfony.com/doc/master/bundles/FOSRestBundle/index.html
+fos_rest:
+  view:
+    view_response_listener: true
+  exception:
+    enabled: true
+    exception_controller: App\Controller\AppController::errorView
+  routing_loader:
+    include_format: false
+
