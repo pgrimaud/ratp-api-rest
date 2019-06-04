@@ -55,7 +55,6 @@ class NameHelper
         $names = [
             'noctiliens' => 'N',
             'tramways'   => 'T',
-            'buses'      => 'B',
         ];
 
         return $names[$value] ?? '';
