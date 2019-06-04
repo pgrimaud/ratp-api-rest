@@ -7,7 +7,7 @@ namespace App\Service\Ratp;
 use App\Exception\AmbiguousException;
 use App\Utils\NameHelper;
 
-use Ratp\{Api, Line, Station, Stations};
+use Ratp\{Api, Line, Reseau, Station, Stations};
 
 class RatpStationsService extends AbstractRatpService implements RatpServiceInterface
 {
@@ -22,8 +22,15 @@ class RatpStationsService extends AbstractRatpService implements RatpServiceInte
     {
         $stations = [];
 
-        /** @var Line $line */
-        $line = $this->formatLineQuery($parameters['type'], $parameters['code']);
+        $prefixCode  = NameHelper::networkPrefix($parameters['type']);
+        $networkRatp = NameHelper::typeSlug($parameters['type'], true);
+
+        $reseau = new Reseau();
+        $reseau->setCode($networkRatp);
+
+        $line = new Line();
+        $line->setReseau($reseau);
+        $line->setCode($prefixCode . $parameters['code']);
 
         $apiStation = new Station();
         $apiStation->setLine($line);
