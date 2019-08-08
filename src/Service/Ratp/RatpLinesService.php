@@ -18,7 +18,7 @@ class RatpLinesService extends AbstractRatpService implements RatpServiceInterfa
 
         $lines = new Lines();
         $api   = new Api(null, [
-            'connection_timeout' => getenv('API_TIMEOUT')
+            'connection_timeout' => getenv('API_TIMEOUT'),
         ]);
 
         foreach ($api->getLines($lines)->getReturn() as $line) {

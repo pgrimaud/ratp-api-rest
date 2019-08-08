@@ -315,6 +315,9 @@
     "symfony/event-dispatcher-contracts": {
         "version": "v1.1.1"
     },
+    "symfony/expression-language": {
+        "version": "v4.3.3"
+    },
     "symfony/filesystem": {
         "version": "v4.2.8"
     },
@@ -332,6 +335,9 @@
         "files": [
             ".env"
         ]
+    },
+    "symfony/form": {
+        "version": "v4.3.3"
     },
     "symfony/framework-bundle": {
         "version": "4.2",
@@ -361,6 +367,9 @@
     "symfony/inflector": {
         "version": "v4.2.8"
     },
+    "symfony/intl": {
+        "version": "v4.3.3"
+    },
     "symfony/mime": {
         "version": "v4.3.0"
     },
@@ -384,6 +393,9 @@
     "symfony/options-resolver": {
         "version": "v4.2.8"
     },
+    "symfony/polyfill-intl-icu": {
+        "version": "v1.12.0"
+    },
     "symfony/polyfill-intl-idn": {
         "version": "v1.11.0"
     },
@@ -401,6 +413,9 @@
     },
     "symfony/profiler-pack": {
         "version": "v1.0.4"
+    },
+    "symfony/property-access": {
+        "version": "v4.3.3"
     },
     "symfony/property-info": {
         "version": "v4.2.8"
@@ -423,6 +438,9 @@
     "symfony/security-core": {
         "version": "v4.2.8"
     },
+    "symfony/serializer": {
+        "version": "v4.3.3"
+    },
     "symfony/service-contracts": {
         "version": "v1.1.2"
     },
@@ -431,6 +449,9 @@
     },
     "symfony/templating": {
         "version": "v4.2.8"
+    },
+    "symfony/translation-contracts": {
+        "version": "v1.1.5"
     },
     "symfony/twig-bridge": {
         "version": "v4.2.8"

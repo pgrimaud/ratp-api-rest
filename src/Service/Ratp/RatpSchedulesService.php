@@ -42,7 +42,9 @@ class RatpSchedulesService extends AbstractRatpService implements RatpServiceInt
 
         $mission = new MissionsNext($station, $direction);
 
-        $api    = new Api();
+        $api    = new Api(null, [
+            'connection_timeout' => getenv('API_TIMEOUT')
+        ]);
         $return = $api->getMissionsNext($mission)->getReturn();
 
         $this->isAmbiguous($return);
