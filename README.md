@@ -39,10 +39,6 @@ composer install
 
 - Add Opendata SNCF data (WIP)
 
-## Known bugs (on the 2nd, June 2019)
-
-- Sentry dependency as dev-master : https://github.com/getsentry/sentry-php/pull/822
-
 ## Feedback or questions
 
 You can [create an issue](https://github.com/pgrimaud/ratp-api-rest/issues) if needed or contact me on [Twitter](https://twitter.com/pgrimaud_).
