@@ -5,6 +5,7 @@
 /public/bundles/
 /var/
 /vendor/
+/public/.htaccess
 ###< symfony/framework-bundle ###
 
 ###> symfony/web-server-bundle ###
