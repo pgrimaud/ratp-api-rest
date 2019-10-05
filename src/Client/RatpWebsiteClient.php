@@ -8,7 +8,7 @@ use GuzzleHttp\Exception\GuzzleException;
 
 class RatpWebsiteClient extends AbstractClassCurlClient
 {
-    const ENDPOINT = 'http://www.ratp.fr/meteo/ajax/data';
+    const ENDPOINT = 'https://www.ratp.fr/meteo/ajax/data';
 
     /**
      * @return array
