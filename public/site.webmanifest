@@ -1,0 +1,13 @@
+{
+  "name": "RATP REST API",
+  "short_name": "RATP REST API",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#00AA91",
+  "description": "Webservice pour les horaires et trafic RATP en temps réel",
+  "icons": [{
+    "src": "favicon.ico",
+    "sizes": "32x32",
+    "type": "image/x-icon"
+  }]
+}
