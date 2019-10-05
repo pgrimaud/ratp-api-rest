@@ -2,7 +2,7 @@ nelmio_api_doc:
   documentation:
     info:
       title: RATP REST API
-      version: 4.0.0
+      version: 4.0.1
   areas:
     path_patterns:
       - ^/traffic
