@@ -1,7 +1,4 @@
 {
-    "clue/stream-filter": {
-        "version": "v1.4.1"
-    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -113,12 +110,6 @@
     "hoa/zformat": {
         "version": "1.17.01.10"
     },
-    "http-interop/http-factory-guzzle": {
-        "version": "1.0.0"
-    },
-    "jean85/pretty-package-versions": {
-        "version": "1.2"
-    },
     "jms/metadata": {
         "version": "2.0.0"
     },
@@ -155,32 +146,8 @@
             "config/routes/nelmio_api_doc.yaml"
         ]
     },
-    "ocramius/package-versions": {
-        "version": "1.4.0"
-    },
     "pgrimaud/horaires-ratp-sdk": {
         "version": "1.1.1"
-    },
-    "php-http/client-common": {
-        "version": "2.0.0"
-    },
-    "php-http/curl-client": {
-        "version": "2.0.0"
-    },
-    "php-http/discovery": {
-        "version": "1.6.1"
-    },
-    "php-http/httplug": {
-        "version": "v2.0.0"
-    },
-    "php-http/message": {
-        "version": "1.7.2"
-    },
-    "php-http/message-factory": {
-        "version": "v1.0.2"
-    },
-    "php-http/promise": {
-        "version": "v1.0.0"
     },
     "phpdocumentor/reflection-common": {
         "version": "1.0.1"
@@ -200,12 +167,6 @@
     "psr/container": {
         "version": "1.0.0"
     },
-    "psr/http-client": {
-        "version": "1.0.0"
-    },
-    "psr/http-factory": {
-        "version": "1.0.1"
-    },
     "psr/http-message": {
         "version": "1.0.1"
     },
@@ -214,9 +175,6 @@
     },
     "ralouphie/getallheaders": {
         "version": "2.0.5"
-    },
-    "ramsey/uuid": {
-        "version": "3.8.0"
     },
     "sensio/framework-extra-bundle": {
         "version": "5.2",
@@ -228,24 +186,6 @@
         },
         "files": [
             "config/packages/sensio_framework_extra.yaml"
-        ]
-    },
-    "sentry/sdk": {
-        "version": "2.0.3"
-    },
-    "sentry/sentry": {
-        "version": "2.1.0"
-    },
-    "sentry/sentry-symfony": {
-        "version": "3.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "3.0",
-            "ref": "9746f0823302d7980e5273ef7a69ef3f5ac80914"
-        },
-        "files": [
-            "config/packages/sentry.yaml"
         ]
     },
     "symfony/asset": {
@@ -501,9 +441,6 @@
     },
     "willdurand/negotiation": {
         "version": "v2.3.1"
-    },
-    "zendframework/zend-diactoros": {
-        "version": "2.1.2"
     },
     "zircote/swagger-php": {
         "version": "2.0.13"
