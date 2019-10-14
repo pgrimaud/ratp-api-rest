@@ -140,7 +140,7 @@ class RatpTrafficService extends AbstractRatpService implements RatpServiceInter
             foreach ($allowedLines as $allowedLine) {
                 if (isset($ixxiData[$type][$allowedLine])) {
                     $errors      = $ixxiData[$type][$allowedLine];
-                    $event       = isset($errors['Incidents']) ? current($errors['Incidents']) : current($errors['Travaux']);
+                    $event       = isset($errors['Incidents']) ? current($errors['Incidents']) : (isset($errors['Travaux']) ? current($errors['Travaux']) : current($errors['Incidents techniques'])) ;
                     $information = [
                         'line'    => strtoupper($allowedLine),
                         'slug'    => $this->slugStatusIxxiData($event['typeName']),
