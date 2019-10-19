@@ -139,13 +139,26 @@ class RatpTrafficService extends AbstractRatpService implements RatpServiceInter
         foreach ($allowedSources as $type => $allowedLines) {
             foreach ($allowedLines as $allowedLine) {
                 if (isset($ixxiData[$type][$allowedLine])) {
-                    $errors      = $ixxiData[$type][$allowedLine];
-                    $event       = isset($errors['Incidents']) ? current($errors['Incidents']) : (isset($errors['Travaux']) ? current($errors['Travaux']) : current($errors['Incidents techniques'])) ;
+                    $errors = $ixxiData[$type][$allowedLine];
+
+                    if (isset($errors['Travaux'])) {
+                        $events = $errors['Travaux'];
+                    } elseif (isset($errors['Incidents techniques'])) {
+                        $events = $errors['Incidents techniques'];
+                    } else if (isset($errors['Mouvement social'])) {
+                        $events = $errors['Mouvement social'];
+                    } else {
+                        $events = current($errors);
+
+                    }
+
+                    $event = reset($events);
+
                     $information = [
                         'line'    => strtoupper($allowedLine),
                         'slug'    => $this->slugStatusIxxiData($event['typeName']),
                         'title'   => $event['typeName'],
-                        'message' => $event['message']
+                        'message' => $event['message'],
                     ];
                 } else {
                     $information = [
@@ -218,6 +231,7 @@ class RatpTrafficService extends AbstractRatpService implements RatpServiceInter
             'Travaux'              => 'normal_trav',
             'Incidents techniques' => 'critical',
             'Incidents'            => 'critical',
+            'Mouvement social'     => 'alerte',
         ];
 
         if (!isset($names[$value])) {
