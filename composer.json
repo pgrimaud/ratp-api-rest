@@ -20,10 +20,11 @@
         "symfony/console": "4.3.*",
         "symfony/dotenv": "4.3.*",
         "symfony/expression-language": "4.3.*",
-        "symfony/form": "4.3.*",
         "symfony/flex": "^1.1",
+        "symfony/form": "4.3.*",
         "symfony/framework-bundle": "4.3.*",
         "symfony/serializer": "4.3.*",
+        "symfony/templating": "4.3.*",
         "symfony/twig-bundle": "4.3.*",
         "symfony/yaml": "4.3.*"
     },

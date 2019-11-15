@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\Service\Ratp;
 
 use App\Client\IxxiApiClient;
-use App\Client\RatpWebsiteClient;
-use App\Utils\NameHelper;
 
 class RatpTrafficService extends AbstractRatpService implements RatpServiceInterface
 {
@@ -15,15 +13,9 @@ class RatpTrafficService extends AbstractRatpService implements RatpServiceInter
      */
     private $ixxiApiClient;
 
-    /**
-     * @var RatpWebsiteClient
-     */
-    private $ratpWebsiteClient;
-
     public function __construct()
     {
         $this->ixxiApiClient = new IxxiApiClient();
-        //$this->ratpWebsiteClient = new RatpWebsiteClient();
     }
 
     /**
@@ -34,65 +26,16 @@ class RatpTrafficService extends AbstractRatpService implements RatpServiceInter
         $ixxiData         = $this->ixxiApiClient->getData();
         $ixxiFormatedData = $this->formatIxxiData($ixxiData);
 
-        // 2019-10-05 - Website json file is protected by cloudflare. Can't bypass it
-        // https://github.com/pgrimaud/horaires-ratp-api/issues/92
-
-        // $ratpData = $this->ratpWebsiteClient->getData();
-        // $completeData = $this->mergeDataSources($ratpData, $ixxiData);
-
         $completeData = $this->getTemporaryDataFromIxxi($ixxiFormatedData);
 
         return $completeData;
     }
 
     /**
-     * @param array $ratpData
      * @param array $ixxiData
      *
      * @return array
      */
-    private function mergeDataSources(array $ratpData, array $ixxiData): array
-    {
-        // merge only RER C, D and E
-        $allowedRers = [
-            'c',
-            'd',
-            'e'
-        ];
-
-        foreach ($allowedRers as $allowedRer) {
-            if (isset($ixxiData['rers'][$allowedRer])) {
-                $rer = $ixxiData['rers'][$allowedRer];
-                ksort($rer);
-
-                $firstEvent = current($rer);
-
-                $information = [
-                    'line'    => strtoupper($allowedRer),
-                    'slug'    => NameHelper::statusSlug($firstEvent['typeName']),
-                    'title'   => $firstEvent['typeName'],
-                    'message' => $firstEvent['message']
-                ];
-            } else {
-                $information = [
-                    'line'    => strtoupper($allowedRer),
-                    'slug'    => 'normal',
-                    'title'   => 'Trafic normal',
-                    'message' => 'Trafic normal sur l\'ensemble de la ligne.'
-                ];
-            }
-            $tmpRers[$allowedRer] = $information;
-        }
-
-        ksort($tmpRers);
-
-        foreach ($tmpRers as $rer) {
-            $ratpData['rers'][] = $rer;
-        }
-
-        return $ratpData;
-    }
-
     private function getTemporaryDataFromIxxi(array $ixxiData): array
     {
         $data = [];
