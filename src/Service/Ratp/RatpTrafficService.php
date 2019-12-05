@@ -130,14 +130,16 @@ class RatpTrafficService extends AbstractRatpService implements RatpServiceInter
             foreach ($event['incidents'] as $incident) {
                 foreach ($incident['lines'] as $line) {
                     if ($event['startDate'] <= date('c') && $event['endDate'] >= date('c')) {
-                        $results[$this->slugIxxiData($line['groupOfLinesName'])][$line['name']][$event['typeName']][$event['startDate']] = [
-                            'message'          => $line['message'],
-                            'shortMessage'     => $line['shortMessage'],
-                            'incidentSeverity' => $line['incidentSeverity'],
-                            'typeName'         => $event['typeName'],
-                            'startDate'        => $event['startDate'],
-                            'endDate'          => $event['endDate']
-                        ];
+                        if ($this->slugIxxiData($line['groupOfLinesName']) !== '') {
+                            $results[$this->slugIxxiData($line['groupOfLinesName'])][$line['name']][$event['typeName']][$event['startDate']] = [
+                                'message'          => $line['message'],
+                                'shortMessage'     => $line['shortMessage'],
+                                'incidentSeverity' => $line['incidentSeverity'],
+                                'typeName'         => $event['typeName'],
+                                'startDate'        => $event['startDate'],
+                                'endDate'          => $event['endDate']
+                            ];
+                        }
                     }
                 }
             }
@@ -157,10 +159,10 @@ class RatpTrafficService extends AbstractRatpService implements RatpServiceInter
             'SNCF'    => 'trains',
             'RER'     => 'rers',
             'Tramway' => 'tramways',
-            'Métro'   => 'metros'
+            'Métro'   => 'metros',
         ];
 
-        return $names[$value];
+        return isset($names[$value]) ? $names[$value] : '';
     }
 
     /**
