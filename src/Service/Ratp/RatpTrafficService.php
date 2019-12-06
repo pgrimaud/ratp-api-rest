@@ -45,12 +45,12 @@ class RatpTrafficService extends AbstractRatpService implements RatpServiceInter
                 '1',
                 '2',
                 '3',
-                '3B',
+                '3b',
                 '4',
                 '5',
                 '6',
                 '7',
-                '7B',
+                '7b',
                 '8',
                 '9',
                 '10',
@@ -69,8 +69,8 @@ class RatpTrafficService extends AbstractRatpService implements RatpServiceInter
             'tramways' => [
                 '1',
                 '2',
-                '3A',
-                '3B',
+                '3a',
+                '3b',
                 '4',
                 '5',
                 '6',
@@ -131,7 +131,9 @@ class RatpTrafficService extends AbstractRatpService implements RatpServiceInter
                 foreach ($incident['lines'] as $line) {
                     if ($event['startDate'] <= date('c') && $event['endDate'] >= date('c')) {
                         if ($this->slugIxxiData($line['groupOfLinesName']) !== '') {
-                            $results[$this->slugIxxiData($line['groupOfLinesName'])][$line['name']][$event['typeName']][$event['startDate']] = [
+                            $lineName = str_replace('T', '', $line['name']);
+
+                            $results[$this->slugIxxiData($line['groupOfLinesName'])][$lineName][$event['typeName']][$event['startDate']] = [
                                 'message'          => $line['message'],
                                 'shortMessage'     => $line['shortMessage'],
                                 'incidentSeverity' => $line['incidentSeverity'],
@@ -144,7 +146,7 @@ class RatpTrafficService extends AbstractRatpService implements RatpServiceInter
                 }
             }
         }
-
+        //dd($results);
         return $results;
     }
 
