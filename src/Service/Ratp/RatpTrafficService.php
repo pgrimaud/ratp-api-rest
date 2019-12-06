@@ -146,7 +146,7 @@ class RatpTrafficService extends AbstractRatpService implements RatpServiceInter
                 }
             }
         }
-        //dd($results);
+
         return $results;
     }
 
