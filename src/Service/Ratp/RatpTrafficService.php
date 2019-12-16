@@ -26,6 +26,7 @@ class RatpTrafficService extends AbstractRatpService implements RatpServiceInter
         $ixxiData         = $this->ixxiApiClient->getData();
         $ixxiFormatedData = $this->formatIxxiData($ixxiData);
 
+
         $completeData = $this->getTemporaryDataFromIxxi($ixxiFormatedData);
 
         return $completeData;
@@ -130,8 +131,10 @@ class RatpTrafficService extends AbstractRatpService implements RatpServiceInter
             foreach ($event['incidents'] as $incident) {
                 foreach ($incident['lines'] as $line) {
                     if ($event['startDate'] <= date('c') && $event['endDate'] >= date('c')) {
-                        if ($this->slugIxxiData($line['groupOfLinesName']) !== '') {
+                        if (isset($line['groupOfLinesName']) && $this->slugIxxiData($line['groupOfLinesName']) !== '') {
                             $lineName = str_replace('T', '', $line['name']);
+
+
 
                             $results[$this->slugIxxiData($line['groupOfLinesName'])][$lineName][$event['typeName']][$event['startDate']] = [
                                 'message'          => $line['message'],
