@@ -25,7 +25,6 @@
         "symfony/framework-bundle": "4.4.*",
         "symfony/serializer": "4.4.*",
         "symfony/templating": "4.4.*",
-        "symfony/twig-bundle": "4.4.*",
         "symfony/yaml": "4.4.*"
     },
     "require-dev": {
