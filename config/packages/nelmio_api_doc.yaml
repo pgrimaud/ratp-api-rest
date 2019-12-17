@@ -2,7 +2,13 @@ nelmio_api_doc:
   documentation:
     info:
       title: RATP REST API
-      version: 4.0.1
+      version: 4.0.2
+      description: >
+        <p>This project is not affiliated with or endorsed by the RATP.</p><br/>
+        <p class="description--support">Support is available <a target="_blank" href="https://github.com/pgrimaud/horaires-ratp-api">here</a>. </p>
+        <p class="description--source">Source code is available <a target="_blank" href="https://github.com/pgrimaud/ratp-api-rest">here</a>. </p><br/>
+        <p class="description--sponsor">You like this API? <a class="github-button" href="https://github.com/sponsors/pgrimaud" data-icon="octicon-heart" aria-label="Sponsor @pgrimaud on GitHub">Become a sponsor</a></p><br/>
+        <p>Official RATP SOAP API status is available on this <a href="https://p.datadoghq.com/sb/b933ad64d-3d03339edc63b8ba89556675024d64fd" target="_blank">dashboard</a>.</p>
   areas:
     path_patterns:
       - ^/traffic

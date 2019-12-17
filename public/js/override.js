@@ -1,10 +1,12 @@
 setTimeout(function () {
-    if(document.querySelector('.schemes')){
-        document.querySelector('.schemes').innerHTML = '<p>This project is not affiliated with or endorsed by the RATP.</p>' +
-          '<p>Support is available <a target="_blank" href="https://github.com/pgrimaud/horaires-ratp-api">here</a>. ' +
-          '<iframe src="https://ghbtns.com/github-btn.html?user=pgrimaud&repo=horaires-ratp-api&type=star&count=true" frameborder="0" scrolling="0" width="170px" height="20px" align="center"></iframe></p>' +
-          '<p>Source code is available <a target="_blank" href="https://github.com/pgrimaud/ratp-api-rest">here</a>. ' +
-          '<iframe src="https://ghbtns.com/github-btn.html?user=pgrimaud&repo=ratp-api-rest&type=star&count=true" frameborder="0" scrolling="0" width="170px" height="20px" align="center"></iframe></p>' +
-          '<p>Official RATP SOAP API status is available on this <a href="https://p.datadoghq.com/sb/b933ad64d-3d03339edc63b8ba89556675024d64fd" target="_blank">dashboard</a>.</p>'
+    if(document.querySelector('.description--support')){
+        document.querySelector('.description--support').innerHTML += '<iframe src="https://ghbtns.com/github-btn.html?user=pgrimaud&repo=horaires-ratp-api&type=star&count=true" frameborder="0" scrolling="0" width="170px" height="20px" align="center"></iframe></p>'
     }
+    if(document.querySelector('.description--source')){
+        document.querySelector('.description--source').innerHTML += '<iframe src="https://ghbtns.com/github-btn.html?user=pgrimaud&repo=ratp-api-rest&type=star&count=true" frameborder="0" scrolling="0" width="170px" height="20px" align="center"></iframe></p>'
+    }
+
+    let sponsorScript = document.createElement('script');
+    sponsorScript.setAttribute('src','https://buttons.github.io/buttons.js');
+    document.body.appendChild(sponsorScript);
 }, 300);

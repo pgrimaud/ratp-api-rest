@@ -29,8 +29,7 @@
         "symfony/yaml": "4.4.*"
     },
     "require-dev": {
-        "symfony/debug-pack": "^1.0",
-        "symfony/web-server-bundle": "4.4.*"
+        "symfony/debug-pack": "^1.0"
     },
     "config": {
         "preferred-install": {

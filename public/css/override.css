@@ -31,15 +31,20 @@ header:before {
     display: block;
 }
 
-.swagger-ui .scheme-container p {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.swagger-ui .scheme-container a, .swagger-ui .scheme-container a:visited {
+.markdown a, .markdown a:visited {
     color: #000000 !important;
 }
 
-.swagger-ui .scheme-container .schemes iframe {
+.markdown iframe {
     margin-top: -3px;
+}
+
+.markdown p {
+    margin: 0.5em auto !important;
+}
+
+.markdown .description--sponsor span {
+    position: absolute !important;
+    margin-top: -3px;
+    margin-left: 5px;
 }
