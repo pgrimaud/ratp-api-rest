@@ -143,9 +143,6 @@ class LinesController extends AppController
             throw new InvalidParameterException('Invalid line type : ' . $type);
         }
 
-        // manage breakage
-        $code = strtoupper($code);
-
         $lineData = null;
 
         foreach ($this->data[$type] as $line) {
