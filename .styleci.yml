@@ -1,2 +1,4 @@
-php:
-  preset: symfony
+preset: symfony
+
+finder:
+  exclude: [var]
