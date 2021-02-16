@@ -44,8 +44,6 @@ class LinesController extends AppController
      *
      * @Rest\View()
      * @Rest\Get("/lines")
-     *
-     * @return View
      */
     public function lines(): View
     {

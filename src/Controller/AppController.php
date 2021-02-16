@@ -58,6 +58,16 @@ class AppController extends AbstractFOSRestController
         ];
     }
 
+    /**
+     * @param RatpServiceInterface $service
+     * @param string               $method
+     * @param array                $parameters
+     * @param int                  $ttl
+     * @param string               $hash
+     * @param array                $cacheParameters
+     *
+     * @return array
+     */
     protected function fetchData(
         RatpServiceInterface $service,
         string $method = '',
@@ -78,6 +88,9 @@ class AppController extends AbstractFOSRestController
         return $data;
     }
 
+    /**
+     * @return string
+     */
     private function getCall(): string
     {
         $method = $this->requestStack->getCurrentRequest()->getMethod();
@@ -86,6 +99,11 @@ class AppController extends AbstractFOSRestController
         return $method . ' ' . $path;
     }
 
+    /**
+     * @param \Exception $exception
+     *
+     * @return View
+     */
     public function errorView(\Exception $exception)
     {
         $exceptionClass = get_class($exception);
