@@ -6,7 +6,7 @@ disabled:
   - concat_without_spaces
   #- no_superfluous_phpdoc_tags_symfony
   #- unalign_double_arrow
-  - unalign_equals
+  #- unalign_equals
   - yoda_style
 
 finder:
