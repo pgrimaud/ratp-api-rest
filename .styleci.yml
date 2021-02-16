@@ -3,7 +3,6 @@ enabled:
   - concat_with_spaces
 disabled:
   - concat_without_spaces
-  - no_superfluous_phpdoc_tags
   - no_superfluous_phpdoc_tags_symfony
   - unalign_double_arrow
   - unalign_equals
