@@ -3,6 +3,9 @@ enabled:
   - concat_with_spaces
 disabled:
   - concat_without_spaces
+  - unalign_double_arrow
+  - unalign_equals
+  - yoda_style
 
 finder:
   exclude: [ var ]
