@@ -17,10 +17,10 @@ class DestinationsController extends AppController
     /**
      * @var RatpDestinationsService
      */
-    private $ratpDestinationsService;
+    private RatpDestinationsService $ratpDestinationsService;
 
     /**
-     * @param RequestStack $requestStack
+     * @param RequestStack            $requestStack
      * @param RatpDestinationsService $ratpDestinationsService
      */
     public function __construct(RequestStack $requestStack, RatpDestinationsService $ratpDestinationsService)
@@ -75,7 +75,7 @@ class DestinationsController extends AppController
             'metros',
             'tramways',
             'buses',
-            'noctiliens'
+            'noctiliens',
         ];
 
         if (!in_array($type, $allowedTypes)) {
@@ -89,7 +89,7 @@ class DestinationsController extends AppController
                 'type' => $type,
                 'code' => $code,
             ],
-            (int)getenv('CACHE_DESTINATIONS')
+            (int) getenv('CACHE_DESTINATIONS')
         );
 
         return $this->appView($data);

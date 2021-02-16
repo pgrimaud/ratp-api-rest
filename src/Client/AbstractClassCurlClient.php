@@ -11,7 +11,7 @@ abstract class AbstractClassCurlClient
     /**
      * @var Client
      */
-    protected $client;
+    protected Client $client;
 
     public function __construct()
     {

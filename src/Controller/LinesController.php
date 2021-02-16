@@ -17,10 +17,10 @@ class LinesController extends AppController
     /**
      * @var array
      */
-    private $data;
+    private array $data;
 
     /**
-     * @param RequestStack $requestStack
+     * @param RequestStack     $requestStack
      * @param RatpLinesService $ratpLinesService
      */
     public function __construct(RequestStack $requestStack, RatpLinesService $ratpLinesService)
@@ -31,7 +31,7 @@ class LinesController extends AppController
             $ratpLinesService,
             'lines',
             [],
-            (int)getenv('CACHE_LINES'),
+            (int) getenv('CACHE_LINES'),
             getenv('API_VERSION') . '_lines'
         );
     }

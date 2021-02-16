@@ -17,10 +17,10 @@ class MissionsController extends AppController
     /**
      * @var RatpMissionsService
      */
-    private $ratpMissionsService;
+    private RatpMissionsService $ratpMissionsService;
 
     /**
-     * @param RequestStack $requestStack
+     * @param RequestStack        $requestStack
      * @param RatpMissionsService $ratpMissionsService
      */
     public function __construct(RequestStack $requestStack, RatpMissionsService $ratpMissionsService)
@@ -77,7 +77,7 @@ class MissionsController extends AppController
                 'code'    => $code,
                 'mission' => strtoupper($mission),
             ],
-            (int)getenv('CACHE_MISSIONS')
+            (int) getenv('CACHE_MISSIONS')
         );
 
         return $this->appView($data);

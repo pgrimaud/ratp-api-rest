@@ -17,14 +17,14 @@ class XmlSerializer
      *
      * @XmlKeyValuePairs
      */
-    private $result;
+    private array $result;
 
     /**
      * @var array
      *
      * @XmlKeyValuePairs
      */
-    private $_metadata;
+    private array $_metadata;
 
     /**
      * @return array

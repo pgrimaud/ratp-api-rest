@@ -20,7 +20,7 @@ class AppController extends AbstractFOSRestController
     /**
      * @var RequestStack
      */
-    private $requestStack;
+    private RequestStack $requestStack;
 
     /**
      * @param RequestStack $requestStack
@@ -32,7 +32,7 @@ class AppController extends AbstractFOSRestController
 
     /**
      * @param array $payload
-     * @param int $httpCode
+     * @param int   $httpCode
      *
      * @return View
      */
@@ -48,7 +48,7 @@ class AppController extends AbstractFOSRestController
         } else {
             $result = [
                 'result'    => $payload,
-                '_metadata' => $this->getMetadata()
+                '_metadata' => $this->getMetadata(),
             ];
         }
 
@@ -68,17 +68,17 @@ class AppController extends AbstractFOSRestController
         return [
             'call'    => $this->getCall(),
             'date'    => date('c'),
-            'version' => (int)getenv('API_VERSION')
+            'version' => (int) getenv('API_VERSION'),
         ];
     }
 
     /**
      * @param RatpServiceInterface $service
-     * @param string $method
-     * @param array $parameters
-     * @param int $ttl
-     * @param string $hash
-     * @param array $cacheParameters
+     * @param string               $method
+     * @param array                $parameters
+     * @param int                  $ttl
+     * @param string               $hash
+     * @param array                $cacheParameters
      *
      * @return array
      */
@@ -141,7 +141,7 @@ class AppController extends AbstractFOSRestController
 
         $payload = [
             'code'    => $responseCode,
-            'message' => $responseStatus
+            'message' => $responseStatus,
         ];
 
         return $this->appView($payload, $responseCode);

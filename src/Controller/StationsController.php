@@ -18,10 +18,10 @@ class StationsController extends AppController
     /**
      * @var RatpStationsService
      */
-    private $ratpStationsService;
+    private RatpStationsService $ratpStationsService;
 
     /**
-     * @param RequestStack $requestStack
+     * @param RequestStack        $requestStack
      * @param RatpStationsService $ratpStationsService
      */
     public function __construct(RequestStack $requestStack, RatpStationsService $ratpStationsService)
@@ -72,8 +72,8 @@ class StationsController extends AppController
      * @Rest\Get("/stations/{type}/{code}")
      *
      * @param Request $request
-     * @param string $type
-     * @param string $code
+     * @param string  $type
+     * @param string  $code
      *
      * @return View
      */
@@ -84,7 +84,7 @@ class StationsController extends AppController
             'metros',
             'tramways',
             'buses',
-            'noctiliens'
+            'noctiliens',
         ];
 
         if (!in_array($type, $allowedTypes)) {
@@ -99,7 +99,7 @@ class StationsController extends AppController
                 'code' => $code,
                 'way'  => $request->get('way'),
             ],
-            (int)getenv('CACHE_STATIONS'),
+            (int) getenv('CACHE_STATIONS'),
             '',
             [
                 'way' => $request->get('way'),

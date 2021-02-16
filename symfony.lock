@@ -1,4 +1,7 @@
 {
+    "clue/stream-filter": {
+        "version": "v1.5.0"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -44,6 +47,12 @@
     "guzzlehttp/psr7": {
         "version": "1.5.2"
     },
+    "http-interop/http-factory-guzzle": {
+        "version": "1.0.0"
+    },
+    "jean85/pretty-package-versions": {
+        "version": "2.0.2"
+    },
     "jms/metadata": {
         "version": "2.0.0"
     },
@@ -80,11 +89,41 @@
             "config/routes/nelmio_api_doc.yaml"
         ]
     },
+    "nyholm/psr7": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "7c0a9352a57376f04f5444e74565102c3a23d0c7"
+        },
+        "files": [
+            "config/packages/nyholm_psr7.yaml"
+        ]
+    },
     "pgrimaud/horaires-ratp-sdk": {
         "version": "1.1.1"
     },
     "php": {
         "version": "7.2"
+    },
+    "php-http/client-common": {
+        "version": "2.3.0"
+    },
+    "php-http/discovery": {
+        "version": "1.13.0"
+    },
+    "php-http/httplug": {
+        "version": "2.2.0"
+    },
+    "php-http/message": {
+        "version": "1.11.0"
+    },
+    "php-http/message-factory": {
+        "version": "v1.0.2"
+    },
+    "php-http/promise": {
+        "version": "1.1.0"
     },
     "phpdocumentor/reflection-common": {
         "version": "1.0.1"
@@ -95,6 +134,9 @@
     "phpdocumentor/type-resolver": {
         "version": "0.4.0"
     },
+    "phpstan/phpdoc-parser": {
+        "version": "0.4.10"
+    },
     "predis/predis": {
         "version": "v1.1.1"
     },
@@ -103,6 +145,12 @@
     },
     "psr/container": {
         "version": "1.0.0"
+    },
+    "psr/http-client": {
+        "version": "1.0.1"
+    },
+    "psr/http-factory": {
+        "version": "1.0.1"
     },
     "psr/http-message": {
         "version": "1.0.1"
@@ -123,6 +171,24 @@
         },
         "files": [
             "config/packages/sensio_framework_extra.yaml"
+        ]
+    },
+    "sentry/sdk": {
+        "version": "3.1.0"
+    },
+    "sentry/sentry": {
+        "version": "3.1.4"
+    },
+    "sentry/sentry-symfony": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "9746f0823302d7980e5273ef7a69ef3f5ac80914"
+        },
+        "files": [
+            "config/packages/sentry.yaml"
         ]
     },
     "symfony/asset": {
@@ -229,6 +295,9 @@
             "src/Kernel.php"
         ]
     },
+    "symfony/http-client": {
+        "version": "v4.4.19"
+    },
     "symfony/http-client-contracts": {
         "version": "v2.3.1"
     },
@@ -291,6 +360,9 @@
     "symfony/polyfill-php80": {
         "version": "v1.18.0"
     },
+    "symfony/polyfill-uuid": {
+        "version": "v1.22.1"
+    },
     "symfony/profiler-pack": {
         "version": "v1.0.4"
     },
@@ -299,6 +371,9 @@
     },
     "symfony/property-info": {
         "version": "v4.2.8"
+    },
+    "symfony/psr-http-message-bridge": {
+        "version": "v2.0.2"
     },
     "symfony/routing": {
         "version": "4.2",

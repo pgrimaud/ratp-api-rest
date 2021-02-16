@@ -17,10 +17,10 @@ class TrafficController extends AppController
     /**
      * @var array
      */
-    private $data;
+    private array $data;
 
     /**
-     * @param RequestStack $requestStack
+     * @param RequestStack       $requestStack
      * @param RatpTrafficService $trafficService
      */
     public function __construct(RequestStack $requestStack, RatpTrafficService $trafficService)
@@ -31,7 +31,7 @@ class TrafficController extends AppController
             $trafficService,
             'traffic',
             [],
-            (int)getenv('CACHE_TRAFFIC'),
+            (int) getenv('CACHE_TRAFFIC'),
             getenv('API_VERSION') . '_traffic'
         );
     }

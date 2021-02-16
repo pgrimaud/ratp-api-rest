@@ -17,10 +17,10 @@ class SchedulesController extends AppController
     /**
      * @var RatpSchedulesService
      */
-    private $ratpSchedulesService;
+    private RatpSchedulesService $ratpSchedulesService;
 
     /**
-     * @param RequestStack $requestStack
+     * @param RequestStack         $requestStack
      * @param RatpSchedulesService $ratpSchedulesService
      */
     public function __construct(RequestStack $requestStack, RatpSchedulesService $ratpSchedulesService)
@@ -90,7 +90,7 @@ class SchedulesController extends AppController
             'metros',
             'tramways',
             'buses',
-            'noctiliens'
+            'noctiliens',
         ];
 
         if (!in_array($type, $allowedTypes)) {
@@ -106,7 +106,7 @@ class SchedulesController extends AppController
                 'station' => $station,
                 'way'     => $way,
             ],
-            (int)getenv('CACHE_SCHEDULES')
+            (int) getenv('CACHE_SCHEDULES')
         );
 
         return $this->appView($schedulesData);
