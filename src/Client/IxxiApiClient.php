@@ -11,9 +11,6 @@ class IxxiApiClient extends AbstractClassCurlClient
     const ENDPOINT = 'http://apixha.ixxi.net/APIX?cmd=getTrafficSituation&category=all' .
     '&networkType=all&withText=true&apixFormat=json&keyapp=FvChCBnSetVgTKk324rO';
 
-    /**
-     * @return array
-     */
     public function getData(): array
     {
         try {

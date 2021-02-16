@@ -14,15 +14,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class DestinationsController extends AppController
 {
-    /**
-     * @var RatpDestinationsService
-     */
     private RatpDestinationsService $ratpDestinationsService;
 
-    /**
-     * @param RequestStack            $requestStack
-     * @param RatpDestinationsService $ratpDestinationsService
-     */
     public function __construct(RequestStack $requestStack, RatpDestinationsService $ratpDestinationsService)
     {
         parent::__construct($requestStack);

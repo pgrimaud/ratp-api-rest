@@ -8,9 +8,6 @@ use GuzzleHttp\Client;
 
 abstract class AbstractClassCurlClient
 {
-    /**
-     * @var Client
-     */
     protected Client $client;
 
     public function __construct()

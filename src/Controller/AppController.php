@@ -12,30 +12,19 @@ use App\Service\Ratp\RatpServiceInterface;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Exception\InvalidParameterException;
 use FOS\RestBundle\View\View;
-use Symfony\Component\HttpFoundation\{RequestStack, Response};
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AppController extends AbstractFOSRestController
 {
-    /**
-     * @var RequestStack
-     */
     private RequestStack $requestStack;
 
-    /**
-     * @param RequestStack $requestStack
-     */
     public function __construct(RequestStack $requestStack)
     {
         $this->requestStack = $requestStack;
     }
 
-    /**
-     * @param array $payload
-     * @param int   $httpCode
-     *
-     * @return View
-     */
     public function appView(array $payload, int $httpCode = Response::HTTP_OK): View
     {
         $acceptHeader = $this->requestStack->getCurrentRequest()->headers->get('Accept');
@@ -60,9 +49,6 @@ class AppController extends AbstractFOSRestController
         return $view;
     }
 
-    /**
-     * @return array
-     */
     private function getMetadata(): array
     {
         return [
@@ -72,16 +58,6 @@ class AppController extends AbstractFOSRestController
         ];
     }
 
-    /**
-     * @param RatpServiceInterface $service
-     * @param string               $method
-     * @param array                $parameters
-     * @param int                  $ttl
-     * @param string               $hash
-     * @param array                $cacheParameters
-     *
-     * @return array
-     */
     protected function fetchData(
         RatpServiceInterface $service,
         string $method = '',
@@ -102,9 +78,6 @@ class AppController extends AbstractFOSRestController
         return $data;
     }
 
-    /**
-     * @return string
-     */
     private function getCall(): string
     {
         $method = $this->requestStack->getCurrentRequest()->getMethod();
@@ -113,11 +86,6 @@ class AppController extends AbstractFOSRestController
         return $method . ' ' . $path;
     }
 
-    /**
-     * @param \Exception $exception
-     *
-     * @return View
-     */
     public function errorView(\Exception $exception)
     {
         $exceptionClass = get_class($exception);

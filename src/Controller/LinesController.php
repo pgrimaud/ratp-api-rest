@@ -14,15 +14,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class LinesController extends AppController
 {
-    /**
-     * @var array
-     */
     private array $data;
 
-    /**
-     * @param RequestStack     $requestStack
-     * @param RatpLinesService $ratpLinesService
-     */
     public function __construct(RequestStack $requestStack, RatpLinesService $ratpLinesService)
     {
         parent::__construct($requestStack);
