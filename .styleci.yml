@@ -1,6 +1,7 @@
 preset: symfony
 enabled:
   - concat_with_spaces
+  - group_import
 disabled:
   - concat_without_spaces
   - no_superfluous_phpdoc_tags_symfony

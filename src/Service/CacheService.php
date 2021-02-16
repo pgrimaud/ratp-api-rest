@@ -13,27 +13,27 @@ class CacheService
     /**
      * @var RequestStack
      */
-    private $requestStack;
+    private RequestStack $requestStack;
 
     /**
      * @var RedisAdapter
      */
-    private $adapter;
+    private RedisAdapter $adapter;
 
     /**
      * @var string
      */
-    private $hash;
+    private string $hash;
 
     /**
      * @var array
      */
-    private $cacheParameters;
+    private array $cacheParameters;
 
     /**
      * @param RequestStack $requestStack
-     * @param string $hash
-     * @param array $cacheParameters
+     * @param string       $hash
+     * @param array        $cacheParameters
      */
     public function __construct(RequestStack $requestStack, string $hash = '', array $cacheParameters = [])
     {
@@ -48,7 +48,7 @@ class CacheService
     /**
      * @return array
      */
-    public function getDataFromCache()
+    public function getDataFromCache(): array
     {
         try {
             $cacheItem = $this->adapter->getItem($this->getHash());
@@ -81,9 +81,11 @@ class CacheService
 
     /**
      * @param array $data
-     * @param int $ttl
+     * @param int   $ttl
+     *
+     * @return void
      */
-    public function setDataToCache(array $data, int $ttl)
+    public function setDataToCache(array $data, int $ttl): void
     {
         try {
             $cacheItem = $this->adapter->getItem($this->getHash());

@@ -6,5 +6,4 @@ namespace App\Exception;
 
 class AmbiguousException extends \Exception
 {
-
 }

@@ -8,7 +8,6 @@ use App\Exception\AmbiguousException;
 use App\Serializer\XmlSerializer;
 use App\Service\CacheService;
 use App\Service\Ratp\RatpServiceInterface;
-
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Exception\InvalidParameterException;
 use FOS\RestBundle\View\View;
@@ -75,8 +74,7 @@ class AppController extends AbstractFOSRestController
         int $ttl = 0,
         string $hash = '',
         array $cacheParameters = []
-    ): array
-    {
+    ): array {
         $cacheService = new CacheService($this->requestStack, $hash, $cacheParameters);
         $data         = $cacheService->getDataFromCache();
 
