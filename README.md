@@ -18,7 +18,7 @@ Demo is available here : [https://api-ratp.pierre-grimaud.fr/v4/](https://api-ra
 ## Requirements
 
  - Access to the official RATP API (see [here](https://data.ratp.fr/explore/dataset/horaires-temps-reel/))
- - PHP >= 7.2
+ - PHP >= 8.0
  - Redis server (for cache)
 
 ## Installation
@@ -37,7 +37,7 @@ composer install
 
 ## TODO
 
-- Add Opendata SNCF data (WIP)
+- Add Opendata SNCF data
 
 ## Feedback or questions
 
