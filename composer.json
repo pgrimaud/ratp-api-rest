@@ -4,7 +4,7 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=8.0",
+        "php": ">=7.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
@@ -31,7 +31,10 @@
         "symfony/yaml": "4.4.*"
     },
     "require-dev": {
-        "symfony/debug-pack": "^1.0"
+        "symfony/debug-bundle": "4.4.*",
+        "symfony/monolog-bundle": "^3.0",
+        "symfony/stopwatch": "4.4.*",
+        "symfony/web-profiler-bundle": "4.4.*"
     },
     "config": {
         "preferred-install": {
