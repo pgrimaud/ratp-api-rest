@@ -35,7 +35,7 @@ class RatpSchedulesService extends AbstractRatpService implements RatpServiceInt
         $station->setLine($line);
         $station->setName(NameHelper::clean($parameters['station']));
 
-        $way = $parameters['way'] == 'A+R' ? '*' : $parameters['way'];
+        $way = strtoupper($parameters['way']) === 'A+R' ? '*' : $parameters['way'];
 
         $direction = new Direction();
         $direction->setSens($way);
