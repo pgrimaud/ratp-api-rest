@@ -9,7 +9,7 @@ use GuzzleHttp\Exception\GuzzleException;
 class IxxiApiClient extends AbstractClassCurlClient
 {
     const ENDPOINT = 'http://apixha.ixxi.net/APIX?cmd=getTrafficSituation&category=all' .
-    '&networkType=all&withText=true&apixFormat=json&keyapp=FvChCBnSetVgTKk324rO';
+    '&networkType=all&withText=true&apixFormat=json';
 
     public function getData(): array
     {
